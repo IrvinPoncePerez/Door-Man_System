@@ -8,6 +8,7 @@
 bin/
 tmp/
 META-INF/
+WEB-INF/
 *.tmp
 *.properties
 *.bak
