@@ -9,6 +9,7 @@ bin/
 tmp/
 META-INF/
 WEB-INF/
+fonts/
 *.tmp
 *.properties
 *.bak
