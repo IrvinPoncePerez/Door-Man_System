@@ -21,6 +21,12 @@ local.properties
 .settings/
 .loadpath
 
+#################
+## Ignore other files of my project
+## .ico .png .jpg
+#################
+img/
+
 # External tool builders
 .externalToolBuilders/
 
