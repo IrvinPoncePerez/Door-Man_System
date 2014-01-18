@@ -1,0 +1,286 @@
+@font-face {
+	font-family: 'icomoon';
+	src:url('fonts/icomoon.eot');
+	src:url('fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+		url('fonts/icomoon.woff') format('woff'),
+		url('fonts/icomoon.ttf') format('truetype'),
+		url('fonts/icomoon.svg#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+a
+{
+	text-decoration: none;
+}
+
+body
+{
+	background: #E5E5E5;	
+	color: #4C4C4C;
+	height: 100%;
+	font-family: "Antic" ,Arial, sans-serif;
+	font-size: 16px;
+	width: 100%;
+}
+
+footer 
+{
+	background: #22bce0;
+	box-shadow: 0px -3px 10px #999;
+	bottom: 0;
+	clear: left;
+	color: #fff;
+	font-size: 1em;
+	margin: 0;
+	padding-bottom: 1%;
+}
+
+footer #contacto a
+{
+	background: white;
+	border-radius: 50%;
+	clear: left;
+	color: #999;
+	font-size: 1.5em;
+	margin-left: 2px;
+	padding: 0.5em;
+}
+
+footer #contacto
+{
+	float: left;
+	margin-left: 4%;
+	margin-top: 3%;
+	margin-right: 4%;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+footer #contacto #gplus
+{
+	margin-left: -30px;
+}
+
+footer #contacto #gplus:after
+{
+	content: "\e001";
+	font-family: 'icomoon';
+}
+
+footer #contacto #gplus:hover
+{
+	color: #D44332;
+}
+
+footer #contacto #skype:after
+{
+	content: "\e002";
+	font-family: 'icomoon';
+}
+
+footer #contacto #skype:hover
+{
+	color: #00B0F6;
+}
+
+footer #contacto #twitter:after
+{
+	content: "\e003";
+	font-family: 'icomoon';
+}
+
+footer #contacto #twitter:hover
+{
+	color: #00aced;
+}
+
+footer #copyright
+{
+	clear: both;
+	display: block;
+	padding-top: 10px;
+	position: relative;
+}
+
+footer #copyright p
+{
+	font-size: 0.8em;
+	margin: auto;
+	text-align: center;
+}
+
+footer #desarrollador
+{
+	width: 400px;
+	background: #fff;
+	box-shadow: 3px 3px 5px #999;
+	color: #848484;
+	float: left;
+	font-size: 0.7em;
+	margin-bottom: 2%;
+	margin-left: 50px;
+	margin-right: auto;
+	padding: 0.5em;
+
+	-webkit-transform: rotateZ(-10deg);
+}
+
+footer #desarrollador h3
+{
+	color: #4C4C4C;
+}
+
+footer #desarrollador p
+{
+	font-family: 'Gloria Hallelujah', Arial, cursive;
+}
+
+footer #desarrollador #foto
+{
+	border: solid white 3px;
+	box-shadow: 1px 1px 5px #999;
+	float: left;
+	padding: 0.5em;
+	width: 100px;
+	margin-right: 10px;
+}
+
+footer #desarrollador #foto img
+{
+	width: 100px;
+}
+
+footer #localizacion
+{
+	border-left: solid white 1px;
+	border-right: solid white 1px;
+	float: left;
+	margin-left: 4%;
+	margin-top: 3%;
+	margin-right: 4%;
+	padding-left: 5%;
+	padding-right: 5%;
+}
+
+footer #localizacion p
+{
+	margin: 0.5em auto;
+}
+
+footer .titulo_footer
+{
+	font-family: 'Aldrich', Arial, sans-serif;
+	margin-bottom: 2em;
+}
+
+header .titulo_header
+{
+	font-family: 'Kite One', Arial, sans-serif;
+	margin-bottom: 0px;
+	margin-left: 110px;
+	margin-right: 20%;
+	position: absolute;
+}
+
+header h1
+{
+	font-size: 2em;	
+	margin-top: -110px;	
+}
+
+header h2
+{
+	color: #848484;
+	font-size: 1em;
+	margin-top: -75px;
+}
+
+header h1 span
+{
+	display: none;
+}
+
+header #login
+{
+	background: #22bce0;
+	border-radius: 5px;
+	box-shadow: 3px 3px 5px #999;
+	color: #fff;	
+	float: left;	
+	margin: 2em 1em;
+	padding: 0.5em 2em;	
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+header #titulo
+{
+	border-right: 40px solid transparent;
+    border-top: 100px solid #fff;
+	margin-right: 40%;
+	padding: 1em;	
+
+	-webkit-filter: drop-shadow(0px 0px 10px #999);
+	/*-moz-filter: drop-shadow(0px 0px 10px #999);
+	-ms-filter: drop-shadow(0px 0px 10px #999);
+	-o-filter: drop-shadow(0px 0px 10px #999);
+	filter: drop-shadow(0px 0px 10px #999);*/
+}
+
+header #titulo #logo
+{
+	margin-top: -100px
+}
+
+header #titulo #logo img
+{
+	width: 80px;
+}
+
+
+#contenido .elemento .descripcion
+{
+	text-align: center;
+}
+
+#contenido .elemento .chapa
+{
+	box-shadow: 1px 1px 5px #999;
+	border-radius: 50px;
+	color: #fff;
+	font-family: "icomoon";
+	font-size: 2em;
+	padding: 0.5em;
+}
+
+#contenido .elemento #chapa1
+{
+	background: #9CBF60;
+}
+
+#contenido .elemento #chapa1:after
+{
+	content: "\e000";
+}
+
+#contenido .elemento #chapa2
+{
+	background: #D34B44;
+}
+
+#contenido .elemento #chapa2:after
+{
+	content: "\e009";
+}
+
+#contenido .elemento #chapa3
+{
+	background: #E2A326;
+}
+
+#contenido .elemento #chapa3:after
+{
+	content: "\e004";
+}
