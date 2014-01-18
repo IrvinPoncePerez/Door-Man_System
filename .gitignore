@@ -7,9 +7,6 @@
 .metadata
 bin/
 tmp/
-META-INF/
-WEB-INF/
-fonts/
 *.tmp
 *.properties
 *.bak
@@ -26,6 +23,10 @@ local.properties
 ## .ico .png .jpg
 #################
 img/
+META-INF/
+WEB-INF/
+fonts/
+/normalize.css
 
 # External tool builders
 .externalToolBuilders/
