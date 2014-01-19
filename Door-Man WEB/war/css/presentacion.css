@@ -9,6 +9,11 @@
 	font-style: normal;
 }
 
+*
+{
+	margin: 0;
+}
+
 a
 {
 	text-decoration: none;
@@ -16,7 +21,7 @@ a
 
 body
 {
-	background: #E5E5E5;	
+	background-image: url('../img/background.png');	
 	color: #4C4C4C;
 	height: 100%;
 	font-family: "Antic" ,Arial, sans-serif;
@@ -29,11 +34,17 @@ footer
 	background: #22bce0;
 	box-shadow: 0px -3px 10px #999;
 	bottom: 0;
-	clear: left;
 	color: #fff;
 	font-size: 1em;
-	margin: 0;
 	padding-bottom: 1%;
+	vertical-align: top;
+}
+
+footer #desarrollador,
+footer #localizacion,
+footer #contacto
+{
+	display: inline-block;
 }
 
 footer #contacto a
@@ -49,7 +60,6 @@ footer #contacto a
 
 footer #contacto
 {
-	float: left;
 	margin-left: 4%;
 	margin-top: 3%;
 	margin-right: 4%;
@@ -97,7 +107,6 @@ footer #contacto #twitter:hover
 
 footer #copyright
 {
-	clear: both;
 	display: block;
 	padding-top: 10px;
 	position: relative;
@@ -116,7 +125,6 @@ footer #desarrollador
 	background: #fff;
 	box-shadow: 3px 3px 5px #999;
 	color: #848484;
-	float: left;
 	font-size: 0.7em;
 	margin-bottom: 2%;
 	margin-left: 50px;
@@ -129,11 +137,13 @@ footer #desarrollador
 footer #desarrollador h3
 {
 	color: #4C4C4C;
+	margin-top: 1em;
 }
 
 footer #desarrollador p
 {
 	font-family: 'Gloria Hallelujah', Arial, cursive;
+	margin-top: 1em;
 }
 
 footer #desarrollador #foto
@@ -155,7 +165,6 @@ footer #localizacion
 {
 	border-left: solid white 1px;
 	border-right: solid white 1px;
-	float: left;
 	margin-left: 4%;
 	margin-top: 3%;
 	margin-right: 4%;
@@ -187,6 +196,7 @@ header h1
 {
 	font-size: 2em;	
 	margin-top: -110px;	
+	text-shadow: 3px 1px 0 rgba(0, 0, 0, 0.3);
 }
 
 header h2
@@ -239,9 +249,24 @@ header #titulo #logo img
 	width: 80px;
 }
 
+#contenido
+{
+	text-align: center;
+}
+
+#contenido .elemento
+{
+	display: inline-block;
+	margin: 10px 30px;
+	text-align: center;
+	padding: 2em;
+	vertical-align: top;
+	width: 300px;
+}
 
 #contenido .elemento .descripcion
 {
+	margin-top: 2em;
 	text-align: center;
 }
 
@@ -250,9 +275,16 @@ header #titulo #logo img
 	box-shadow: 1px 1px 5px #999;
 	border-radius: 50px;
 	color: #fff;
+	display: inline-block;
 	font-family: "icomoon";
 	font-size: 2em;
 	padding: 0.5em;
+	text-align: center;
+}
+
+#contenido .elemento .descripcion
+{
+	padding: 1em;
 }
 
 #contenido .elemento #chapa1
