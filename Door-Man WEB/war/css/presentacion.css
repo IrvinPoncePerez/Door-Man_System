@@ -25,163 +25,156 @@ body
 	color: #4C4C4C;
 	height: 100%;
 	font-family: "Antic" ,Arial, sans-serif;
-	font-size: 16px;
+	font-size: 100%;
 	width: 100%;
 }
 
-footer 
+/*
+ * 		Diseño del Footer
+ */
+
+footer
 {
 	background: #22bce0;
 	box-shadow: 0px -3px 10px #999;
-	bottom: 0;
 	color: #fff;
 	font-size: 1em;
-	padding-bottom: 1%;
-	vertical-align: top;
 }
 
-footer #desarrollador,
-footer #localizacion,
-footer #contacto
+footer #copyright
+{
+	display: block;
+	font-size: 0.8em;
+	padding-bottom: 1em;
+	padding-top: 2em;
+	text-align: center;
+}
+
+footer #footer
+{
+	text-align: center;
+}
+
+footer #footer #contacto,
+footer #footer #localizacion
 {
 	display: inline-block;
+	margin-left: 2%;
+	margin-right: 2%;
+	margin-top: 50px;	
+	vertical-align: top;
+	width: 300px;
 }
 
 footer #contacto a
 {
 	background: white;
 	border-radius: 50%;
-	clear: left;
 	color: #999;
 	font-size: 1.5em;
-	margin-left: 2px;
 	padding: 0.5em;
 }
 
-footer #contacto
+footer #footer #contacto h3,
+footer #footer #localizacion h3
 {
-	margin-left: 4%;
-	margin-top: 3%;
-	margin-right: 4%;
-	padding-left: 5%;
-	padding-right: 5%;
+	padding-bottom: 2em;
 }
 
-footer #contacto #gplus
-{
-	margin-left: -30px;
-}
-
-footer #contacto #gplus:after
+footer #footer #contacto #gplus:after
 {
 	content: "\e001";
 	font-family: 'icomoon';
 }
 
-footer #contacto #gplus:hover
+footer #footer #contacto #gplus:hover
 {
 	color: #D44332;
 }
 
-footer #contacto #skype:after
+footer #footer #contacto #skype:after
 {
 	content: "\e002";
 	font-family: 'icomoon';
 }
 
-footer #contacto #skype:hover
+footer #footer #contacto #skype:hover
 {
 	color: #00B0F6;
 }
 
-footer #contacto #twitter:after
+footer #footer #contacto #twitter:after
 {
 	content: "\e003";
 	font-family: 'icomoon';
 }
 
-footer #contacto #twitter:hover
+footer #footer #contacto #twitter:hover
 {
 	color: #00aced;
 }
 
-footer #copyright
+footer #footer #desarrollador
 {
-	display: block;
-	padding-top: 10px;
-	position: relative;
-}
-
-footer #copyright p
-{
-	font-size: 0.8em;
-	margin: auto;
-	text-align: center;
-}
-
-footer #desarrollador
-{
-	width: 400px;
 	background: #fff;
 	box-shadow: 3px 3px 5px #999;
 	color: #848484;
+	display: inline-block;
 	font-size: 0.7em;
-	margin-bottom: 2%;
-	margin-left: 50px;
-	margin-right: auto;
+	margin-left: 2%;
+	margin-right: 2%;
 	padding: 0.5em;
-
+	text-align: left;
+	top: 0;
+	vertical-align: top;
+	width: 400px;
+	
 	-webkit-transform: rotateZ(-10deg);
 }
 
-footer #desarrollador h3
+footer #footer #desarrollador h3
 {
 	color: #4C4C4C;
 	margin-top: 1em;
 }
 
-footer #desarrollador p
+footer #footer #desarrollador p
 {
 	font-family: 'Gloria Hallelujah', Arial, cursive;
 	margin-top: 1em;
 }
 
-footer #desarrollador #foto
+footer #footer #desarrollador #foto
 {
 	border: solid white 3px;
 	box-shadow: 1px 1px 5px #999;
 	float: left;
 	padding: 0.5em;
-	width: 100px;
 	margin-right: 10px;
 }
 
-footer #desarrollador #foto img
+footer #footer #desarrollador #foto img
 {
 	width: 100px;
 }
 
-footer #localizacion
+footer #footer #localizacion
 {
 	border-left: solid white 1px;
 	border-right: solid white 1px;
-	margin-left: 4%;
-	margin-top: 3%;
-	margin-right: 4%;
-	padding-left: 5%;
-	padding-right: 5%;
+	padding-bottom: 3em;
+	padding-left: 3em;
 }
 
-footer #localizacion p
+footer #footer #localizacion p
 {
-	margin: 0.5em auto;
+	text-align: left;
+	padding-bottom: 0.5em;
 }
 
-footer .titulo_footer
-{
-	font-family: 'Aldrich', Arial, sans-serif;
-	margin-bottom: 2em;
-}
+/*
+ *		Diseño del Header
+ */
 
 header .titulo_header
 {
@@ -248,6 +241,10 @@ header #titulo #logo img
 {
 	width: 80px;
 }
+
+/*
+ *		Diseño del Contenido de Presentacion
+ */
 
 #contenido
 {
