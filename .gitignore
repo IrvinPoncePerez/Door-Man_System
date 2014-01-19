@@ -22,6 +22,7 @@ local.properties
 ## Ignore other files of my project
 ## .ico .png .jpg
 #################
+src/
 img/
 META-INF/
 WEB-INF/
