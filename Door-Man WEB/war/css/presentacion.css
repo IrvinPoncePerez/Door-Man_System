@@ -25,8 +25,7 @@ body
 	color: #4C4C4C;
 	height: 100%;
 	font-family: "Antic" ,Arial, sans-serif;
-	font-size: 100%;
-	width: 100%;
+	font-size: 80%;
 }
 
 /*
@@ -50,9 +49,19 @@ footer #copyright
 	text-align: center;
 }
 
+footer #copyright p:first-child
+{
+	padding-top: 30px;
+}
+
 footer #footer
 {
 	text-align: center;
+}
+
+footer #footer #contacto
+{
+	margin-top: 30px;
 }
 
 footer #footer #contacto,
@@ -60,10 +69,9 @@ footer #footer #localizacion
 {
 	display: inline-block;
 	margin-left: 2%;
-	margin-right: 2%;
-	margin-top: 50px;	
+	margin-right: 2%;	
 	vertical-align: top;
-	width: 300px;
+	width: 290px;
 }
 
 footer #contacto a
@@ -121,13 +129,11 @@ footer #footer #desarrollador
 	color: #848484;
 	display: inline-block;
 	font-size: 0.7em;
-	margin-left: 2%;
-	margin-right: 2%;
 	padding: 0.5em;
 	text-align: left;
 	top: 0;
 	vertical-align: top;
-	width: 400px;
+	max-width: 270px;
 	
 	-webkit-transform: rotateZ(-10deg);
 }
@@ -155,21 +161,20 @@ footer #footer #desarrollador #foto
 
 footer #footer #desarrollador #foto img
 {
-	width: 100px;
+	width: 80px;
 }
 
 footer #footer #localizacion
 {
-	border-left: solid white 1px;
-	border-right: solid white 1px;
-	padding-bottom: 3em;
-	padding-left: 3em;
+	padding-bottom: 1em;
+	margin-top: 50px;
 }
 
 footer #footer #localizacion p
 {
 	text-align: left;
 	padding-bottom: 0.5em;
+	padding-left: 3em;
 }
 
 /*
@@ -180,7 +185,7 @@ header .titulo_header
 {
 	font-family: 'Kite One', Arial, sans-serif;
 	margin-bottom: 0px;
-	margin-left: 110px;
+	margin-left: 80px;
 	margin-right: 20%;
 	position: absolute;
 }
@@ -211,8 +216,9 @@ header #login
 	box-shadow: 3px 3px 5px #999;
 	color: #fff;	
 	float: left;	
-	margin: 2em 1em;
-	padding: 0.5em 2em;	
+	font-size: 1em;
+	margin: 3em 0.5em;
+	padding: 0.5em 1em;	
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -222,8 +228,8 @@ header #titulo
 {
 	border-right: 40px solid transparent;
     border-top: 100px solid #fff;
-	margin-right: 40%;
-	padding: 1em;	
+	margin-right: 20%;
+	padding: 1em 0.5em;	
 
 	-webkit-filter: drop-shadow(0px 0px 10px #999);
 	/*-moz-filter: drop-shadow(0px 0px 10px #999);
@@ -239,7 +245,7 @@ header #titulo #logo
 
 header #titulo #logo img
 {
-	width: 80px;
+	width: 70px;
 }
 
 /*
@@ -254,16 +260,16 @@ header #titulo #logo img
 #contenido .elemento
 {
 	display: inline-block;
-	margin: 10px 30px;
+	margin: 10px 0px;
 	text-align: center;
-	padding: 2em;
+	padding: 1em 0px;
 	vertical-align: top;
 	width: 300px;
 }
 
 #contenido .elemento .descripcion
 {
-	margin-top: 2em;
+	margin: 1em 2em;
 	text-align: center;
 }
 
