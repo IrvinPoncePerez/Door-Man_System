@@ -133,7 +133,7 @@ footer #footer #desarrollador
 	text-align: left;
 	top: 0;
 	vertical-align: top;
-	max-width: 270px;
+	width: 270px;
 	
 	-webkit-transform: rotateZ(-10deg);
 }

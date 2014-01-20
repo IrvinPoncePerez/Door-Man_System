@@ -1,0 +1,67 @@
+@media screen and (min-width: 320px)
+{
+
+	/*
+	 * 		Ajuste del Font-size del body para resoluciones
+	 *		mayores a 320px
+	 */
+
+	body
+	{
+		font-size: 100%;
+	}
+
+	footer #footer #contacto,
+	footer #footer #localizacion
+	{
+		margin-right: 2%;
+		margin-top: 50px;	
+		width: 300px;
+	}
+
+	footer #footer #desarrollador
+	{
+		margin-left: 2%;
+		margin-right: 2%;
+		width: 400px;
+	}
+
+	footer #footer #desarrollador #foto img
+	{
+		width: 100px;
+	}
+
+	header #login
+	{
+		margin: 2em 1em;
+		padding: 0.5em 2em;	
+	}
+
+	header #titulo
+	{
+		margin-right: 30%;
+		padding: 1em;	
+	}
+
+	header #titulo #logo img
+	{
+		width: 80px;
+	}
+
+	header .titulo_header
+	{
+		margin-left: 110px;
+	}
+
+	#contenido .elemento
+	{
+		margin: 10px 30px;
+		padding: 2em;
+	}
+
+	#contenido .elemento .descripcion
+	{
+		margin-top: 2em;
+	}
+
+}
