@@ -1,4 +1,4 @@
-@media screen and (min-width: 320px)
+@media screen and (min-width: 400px)
 {
 
 	/*
@@ -10,6 +10,11 @@
 	{
 		font-size: 100%;
 	}
+
+	/*
+	 *		Modificaciones para adoptar el footer
+	 *		a su diseño original
+	 */
 
 	footer #footer #contacto,
 	footer #footer #localizacion
@@ -52,6 +57,12 @@
 	{
 		margin-left: 110px;
 	}
+
+	/*
+	 *		Reajuste del Contenido
+	 *		ajuste de margenes y paddings
+	 *		para dar su diseño original
+	 */
 
 	#contenido .elemento
 	{

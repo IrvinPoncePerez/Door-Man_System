@@ -59,11 +59,6 @@ footer #footer
 	text-align: center;
 }
 
-footer #footer #contacto
-{
-	margin-top: 30px;
-}
-
 footer #footer #contacto,
 footer #footer #localizacion
 {
@@ -74,7 +69,12 @@ footer #footer #localizacion
 	width: 290px;
 }
 
-footer #contacto a
+footer #footer #contacto
+{
+	margin-top: 30px;
+}
+
+footer #footer #contacto a
 {
 	background: white;
 	border-radius: 50%;
@@ -181,15 +181,6 @@ footer #footer #localizacion p
  *		Diseño del Header
  */
 
-header .titulo_header
-{
-	font-family: 'Kite One', Arial, sans-serif;
-	margin-bottom: 0px;
-	margin-left: 80px;
-	margin-right: 20%;
-	position: absolute;
-}
-
 header h1
 {
 	font-size: 2em;	
@@ -248,6 +239,15 @@ header #titulo #logo img
 	width: 70px;
 }
 
+header .titulo_header
+{
+	font-family: 'Kite One', Arial, sans-serif;
+	margin-bottom: 0px;
+	margin-left: 80px;
+	margin-right: 20%;
+	position: absolute;
+}
+
 /*
  *		Diseño del Contenido de Presentacion
  */
@@ -267,12 +267,6 @@ header #titulo #logo img
 	width: 300px;
 }
 
-#contenido .elemento .descripcion
-{
-	margin: 1em 2em;
-	text-align: center;
-}
-
 #contenido .elemento .chapa
 {
 	box-shadow: 1px 1px 5px #999;
@@ -283,11 +277,6 @@ header #titulo #logo img
 	font-size: 2em;
 	padding: 0.5em;
 	text-align: center;
-}
-
-#contenido .elemento .descripcion
-{
-	padding: 1em;
 }
 
 #contenido .elemento #chapa1
@@ -319,3 +308,11 @@ header #titulo #logo img
 {
 	content: "\e004";
 }
+
+#contenido .elemento .descripcion
+{
+	margin: 1em 2em;
+	text-align: center;
+	padding: 1em;
+}
+
