@@ -89,7 +89,7 @@ footer #footer #localizacion h3
 
 footer #footer #contacto #gplus:after
 {
-	content: "*";
+	content: "\e607";
 	font-family: 'icomoon';
 }
 
@@ -100,7 +100,7 @@ footer #footer #contacto #gplus:hover
 
 footer #footer #contacto #skype:after
 {
-	content: "*";
+	content: "\e601";
 	font-family: 'icomoon';
 }
 
@@ -111,7 +111,7 @@ footer #footer #contacto #skype:hover
 
 footer #footer #contacto #twitter:after
 {
-	content: "*";
+	content: "\e602";
 	font-family: 'icomoon';
 }
 
@@ -163,7 +163,8 @@ header h1 span
 
 header #login:after
 {
-	content: "*";
+	content: "\e600";
+	font-family: "icomoon";
 }
 
 header #login
@@ -173,9 +174,9 @@ header #login
 	box-shadow: 3px 3px 5px #999;
 	color: #fff;
 	float: left;	
-	font-size: 1em;
-	margin: 2em 0.5em;
-	padding: 0.5em 1em;	
+	font-size: 1.3em;
+	margin: 1em 0.5em;
+	padding: 0.8em 1em;	
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -240,7 +241,7 @@ header .titulo_header
 	color: #fff;
 	display: inline-block;
 	font-family: "icomoon";
-	font-size: 2em;
+	font-size: 2.5em;
 	padding: 0.5em;
 	text-align: center;
 }
@@ -252,7 +253,7 @@ header .titulo_header
 
 #contenido .elemento #chapa1:after
 {
-	content: "*";
+	content: "\e603";
 }
 
 #contenido .elemento #chapa2
@@ -262,7 +263,7 @@ header .titulo_header
 
 #contenido .elemento #chapa2:after
 {
-	content: "*";
+	content: "\e604";
 }
 
 #contenido .elemento #chapa3
@@ -272,13 +273,14 @@ header .titulo_header
 
 #contenido .elemento #chapa3:after
 {
-	content: "*";
+	content: "\e606";
 }
 
 #contenido .elemento .descripcion
 {
-	margin: 1em 2em;
+	font-size: 1.5em;
+	margin: 1em 0.5em;
 	text-align: center;
-	padding: 1em;
+	padding: 1em 0.5em;
 }
 
