@@ -24,7 +24,7 @@ body
 	background-image: url('../img/background.png');	
 	color: #4C4C4C;
 	height: 100%;
-	font-family: "Antic" ,Arial, sans-serif;
+	font-family: "Antic", sans-serif;
 	font-size: 70%;
 }
 
@@ -208,7 +208,7 @@ header #titulo #logo img
 
 header .titulo_header
 {
-	font-family: 'Kite One', Arial, sans-serif;
+	font-family: 'Kite One', sans-serif;
 	margin-bottom: 0px;
 	margin-left: 60px;
 	margin-right: 20%;
