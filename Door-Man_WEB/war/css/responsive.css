@@ -175,5 +175,65 @@
 
 @media screen and (min-width: 640px)
 {
+	header #login
+	{
+		border-radius: 5px;
+		font-size: 1em;
+		padding: 0.5em 1em;	
+	}
+
+	header #login:before
+	{
+		content: "Login  ";
+		font-weight: bold;
+	}
+}
+
+@media screen and (min-width: 1400px)
+{
+	body
+	{
+		font-size: 120%;
+	}
+
+	footer #footer #desarrollador
+	{
+		width: 410px;
+	}
+
+	header h1
+	{
+		margin-top: -140px;
+	}
+
+	header h2
+	{
+		margin-top: -100px;
+	}
+
+	header #login
+	{
+		margin: 1.5em 0.5em;
+	}
+
+	header #titulo
+	{
+		border-top: 120px solid #fff;
+	}
+
+	header #titulo #logo
+	{
+		margin-top:  -130px;
+	}
+
+	header #titulo #logo img
+	{
+		width: 100px;
+	}
 	
+	header .titulo_header
+	{
+		margin-left: 125px;
+	}
+
 }
