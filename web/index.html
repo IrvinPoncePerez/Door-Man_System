@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>   
-    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
-    <meta name="description" content="Proyecto de Estadia, realizado con Arduino y NFC/RFID, Sistema de Control de Entradas en Tiempo Real." />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">   
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">
+    <meta name="description" content="Proyecto de Estadia, realizado con Arduino y NFC/RFID, Sistema de Control de Entradas en Tiempo Real." >
     <meta name="author" content="by Irvin Ponce Pérez">
 
     <title>Door-Man System</title>
@@ -26,16 +26,10 @@
         </div>
         <h1 class="titulo_header">Door-Man</h1>   
         <h2 class="titulo_header">System</h2>
-        <span id="signinButton">
-            <span
-                class="g-signin"
-                data-callback="signinCallback"
-                data-clientid="383828807826-od8raqqomos3vbkseoph3uec76b7ucd1.apps.googleusercontent.com"
-                data-cookiepolicy="single_host_origin"
-                data-requestvisibleactions="http://schemas.google.com/AddActivity"
-                data-scope="https://www.googleapis.com/auth/plus.login">
-            </span>
-        </span>
+        <div id="customBtn" class="customGPlusSignIn">
+            <span class="icon"></span>
+            <span class="buttonText"></span>
+        </div>
     </header>
 
     <!-- Mapa Navegacional -->

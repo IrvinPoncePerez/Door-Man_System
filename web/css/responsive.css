@@ -29,9 +29,17 @@
 		margin-top: -75px;
 	}
 
-	header #login
+	header #customBtn
 	{
-		margin-top: 1.5em;
+		margin-top: -100px;
+		width: 50px;
+	}
+
+	header #customBtn .icon
+	{
+		background: url('../img/btn_red1.png') transparent 10px 50% no-repeat;
+		width: 35px;
+		height: 35px;
 	}
 
 	header #titulo
@@ -131,6 +139,24 @@
 		width: 100px;
 	}
 
+	header #customBtn
+	{
+		width: 130px;
+	}
+
+	header #customBtn .buttonText
+	{
+		margin-left: 8px;
+		margin-right: 5px;
+		vertical-align: middle;
+	}
+
+	header #customBtn .buttonText:after
+	{
+		content: "Sign in";
+		font-weight: bold;
+	}
+
 	header #titulo
 	{
 		margin-right: 30%;
@@ -173,22 +199,6 @@
 
 }
 
-@media screen and (min-width: 640px)
-{
-	header #login
-	{
-		border-radius: 5px;
-		font-size: 1em;
-		padding: 0.5em 1em;	
-	}
-
-	header #login:before
-	{
-		content: "Login  ";
-		font-weight: bold;
-	}
-}
-
 @media screen and (min-width: 1400px)
 {
 	body
@@ -211,9 +221,18 @@
 		margin-top: -100px;
 	}
 
-	header #login
+	header #customBtn
 	{
-		margin: 1.5em 0.5em;
+		margin-right: 10px;
+		margin-top: -120px;
+		width: 150px;
+	}
+
+	header #customBtn .icon
+	{
+		background: url('../img/btn_red2.png') transparent 10px 50% no-repeat;
+		width: 50px;
+		height: 50px;
 	}
 
 	header #titulo
