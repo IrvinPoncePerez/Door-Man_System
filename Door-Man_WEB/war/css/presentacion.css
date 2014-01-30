@@ -156,11 +156,6 @@ header h2
 	margin-top: -55px;
 }
 
-header h1 span
-{
-	display: none;
-}
-
 header #login:after
 {
 	content: "\e600";
