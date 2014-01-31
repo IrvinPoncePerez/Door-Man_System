@@ -156,7 +156,7 @@ header h2
 	margin-top: -55px;
 }
 
-header #customBtn
+header #login
 {  	
     background: #cc3732;
     border-radius: 5px;
@@ -167,13 +167,13 @@ header #customBtn
     width: 35px;    
 }
 
-header #customBtn:hover
+header #login:hover
 {
 	background: #e74b37;
     cursor: hand;
 }
 
-header #customBtn .icon
+header #login .iconLogin
 {
 	background: url('../img/btn_red1.png') transparent 10px 50% no-repeat;
 	display: inline-block;
@@ -206,6 +206,22 @@ header #titulo #logo img
 	width: 50px;
 }
 
+/*
+ *CSS para los datos del usuario.
+ */
+header #usuario figure img
+{
+	background: white;
+	border-radius: 50%;
+	box-shadow: 1px 1px 5px #999;
+	width: 40px;	
+}
+
+header #usuario .datos
+{
+	display: none;
+}
+
 header .titulo_header
 {
 	font-family: 'Kite One', sans-serif;
@@ -236,7 +252,7 @@ header .titulo_header
 
 #contenido .elemento .chapa
 {
-	box-shadow: 1px 1px 5px #999;
+	
 	border-radius: 50%;
 	color: #fff;
 	display: inline-block;
