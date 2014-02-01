@@ -27,16 +27,20 @@ function signinCallback (authResult) {
           $.ajax({
             type: 'GET',
             url: accessUrl,
-            async: false,
-            contentType: 'application/json',
             dataType: 'jsonp',
             success: function(data) {
               var nombreUsuario = data.displayName;
               var imgUsuario = data.image.url;
+              var urlUsuario = imgUsuario.slice(0, -2);
+              var picAvatar = new Image();
+              picAvatar.src= urlUsuario + '200';
 
-              console.log(data);
-              console.log(nombreUsuario);
-              console.log(imgUsuario);
+              var usuario = $('header #usuario .datos');
+              var avatar = $('header #usuario #avatar');
+
+              usuario.prepend('<p id="nombreUsuario">' + nombreUsuario + '</p>');
+              avatar.prepend(picAvatar);
+
             },
             error: function(e) {
               alert(e);

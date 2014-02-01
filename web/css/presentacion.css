@@ -25,7 +25,7 @@ body
 	color: #4C4C4C;
 	height: 100%;
 	font-family: "Antic", sans-serif;
-	font-size: 70%;
+	font-size: 80%;
 }
 
 /*
@@ -63,8 +63,10 @@ footer #footer #contacto,
 footer #footer #localizacion
 {
 	display: inline-block;
+	margin-left: 2%;
+	margin-right: 2%;
 	vertical-align: top;
-	width: 220px;
+	width: 290px;
 }
 
 footer #footer #contacto
@@ -78,7 +80,7 @@ footer #footer #contacto a
 	border-radius: 50%;
 	color: #999;
 	font-size: 1.5em;
-	padding: 0.5em;
+	padding: 0.4em 0.5em;
 }
 
 footer #footer #contacto h3,
@@ -145,7 +147,7 @@ footer #footer #localizacion p
 header h1
 {
 	font-size: 2em;	
-	margin-top: -80px;	
+	margin-top: -110px;	
 	text-shadow: 3px 1px 0 rgba(0, 0, 0, 0.3);
 }
 
@@ -153,7 +155,7 @@ header h2
 {
 	color: #848484;
 	font-size: 1em;
-	margin-top: -55px;
+	margin-top: -75px;
 }
 
 header #login
@@ -161,16 +163,16 @@ header #login
     background: #cc3732;
     border-radius: 5px;
     color: white;
-    margin-top: -70px;
+    cursor: pointer;
+    margin-top: -100px;
     position: absolute;
     right: 5px;
-    width: 35px;    
+    width: 50px;    
 }
 
 header #login:hover
 {
 	background: #e74b37;
-    cursor: hand;
 }
 
 header #login .iconLogin
@@ -178,55 +180,107 @@ header #login .iconLogin
 	background: url('../img/btn_red1.png') transparent 10px 50% no-repeat;
 	display: inline-block;
     vertical-align: middle;
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
 }
 
 header #titulo
 {
 	border-right: 40px solid transparent;
-    border-top: 70px solid #fff;
-	margin-right: 15%;
+    border-top: 100px solid #fff;
+	margin-right: 20%;
 	padding: 1em 0.5em;	
 
 	-webkit-filter: drop-shadow(0px 0px 10px #999);
-	-moz-filter: drop-shadow(0px 0px 10px #999);
-	-ms-filter: drop-shadow(0px 0px 10px #999);
-	-o-filter: drop-shadow(0px 0px 10px #999);
-	filter: drop-shadow(0px 0px 10px #999);
 }
 
 header #titulo #logo
 {
-	margin-top: -70px
+	margin-top: -100px
 }
 
 header #titulo #logo img
 {
-	width: 50px;
+	width: 70px;
 }
 
 /*
  *CSS para los datos del usuario.
  */
-header #usuario figure img
+
+header #usuario
 {
-	background: white;
-	border-radius: 50%;
-	box-shadow: 1px 1px 5px #999;
-	width: 40px;	
+	position: absolute;
+	top : 15px;
+	right: 5px;
 }
 
-header #usuario .datos
+header #usuario div,
+header #usuario div .datos,
+header #usuario div #apuntador,
+header #usuario #avatar
+{
+	display: inline-block;
+}
+
+header #usuario div
 {
 	display: none;
+}
+
+header #usuario div #apuntador
+{
+	border-top: 10px solid transparent;
+ 	border-bottom: 10px solid transparent;
+ 	border-left: 10px solid white; 	
+ 	position: relative;
+ 	left: -5px;
+ 	top: -12px;
+
+ 	-webkit-filter: drop-shadow(rgba(153, 153, 153, 1) 1.5px 0px 0px);
+}
+
+header #usuario div .datos{
+	background: #fff;
+	border-radius: 5px 2px 5px 5px;
+	box-shadow: 0px 0px 1px 1px #999;
+	padding: 0.5em 1em;
+	text-align: right;
+}
+
+header #usuario div .datos #nombreUsuario
+{
+	font-weight: bold;
+}
+
+header #usuario div .datos #signout
+{
+	color: #cc3732;
+	cursor: pointer;
+}
+
+header #usuario div .datos #signout:hover
+{
+	text-decoration: underline;
+}
+
+header #usuario figure
+{
+	margin-left: -10px;
+}
+
+header #usuario #avatar img
+{
+	width: 50px;
+	border-radius: 50%;
+	box-shadow: 0px 0px 1px 1px #999;
 }
 
 header .titulo_header
 {
 	font-family: 'Kite One', sans-serif;
 	margin-bottom: 0px;
-	margin-left: 60px;
+	margin-left: 80px;
 	margin-right: 20%;
 	position: absolute;
 }

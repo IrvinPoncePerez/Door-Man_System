@@ -8,6 +8,7 @@
 
     <title>Door-Man System</title>
 
+    <script type="text/javascript" src="js/prefixfree.min.js"></script>
 	<link rel="shortcut icon" type="image/x-icon" href="img/logo.ico" />
     <link rel="stylesheet" type="text/css" href="css/normalize.css" />
     <link href='//fonts.googleapis.com/css?family=Kite+One|Gloria+Hallelujah|Antic|Aldrich' rel='stylesheet' type='text/css'>
@@ -31,12 +32,14 @@
             <span class="textLogin"></span>
         </div>
         <div id="usuario">
-            <span class="datos">
-                <p id="nombreUsuario">Irvin Ponce</p>
-                <a id="signout" href="#">Sign out</a>
-            </span>
-            <figure>
-                <img src="img/user.png" id="avatar">
+            <div>
+                <span class="datos">
+                    <p id="signout">Sign out</p>
+                </span>
+                <span id="apuntador">
+                </span>
+            </div>
+            <figure id="avatar">
             </figure>
         </div>
     </header>
@@ -60,6 +63,11 @@
     		<p class="descripcion">Supervisa el uso de las habitaciones, horarios de entrada y salida, tiempos de mantenimiento y limpieza con reportes detallados que ayuden en la toma de decisiones administrativas.</p>
     	</article>
     </section>
+
+    <!-- Contenido de las puertas -->
+    <section id="contenidoPuertas">
+    </section>
+
 
     <!-- Pie de Página -->
     <footer>
