@@ -35,17 +35,19 @@ function signinCallback (authResult) {
               var picAvatar = new Image();
               picAvatar.src= urlUsuario + '200';
 
-              var usuario = $('header #usuario .datos');
-              var avatar = $('header #usuario #avatar');
-
-              usuario.prepend('<p id="nombreUsuario">' + nombreUsuario + '</p>');
-              avatar.prepend(picAvatar);
-
+              $('header #usuario .datos').prepend('<p id="nombreUsuario">' + nombreUsuario + '</p>');
+              $('header #usuario #avatar').prepend(picAvatar);
+              
+              $('#login').slideToggle('fast', function(){
+                $('#usuario').slideToggle('fast');
+              });
+              
             },
             error: function(e) {
               alert(e);
             }
           });
+          cargarPuertas();
       } else {
             //en caso de error, avisar al usuario :
             if (authResult['access_denied']) {
@@ -55,4 +57,18 @@ function signinCallback (authResult) {
                   alert("No se ha podido dar acceso al usuario de forma automática.");
             }           
       }
+}
+
+function cargarPuertas(){
+  $('#contenido').fadeToggle('fast', function(){
+    $('#footer').fadeToggle('fast', function(){
+      $('footer').css('position', 'fixed');
+      $('footer').css('bottom', 0);
+      $('footer #copyright p:first-child').css('padding-top', 0);
+    });
+  });
+
+  $.getJSON('json/puertas.json', function(puertas){
+    console.log(puertas);
+  });
 }

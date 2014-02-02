@@ -38,6 +38,7 @@ footer
 	box-shadow: 0px -3px 10px #999;
 	color: #fff;
 	font-size: 1em;
+	width: 100%;
 }
 
 footer #copyright
@@ -210,6 +211,7 @@ header #titulo #logo img
 
 header #usuario
 {
+	display: none;
 	position: absolute;
 	top : 15px;
 	right: 5px;
