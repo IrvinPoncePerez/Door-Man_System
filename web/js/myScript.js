@@ -27,7 +27,9 @@ function signinCallback (authResult) {
           $.ajax({
             type: 'GET',
             url: accessUrl,
-            dataType: 'jsonp',
+            async:false,
+            contentType : 'appication/json',
+            dataType : 'jsonp',
             success: function(data) {
               var nombreUsuario = data.displayName;
               var imgUsuario = data.image.url;
@@ -49,26 +51,48 @@ function signinCallback (authResult) {
           });
           cargarPuertas();
       } else {
-            //en caso de error, avisar al usuario :
-            if (authResult['access_denied']) {
-                  alert("El usuario ha denegado el acceso a la aplicación.");
-            }
-            if (authResult['immediate_failed']) {
-                  alert("No se ha podido dar acceso al usuario de forma automática.");
-            }           
+        //en caso de error, avisar al usuario :
+        if (authResult['access_denied']) {
+          alert("El usuario ha denegado el acceso a la aplicación.");
+        }
+        if (authResult['immediate_failed']) {
+          alert("No se ha podido dar acceso al usuario de forma automática.");
+        }           
       }
 }
 
 function cargarPuertas(){
-  $('#contenido').fadeToggle('fast', function(){
-    $('#footer').fadeToggle('fast', function(){
-      $('footer').css('position', 'fixed');
-      $('footer').css('bottom', 0);
-      $('footer #copyright p:first-child').css('padding-top', 0);
-    });
-  });
+  $('#contenido').slideToggle('fast');
+  $('footer').slideToggle('fast');
 
   $.getJSON('json/puertas.json', function(puertas){
     console.log(puertas);
   });
 }
+
+function cerrarSesion(access_token) {
+  var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' + access_token;
+
+  $.ajax({
+    type : 'GET',
+    url: revokeUrl,
+    async : false,
+    contentType : 'appication/json',
+    dataType : 'jsonp',
+    success : function(){
+      $('#usuario').slideToggle('fast', function(){
+        $('#login').slideToggle('fast');
+        $('footer').slideToggle('fast');
+        $('#contenido').slideToggle('fast');
+        $('#nombreUsuario').remove();
+        $('#avatar img').remove();
+      });
+    },
+    error : function(e) {
+      alert('Error producido al cerrar su sesión, si desea cerrar su sesión de forma manual puede hacerlo en https://plus.google.com/apps.');
+    }
+  });
+}
+
+//Declaracion de eventos
+$('#signout').click(cerrarSesion);
