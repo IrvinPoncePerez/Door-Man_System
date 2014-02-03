@@ -74,9 +74,37 @@ function signinCallback (authResult) {
 function cargarPuertas(){
   $('#contenido').slideToggle('fast');
   $('footer').slideToggle('fast');
+  var svgPuerta = null
 
-  $.getJSON('json/puertas.json', function(puertas){
-    console.log(puertas);
+  if ($(window).width() <= 680){
+    svgPuerta = '<object data="img/chapa.svg"></object>';
+  } else {
+    svgPuerta = '<object data="img/puerta.svg"></object>';
+  }
+  
+  $.ajax({
+    url: 'json/puertas.json',
+    dataType: 'json',
+    success: function(data){
+      $('#contenidoPuertas').append('<section id="seccionPuertas"></section>');
+      for (var i = 0; i < data.puertas.length; i++){
+        var habitacion = '<article id="puerta' + (i + 1)+ '" class="contPuerta">' +
+                            '<p class="tituloPuerta">' + data.puertas[i].puerta + '</p>' +
+                            '<div class="contDatos">' +
+                              '<figure>' + svgPuerta + '</figure>' +
+                              '<div class="contInfo">' +
+                                '<p class="infoBateria">' + data.puertas[i].bateria +'</p>' +
+                                '<p class="infoTiempo">' + data.puertas[i].tiempo +'</p>' +
+                                '<p class="infoEntrada">' + data.puertas[i].entrada +'</p>' +
+                                '<p class="infoSalida">' + data.puertas[i].salida +'</p>' +
+                                '<p class="infoDescripcion">' + data.puertas[i].Descripcion +'</p>' +
+                              '</div>' +
+                            '</div>' +
+                          '</article>';
+
+        $('#seccionPuertas').append(habitacion);
+      }
+    }    
   });
 }
 
@@ -102,14 +130,6 @@ function cerrarSesion(access_token) {
       alert('Error producido al cerrar su sesión, si desea cerrar su sesión de forma manual puede hacerlo en https://plus.google.com/apps.');
     }
   });
-}
-
-function mostrarDatos(){
-  console.log('hola');
-
-  if (screen.width <= 680) {
-    console.log($('header #usuario div'));
-  }
 }
 
 //Declaracion de eventos
