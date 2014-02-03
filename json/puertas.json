@@ -1,11 +1,115 @@
 {
 	"puertas" : [{
-		"puerta" : "Puerta 1",
-		"bateria" : "30%",
-		"tiempo" : "68 minutos",
-		"entrada" : "10:22 am",
-		"salida" : "12:30 pm",
-		"descripcion" : "pareja a pie",
-		"color" : "#22BCE0"
+			"puerta" : "Puerta 1",
+			"bateria" : "100%",
+			"tiempo" : "60 minutos",
+			"entrada" : "10:00 am",
+			"salida" : "12:00 pm",
+			"descripcion" : "pareja a pie",
+			"color" : "#22BCE0"
+		},{
+			"puerta" : "Puerta 1",
+			"bateria" : "100%",
+			"tiempo" : "60 minutos",
+			"entrada" : "10:00 am",
+			"salida" : "12:00 pm",
+			"descripcion" : "pareja a pie",
+			"color" : "#22BCE0"
+		},{
+			"puerta" : "Puerta 1",
+			"bateria" : "100%",
+			"tiempo" : "60 minutos",
+			"entrada" : "10:00 am",
+			"salida" : "12:00 pm",
+			"descripcion" : "pareja a pie",
+			"color" : "#22BCE0"
+		},{
+			"puerta" : "Puerta 1",
+			"bateria" : "100%",
+			"tiempo" : "60 minutos",
+			"entrada" : "10:00 am",
+			"salida" : "12:00 pm",
+			"descripcion" : "pareja a pie",
+			"color" : "#22BCE0"
+		},{
+			"puerta" : "Puerta 1",
+			"bateria" : "100%",
+			"tiempo" : "60 minutos",
+			"entrada" : "10:00 am",
+			"salida" : "12:00 pm",
+			"descripcion" : "pareja a pie",
+			"color" : "#22BCE0"
+		},{
+			"puerta" : "Puerta 1",
+			"bateria" : "100%",
+			"tiempo" : "60 minutos",
+			"entrada" : "10:00 am",
+			"salida" : "12:00 pm",
+			"descripcion" : "pareja a pie",
+			"color" : "#22BCE0"
+		},{
+			"puerta" : "Puerta 1",
+			"bateria" : "100%",
+			"tiempo" : "60 minutos",
+			"entrada" : "10:00 am",
+			"salida" : "12:00 pm",
+			"descripcion" : "pareja a pie",
+			"color" : "#22BCE0"
+		},{
+			"puerta" : "Puerta 1",
+			"bateria" : "100%",
+			"tiempo" : "60 minutos",
+			"entrada" : "10:00 am",
+			"salida" : "12:00 pm",
+			"descripcion" : "pareja a pie",
+			"color" : "#22BCE0"
+		},{
+			"puerta" : "Puerta 1",
+			"bateria" : "100%",
+			"tiempo" : "60 minutos",
+			"entrada" : "10:00 am",
+			"salida" : "12:00 pm",
+			"descripcion" : "pareja a pie",
+			"color" : "#22BCE0"
+		},{
+			"puerta" : "Puerta 1",
+			"bateria" : "100%",
+			"tiempo" : "60 minutos",
+			"entrada" : "10:00 am",
+			"salida" : "12:00 pm",
+			"descripcion" : "pareja a pie",
+			"color" : "#22BCE0"
+		},{
+			"puerta" : "Puerta 1",
+			"bateria" : "100%",
+			"tiempo" : "60 minutos",
+			"entrada" : "10:00 am",
+			"salida" : "12:00 pm",
+			"descripcion" : "pareja a pie",
+			"color" : "#22BCE0"
+		},{
+			"puerta" : "Puerta 1",
+			"bateria" : "100%",
+			"tiempo" : "60 minutos",
+			"entrada" : "10:00 am",
+			"salida" : "12:00 pm",
+			"descripcion" : "pareja a pie",
+			"color" : "#22BCE0"
+		},{
+			"puerta" : "Puerta 1",
+			"bateria" : "100%",
+			"tiempo" : "60 minutos",
+			"entrada" : "10:00 am",
+			"salida" : "12:00 pm",
+			"descripcion" : "pareja a pie",
+			"color" : "#22BCE0"
+		},{
+			"puerta" : "Puerta 1",
+			"bateria" : "100%",
+			"tiempo" : "60 minutos",
+			"entrada" : "10:00 am",
+			"salida" : "12:00 pm",
+			"descripcion" : "pareja a pie",
+			"color" : "#22BCE0"
 		}]
 }

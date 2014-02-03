@@ -35,13 +35,23 @@ function signinCallback (authResult) {
               var imgUsuario = data.image.url;
               var urlUsuario = imgUsuario.slice(0, -2);
               var picAvatar = new Image();
-              picAvatar.src= urlUsuario + '200';
+              picAvatar.src = urlUsuario + '200';
 
               $('header #usuario .datos').prepend('<p id="nombreUsuario">' + nombreUsuario + '</p>');
               $('header #usuario #avatar').prepend(picAvatar);
               
               $('#login').slideToggle('fast', function(){
                 $('#usuario').slideToggle('fast');
+              });
+
+              $('#avatar img').click(function() {
+                if ($(window).width() <= 680){
+                  if ($('header #usuario div').css('display') === 'none'){
+                    $('header #usuario div').css('display', 'inline-block');
+                  } else {
+                    $('header #usuario div').css('display', 'none');
+                  }                  
+                }
               });
               
             },
@@ -92,6 +102,14 @@ function cerrarSesion(access_token) {
       alert('Error producido al cerrar su sesión, si desea cerrar su sesión de forma manual puede hacerlo en https://plus.google.com/apps.');
     }
   });
+}
+
+function mostrarDatos(){
+  console.log('hola');
+
+  if (screen.width <= 680) {
+    console.log($('header #usuario div'));
+  }
 }
 
 //Declaracion de eventos
