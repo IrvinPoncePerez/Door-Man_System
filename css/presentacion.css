@@ -357,3 +357,109 @@ header .titulo_header
 	padding: 1em 0.5em;
 }
 
+/*
+ * Diseño de los contenedores de las puertas
+ */
+
+#seccionPuertas
+{
+	text-align: center;
+}
+
+#seccionPuertas .contPuerta
+{
+	background: white;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px 1px #999;
+	display: inline-block;
+	margin: 1em 0.5em;
+	width: 300px;
+}
+
+#seccionPuertas .contPuerta .tituloPuerta
+{
+	border-bottom: solid #999 1px;
+	display: inline-block;
+	font-weight: bold;
+	padding: 0.5em 0px;
+	width: 280px;
+}
+
+#seccionPuertas .contPuerta .contDatos figure
+{
+	border-left: solid #999 0.3em;
+	border-right: solid #999 0.3em;
+	border-top: solid #999 0.3em;
+	display: inline-block;
+	margin: 0.5em 0;
+	padding: 1px 1px 0px 1px;
+}
+
+#seccionPuertas .contPuerta .contDatos object
+{
+	height: 55px;
+	width: 40px;
+}
+
+#seccionPuertas .contPuerta .contDatos .contInfo
+{
+	display: inline-block;
+	margin: 0.5em;
+	text-align: center;
+	vertical-align: top;
+	width: 200px;
+}
+
+#seccionPuertas .contPuerta .contDatos .contInfo p
+{
+	display: inline-block;
+	font-size: 0.8em;
+	text-align: left;
+	width: 90px;
+}
+
+#seccionPuertas .contPuerta .contDatos .contInfo p:nth-child(5)
+{
+	text-align: left;
+	width: 100%;
+}
+
+#seccionPuertas .contPuerta .contDatos .contInfo .infoBateria:before
+{
+	color: #FBD600;
+	content: "\e605";
+	font-family: 'icomoon';
+	margin-right: 3px;
+}
+
+#seccionPuertas .contPuerta .contDatos .contInfo .infoTiempo:before
+{
+	color: #000;
+	content: "\e608";
+	font-family: 'icomoon';
+	margin-right: 3px;
+}
+
+#seccionPuertas .contPuerta .contDatos .contInfo .infoEntrada:before
+{
+	color: #3AB54A;
+	content: "\e609";
+	font-family: 'icomoon';
+	margin-right: 3px;
+}
+
+#seccionPuertas .contPuerta .contDatos .contInfo .infoSalida:before
+{
+	color: #EC1B23;
+	content: "\e60a";
+	font-family: 'icomoon';
+	margin-right: 3px;
+}
+
+#seccionPuertas .contPuerta .contDatos .contInfo .infoDescripcion:before
+{
+	color: #3F7BCB;
+	content: "\e60b";
+	font-family: 'icomoon';
+	margin-right: 3px;
+}

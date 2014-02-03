@@ -73,14 +73,9 @@ function signinCallback (authResult) {
 
 function cargarPuertas(){
   $('#contenido').slideToggle('fast');
-  $('footer').slideToggle('fast');
-  var svgPuerta = null
-
-  if ($(window).width() <= 680){
-    svgPuerta = '<object data="img/chapa.svg"></object>';
-  } else {
-    svgPuerta = '<object data="img/puerta.svg"></object>';
-  }
+  $('#footer').slideToggle('fast');
+  $('footer #copyright p:first-child').css('padding-top', '0px');
+  var svgPuerta = '<object data="img/puerta.svg"></object>';
   
   $.ajax({
     url: 'json/puertas.json',
@@ -97,7 +92,7 @@ function cargarPuertas(){
                                 '<p class="infoTiempo">' + data.puertas[i].tiempo +'</p>' +
                                 '<p class="infoEntrada">' + data.puertas[i].entrada +'</p>' +
                                 '<p class="infoSalida">' + data.puertas[i].salida +'</p>' +
-                                '<p class="infoDescripcion">' + data.puertas[i].Descripcion +'</p>' +
+                                '<p class="infoDescripcion">' + data.puertas[i].descripcion +'</p>' +
                               '</div>' +
                             '</div>' +
                           '</article>';
@@ -106,6 +101,7 @@ function cargarPuertas(){
       }
     }    
   });
+
 }
 
 function cerrarSesion(access_token) {
@@ -120,10 +116,11 @@ function cerrarSesion(access_token) {
     success : function(){
       $('#usuario').slideToggle('fast', function(){
         $('#login').slideToggle('fast');
-        $('footer').slideToggle('fast');
+        $('#footer').slideToggle('fast');
         $('#contenido').slideToggle('fast');
         $('#nombreUsuario').remove();
         $('#avatar img').remove();
+        $('#seccionPuertas').remove();
       });
     },
     error : function(e) {

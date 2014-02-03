@@ -1,6 +1,6 @@
 {
 	"puertas" : [{
-			"puerta" : "Puerta 1",
+			"puerta" : "Habitacion 1",
 			"bateria" : "100%",
 			"tiempo" : "60 minutos",
 			"entrada" : "10:00 am",
@@ -8,7 +8,7 @@
 			"descripcion" : "pareja a pie",
 			"color" : "#22BCE0"
 		},{
-			"puerta" : "Puerta 2",
+			"puerta" : "Habitacion 2",
 			"bateria" : "100%",
 			"tiempo" : "60 minutos",
 			"entrada" : "10:00 am",
@@ -16,7 +16,7 @@
 			"descripcion" : "pareja a pie",
 			"color" : "#22BCE0"
 		},{
-			"puerta" : "Puerta 3",
+			"puerta" : "Habitacion 3",
 			"bateria" : "100%",
 			"tiempo" : "60 minutos",
 			"entrada" : "10:00 am",
@@ -24,7 +24,7 @@
 			"descripcion" : "pareja a pie",
 			"color" : "#22BCE0"
 		},{
-			"puerta" : "Puerta 4",
+			"puerta" : "Habitacion 4",
 			"bateria" : "100%",
 			"tiempo" : "60 minutos",
 			"entrada" : "10:00 am",
@@ -32,7 +32,7 @@
 			"descripcion" : "pareja a pie",
 			"color" : "#22BCE0"
 		},{
-			"puerta" : "Puerta 5",
+			"puerta" : "Habitacion 5",
 			"bateria" : "100%",
 			"tiempo" : "60 minutos",
 			"entrada" : "10:00 am",
@@ -40,7 +40,7 @@
 			"descripcion" : "pareja a pie",
 			"color" : "#22BCE0"
 		},{
-			"puerta" : "Puerta 6",
+			"puerta" : "Habitacion 6",
 			"bateria" : "100%",
 			"tiempo" : "60 minutos",
 			"entrada" : "10:00 am",
@@ -48,7 +48,7 @@
 			"descripcion" : "pareja a pie",
 			"color" : "#22BCE0"
 		},{
-			"puerta" : "Puerta 7",
+			"puerta" : "Habitacion 7",
 			"bateria" : "100%",
 			"tiempo" : "60 minutos",
 			"entrada" : "10:00 am",
@@ -56,7 +56,7 @@
 			"descripcion" : "pareja a pie",
 			"color" : "#22BCE0"
 		},{
-			"puerta" : "Puerta 8",
+			"puerta" : "Habitacion 8",
 			"bateria" : "100%",
 			"tiempo" : "60 minutos",
 			"entrada" : "10:00 am",
@@ -64,7 +64,7 @@
 			"descripcion" : "pareja a pie",
 			"color" : "#22BCE0"
 		},{
-			"puerta" : "Puerta 9",
+			"puerta" : "Habitacion 9",
 			"bateria" : "100%",
 			"tiempo" : "60 minutos",
 			"entrada" : "10:00 am",
@@ -72,7 +72,7 @@
 			"descripcion" : "pareja a pie",
 			"color" : "#22BCE0"
 		},{
-			"puerta" : "Puerta 10",
+			"puerta" : "Habitacion 10",
 			"bateria" : "100%",
 			"tiempo" : "60 minutos",
 			"entrada" : "10:00 am",
@@ -80,7 +80,7 @@
 			"descripcion" : "pareja a pie",
 			"color" : "#22BCE0"
 		},{
-			"puerta" : "Puerta 11",
+			"puerta" : "Habitacion 11",
 			"bateria" : "100%",
 			"tiempo" : "60 minutos",
 			"entrada" : "10:00 am",
@@ -88,7 +88,7 @@
 			"descripcion" : "pareja a pie",
 			"color" : "#22BCE0"
 		},{
-			"puerta" : "Puerta 12",
+			"puerta" : "Habitacion 12",
 			"bateria" : "100%",
 			"tiempo" : "60 minutos",
 			"entrada" : "10:00 am",
@@ -96,7 +96,7 @@
 			"descripcion" : "pareja a pie",
 			"color" : "#22BCE0"
 		},{
-			"puerta" : "Puerta 13",
+			"puerta" : "Habitacion 13",
 			"bateria" : "100%",
 			"tiempo" : "60 minutos",
 			"entrada" : "10:00 am",
@@ -104,7 +104,7 @@
 			"descripcion" : "pareja a pie",
 			"color" : "#22BCE0"
 		},{
-			"puerta" : "Puerta 14",
+			"puerta" : "Habitacion 14",
 			"bateria" : "100%",
 			"tiempo" : "60 minutos",
 			"entrada" : "10:00 am",

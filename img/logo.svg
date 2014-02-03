@@ -1,0 +1,51 @@
+<svg width="255" height="233" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <title>Logo Door-Man</title>
+ <g>
+  <title>Logo</title>
+  <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+  <g id="marco">
+   <title>marco</title>
+   <g id="svg_11">
+    <g id="svg_10" transform="matrix(0.97228 0 0 0.973176 -812.009 -744.582)">
+     <title>Layer 1</title>
+     <path id="svg_8" d="m835.159607,896.151123c0,-72.401245 58.644775,-131.046021 131.046021,-131.046021c72.401062,0 131.046082,58.644775 131.046082,131.046021c0,36.200989 -14.661011,68.961975 -38.373047,92.672974c-5.927979,5.92804 -12.421021,11.289978 -19.391968,15.999023l-146.562073,0c-6.971313,-4.709045 -13.464722,-10.070984 -19.392517,-15.999023c-23.711304,-23.710999 -38.372498,-56.471985 -38.372498,-92.672974l0,0z" stroke-linecap="square" stroke-linejoin="round" stroke-dasharray="null" stroke-width="0" fill="#22bce0" stroke="#22bce0"/>
+    </g>
+   </g>
+   <rect fill="#ffffff" stroke-width="0" stroke-dasharray="null" stroke-linejoin="round" stroke-linecap="square" x="57.732365" y="39.201887" width="139.699164" height="190.458699" id="fondo_marco" stroke="#ffffff"/>
+   <path fill="#22bce0" stroke="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="round" stroke-linecap="square" stroke-opacity="0" d="m59.132362,41.797264l10.345001,9.783298l0,176.870975l-10.345001,0l0,-186.654274z" id="marco_izquierdo"/>
+   <path fill="#22bce0" stroke="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="round" stroke-linecap="square" stroke-opacity="0" d="m196.005798,41.767895l0,186.653889l-10.344818,0l0,-177.126949l10.344818,-9.526951l0,0.000011z" id="marco_derecho"/>
+   <path fill="#22bce0" stroke="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="round" stroke-linecap="square" stroke-opacity="0" d="m60.49099,40.684444l134.254585,0l-10.970322,10l-112.893349,0l-10.390915,-10z" id="marco_superior"/>
+  </g>
+  <g id="puerta">
+   <rect fill="#ffffff" stroke-width="2" stroke-dasharray="null" stroke-linejoin="round" stroke-linecap="square" x="72.176915" y="53.085316" width="110.857148" height="173.607151" id="marco_puerta" stroke="#22bce0"/>
+   <rect fill="#edc03d" stroke-width="1.5" stroke-dasharray="null" stroke-linejoin="round" stroke-linecap="square" x="65.784069" y="81.942459" width="5.000006" height="19.666667" id="bisagra1" stroke="#ffffff"/>
+   <rect fill="#edc03d" stroke-width="1.5" stroke-dasharray="null" stroke-linejoin="round" stroke-linecap="square" x="65.617392" y="178.275789" width="5.000006" height="19.666667" stroke="#ffffff" id="bisagra2"/>
+   <g id="chapa">
+    <rect stroke="#000000" id="fondo_chapa" stroke-opacity="0" fill="#edc03d" stroke-width="0" stroke-dasharray="null" stroke-linejoin="round" stroke-linecap="square" x="169.484089" y="131.442464" width="10.333345" height="20.333334"/>
+    <circle stroke="#000000" id="perilla" r="3.104572" cy="136.859121" cx="174.567418" stroke-opacity="0" stroke-linecap="square" stroke-linejoin="round" stroke-dasharray="null" stroke-width="0" fill="#000000"/>
+    <path stroke="#000000" stroke-opacity="0" id="cerrojo" d="m172.559372,144.620041c0,-0.999008 0.902527,-1.808182 2.016617,-1.808182c1.114197,0 2.016602,0.809174 2.016602,1.808182c0,0.249771 -0.056396,0.487579 -0.158447,0.703918c-0.101929,0.216309 -0.249512,0.411148 -0.432007,0.574814c-0.091309,0.08168 -0.191116,0.155731 -0.298523,0.220703l0,2.927353l-2.25531,-0.027527l0,-2.899826c-0.007019,-0.032425 -0.207214,-0.139023 -0.29834,-0.220703c-0.182495,-0.163666 -0.330093,-0.358505 -0.432129,-0.574814c-0.101929,-0.216339 -0.158463,-0.454147 -0.158463,-0.703918z" stroke-linecap="square" stroke-linejoin="round" stroke-dasharray="null" stroke-width="0" fill="#000000"/>
+   </g>
+   <g id="trazo2">
+    <path stroke="#22bce0" id="dibujo2" d="m130.850739,68.466232l34.199982,0l0,62.333328l-20.563293,0l0,-27.696808l-13.636688,0l0,-34.63652z" stroke-linecap="square" stroke-linejoin="round" stroke-dasharray="null" stroke-width="3" fill="#ffffff"/>
+    <path stroke="#000000" id="dibujo21" d="m134.749741,71.972488l26.401993,0l0,55.320587l-13.200989,0l0,-27.659981l-13.201004,0l0,-27.660606z" stroke-opacity="0" stroke-linecap="square" stroke-linejoin="round" stroke-dasharray="null" stroke-width="0" fill="#22bce0"/>
+   </g>
+   <g id="trazo1">
+    <path stroke="#22bce0" id="dibujo1" d="m84.250725,68.466232l34.200012,0l0,34.903893l-13.428009,0l0,27.428993l-20.772003,0l0,-62.332886z" stroke-linecap="square" stroke-linejoin="round" stroke-dasharray="null" stroke-width="3" fill="#ffffff"/>
+    <path stroke="#000000" id="dibujo11" d="m88.149742,71.972534l26.402008,0l0,27.660599l-13.201019,0l0,27.659988l-13.200989,0l0,-55.320587z" stroke-opacity="0" stroke-linecap="square" stroke-linejoin="round" stroke-dasharray="null" stroke-width="0" fill="#22bce0"/>
+   </g>
+   <g id="trazo3">
+    <path transform="rotate(180 101.351 180.659)" id="dibujo3" stroke="#22bce0" d="m84.250725,149.492447l34.199951,0l0,62.333328l-20.563293,0l0,-27.696808l-13.636658,0l0,-34.63652z" stroke-linecap="square" stroke-linejoin="round" stroke-dasharray="null" stroke-width="3" fill="#ffffff"/>
+    <path transform="rotate(180 101.351 180.659)" id="dibujo31" stroke="#000000" d="m88.149712,152.998886l26.401978,0l0,55.320602l-13.200989,0l0,-27.660004l-13.200989,0l0,-27.660599z" stroke-opacity="0" stroke-linecap="square" stroke-linejoin="round" stroke-dasharray="null" stroke-width="0" fill="#22bce0"/>
+   </g>
+   <g id="trazo4">
+    <path transform="rotate(180 147.951 180.659)" id="dibujo4" stroke="#22bce0" d="m130.850739,149.492447l34.199982,0l0,34.9039l-13.427994,0l0,27.429001l-20.771988,0l0,-62.332901z" stroke-linecap="square" stroke-linejoin="round" stroke-dasharray="null" stroke-width="3" fill="#ffffff"/>
+    <path transform="rotate(180 147.951 180.659)" id="dibujo41" stroke="#000000" d="m134.749847,152.998428l26.401947,0l0,27.660614l-13.200928,0l0,27.660004l-13.201019,0l0,-55.320618z" stroke-opacity="0" stroke-linecap="square" stroke-linejoin="round" stroke-dasharray="null" stroke-width="0" fill="#22bce0"/>
+   </g>
+   <g id="trazo5">
+    <rect stroke="#22bce0" id="dibujo5" height="52.666665" width="21.266665" y="113.613883" x="113.988837" stroke-linecap="square" stroke-linejoin="round" stroke-dasharray="null" stroke-width="3" fill="#ffffff"/>
+    <rect stroke="#000000" id="dibujo51" stroke-opacity="0" height="44.987501" width="13.151642" y="117.420135" x="118.088022" stroke-linecap="square" stroke-linejoin="round" stroke-dasharray="null" stroke-width="0" fill="#22bce0"/>
+   </g>
+  </g>
+ </g>
+</svg>

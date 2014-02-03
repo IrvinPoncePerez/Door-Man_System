@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="203" height="282" viewBox="0 0 206 282" preserveAspectRatio="xMidYMid meet">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+    <style type="text/css" >
+      <![CDATA[
+
+        .marco{
+          stroke : #999;
+
+          /* Puerta disponible : #9CBF60
+           * Puerta ocupada : #D34B44
+           * Puerta mantenimiento : #DEAA31
+           * Puerta limpieza : #85C7C3
+           * Puerta sucia : #A89565 */
+        }
+
+        .fondo{
+          fill : #999; 
+        }
+    }
+
+      ]]>
+    </style>
+ <g>
+  <title>Layer 1</title>
+  <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+  <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+  <g id="puerta">
+   <rect class="marco" transform="matrix(1.83221 0 0 1.62327 -448.158 -91.3382)" id="item11" height="173.607151" width="110.857148" y="56.2681" x="244.599862" stroke-linecap="square" stroke-linejoin="round" stroke-dasharray="null" stroke-width="4" fill="#ffffff"/>
+   <g transform="matrix(1.83221 0 0 1.62327 -448.158 -91.3382)" id="svg_50">
+    <rect stroke="#000000" height="20.333334" width="10.333345" y="134.625251" x="341.907032" stroke-linecap="square" stroke-linejoin="round" stroke-dasharray="null" stroke-width="0" fill="#edc03d" stroke-opacity="0" id="svg_53"/>
+    <circle stroke="#000000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="round" stroke-linecap="square" stroke-opacity="0" cx="346.990361" cy="140.041908" r="3.104572" id="svg_52"/>
+    <path stroke="#000000" fill="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="round" stroke-linecap="square" d="m344.982269,147.802841c0,-0.999008 0.902557,-1.808182 2.016663,-1.808182c1.114136,0 2.016602,0.809174 2.016602,1.808182c0,0.249771 -0.056366,0.487564 -0.158447,0.703918c-0.101929,0.216309 -0.249481,0.411148 -0.431976,0.574814c-0.091339,0.081696 -0.191101,0.155731 -0.298615,0.220703l0,2.927338l-2.255219,-0.027496l0,-2.899841c-0.007111,-0.03241 -0.207275,-0.139008 -0.29837,-0.220703c-0.182495,-0.163666 -0.330139,-0.358505 -0.432129,-0.574814c-0.101929,-0.216354 -0.158508,-0.454147 -0.158508,-0.703918z" id="svg_51" stroke-opacity="0"/>
+   </g>
+   <g id="svg_68">
+    <path class="marco" fill="#ffffff" stroke-width="4" stroke-dasharray="null" stroke-linejoin="round" stroke-linecap="square" d="m22.121666,24.967384l62.661514,0l0,56.658325l-24.602844,0l0,44.524628l-38.05867,0l0,-101.182953z" id="item1"/>
+    <path stroke="#000000" class="fondo" stroke-width="0" stroke-dasharray="null" stroke-linejoin="round" stroke-linecap="square" stroke-opacity="0" d="m29.265511,30.659004l48.373932,0l0,44.900604l-24.18692,0l0,44.899536l-24.187012,0l0,-89.80014z" id="item2"/>
+   </g>
+   <g id="svg_69">
+    <path class="marco" fill="#ffffff" stroke-width="4" stroke-dasharray="null" stroke-linejoin="round" stroke-linecap="square" d="m107.502724,24.967384l62.661369,0l0,101.18364l-37.676193,0l0,-44.95932l-24.985176,0l0,-56.224319z" id="item3"/>
+    <path stroke="#000000" class="fondo" stroke-width="0" stroke-dasharray="null" stroke-linejoin="round" stroke-linecap="square" stroke-opacity="0" d="m114.646461,30.658958l48.373787,0l0,89.800125l-24.186829,0l0,-44.899582l-24.186958,0l0,-44.900543z" id="item4"/>
+   </g>
+   <g id="svg_70">
+    <rect class="marco" transform="matrix(1.83221 0 0 1.62327 -448.158 -91.3382)" fill="#ffffff" stroke-width="3" stroke-dasharray="null" stroke-linejoin="round" stroke-linecap="square" x="286.411784" y="116.796667" width="21.266665" height="52.666665" id="item5"/>
+    <rect stroke="#000000" transform="matrix(1.83221 0 0 1.62327 -448.158 -91.3382)" class="fondo" stroke-width="0" stroke-dasharray="null" stroke-linejoin="round" stroke-linecap="square" x="290.510969" y="120.602919" width="13.151642" height="44.987501" stroke-opacity="0" id="item6"/>
+   </g>
+   <g id="svg_71">
+    <path class="marco" fill="#ffffff" stroke-width="4" stroke-dasharray="null" stroke-linejoin="round" stroke-linecap="square" d="m84.783058,256.918335l-62.661346,0l0,-101.183716l37.675995,0l0,44.959351l24.985352,0l0,56.224365z" id="item7"/>
+    <path stroke="#000000" class="fondo" stroke-width="0" stroke-dasharray="null" stroke-linejoin="round" stroke-linecap="square" stroke-opacity="0" d="m77.63932,251.226685l-48.37384,0l0,-89.80011l24.186951,0l0,44.899597l24.18689,0l0,44.900513z" id="item8"/>
+   </g>
+   <g id="svg_72">
+    <path class="marco" fill="#ffffff" stroke-width="4" stroke-dasharray="null" stroke-linejoin="round" stroke-linecap="square" d="m170.164093,256.917633l-62.6614,0l0,-56.658356l24.602852,0l0,-44.524628l38.058548,0l0,101.182983z" id="item9"/>
+    <path stroke="#000000" class="fondo" stroke-width="0" stroke-dasharray="null" stroke-linejoin="round" stroke-linecap="square" stroke-opacity="0" d="m163.020355,251.224945l-48.373833,0l0,-44.900543l24.186775,0l0,-44.899536l24.187057,0l0,89.800079z" id="item10"/>
+   </g>
+  </g>
+ </g>
+</svg>
