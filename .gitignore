@@ -23,7 +23,9 @@ local.properties
 ## .ico .png .jpg
 #################
 src/
-img/
+*.ico
+*.png
+*.jpg
 META-INF/
 WEB-INF/
 fonts/
