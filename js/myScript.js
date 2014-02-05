@@ -73,9 +73,15 @@ function signinCallback (authResult) {
 
 function cargarPuertas(){
   $('#contenido').slideToggle('fast');
+  //
+  // Aplicador de colores
+  //
+  $('#aplicadorColores').slideToggle();
+
   $('#footer').slideToggle('fast');
   $('footer #copyright p:first-child').css('padding-top', '0px');
-  var svgPuerta = '<object data="img/puerta.svg"></object>';
+
+  var svgPuerta = 'img/puerta.svg';
   
   $.ajax({
     url: 'json/puertas.json',
@@ -86,7 +92,7 @@ function cargarPuertas(){
         var habitacion = '<article id="puerta' + (i + 1)+ '" class="contPuerta">' +
                             '<p class="tituloPuerta">' + data.puertas[i].puerta + '</p>' +
                             '<div class="contDatos">' +
-                              '<figure>' + svgPuerta + '</figure>' +
+                              '<figure><object id="svgPuerta' + (i + 1) + '" data="' + svgPuerta + '"></object></figure>' +
                               '<div class="contInfo">' +
                                 '<p class="infoBateria">' + data.puertas[i].bateria +'</p>' +
                                 '<p class="infoTiempo">' + data.puertas[i].tiempo +'</p>' +
@@ -101,7 +107,6 @@ function cargarPuertas(){
       }
     }    
   });
-
 }
 
 function cerrarSesion(access_token) {
@@ -118,6 +123,11 @@ function cerrarSesion(access_token) {
         $('#login').slideToggle('fast');
         $('#footer').slideToggle('fast');
         $('#contenido').slideToggle('fast');
+        //
+        // Aplicador de colores
+        //
+        $('#aplicadorColores').slideToggle();
+
         $('#nombreUsuario').remove();
         $('#avatar img').remove();
         $('#seccionPuertas').remove();
@@ -129,5 +139,56 @@ function cerrarSesion(access_token) {
   });
 }
 
+// Puerta disponible : #9CBF60
+// Puerta ocupada : #D34B44
+// Puerta mantenimiento : #DEAA31
+// Puerta limpieza : #85C7C3
+// Puerta sucia : #A89565 
+
+
 //Declaracion de eventos
 $('#signout').click(cerrarSesion);
+$('#colorDisponible').click(function(){ findSVGElements('#9CBF60') });
+$('#colorOcupada').click(function(){ findSVGElements('#D34B44') });
+$('#colorMantenimiento').click(function(){ findSVGElements('#DEAA31') });
+$('#colorLimpieza').click(function(){ findSVGElements('#85c7c3') });
+$('#colorSupervision').click(function(){ findSVGElements('#a89565') });
+    
+   
+    
+// fetches the document for the given embedding_element
+function getSubDocument(embedding_element)
+{
+  if (embedding_element.contentDocument) 
+  {
+    return embedding_element.contentDocument;
+  } 
+  else 
+  {
+    var subdoc = null;
+    try {
+      subdoc = embedding_element.getSVGDocument();
+    } catch(e) {}
+    return subdoc;
+  }
+}
+    
+function findSVGElements(color)
+{
+  $('#seccionPuertas .contPuerta .contDatos figure').css('border-color', color);
+  var elms = document.querySelectorAll("object");
+  for (var i = 0; i < elms.length; i++)
+  {
+    var subdoc = getSubDocument(elms[i]);
+    if (subdoc){
+      var fondos = subdoc.getElementsByClassName('fondo');
+      var marcos = subdoc.getElementsByClassName('marco')
+      for (var j = 0; j < fondos.length; j++){
+        fondos[j].setAttribute('fill', color);
+      }
+      for (var j = 0; j < marcos.length; j++){
+        marcos[j].setAttribute('stroke', color);
+      }
+    }
+  }
+}

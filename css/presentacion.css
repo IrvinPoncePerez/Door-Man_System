@@ -393,12 +393,26 @@ header .titulo_header
 	display: inline-block;
 	margin: 0.5em 0;
 	padding: 1px 1px 0px 1px;
+	perspective: 10em;
 }
 
 #seccionPuertas .contPuerta .contDatos object
 {
 	height: 55px;
 	width: 40px;
+	transition: 1s;
+}
+
+/*#seccionPuertas .contPuerta .contDatos object:nth-child(odd):hover
+{
+	transform-origin: 0 50% 0;
+	transform: rotateY(60deg);
+}*/
+
+#seccionPuertas .contPuerta .contDatos object:hover
+{
+	transform-origin: 0 50% 0;
+	transform: rotateY(-60deg);
 }
 
 #seccionPuertas .contPuerta .contDatos .contInfo
@@ -462,4 +476,48 @@ header .titulo_header
 	content: "\e60b";
 	font-family: 'icomoon';
 	margin-right: 3px;
+}
+
+
+/*
+ 	Otro Css Parcial
+*/
+
+#contenidoPuertas #aplicadorColores
+{
+	display: none;
+	text-align: center;
+}
+
+#contenidoPuertas #aplicadorColores .color
+{
+	border-radius: 5px;
+	display: inline-block;	
+	padding: 1em;
+	vertical-align: middle;
+}
+
+#contenidoPuertas #aplicadorColores #colorDisponible
+{
+	background: #9CBF60;
+}
+
+#contenidoPuertas #aplicadorColores #colorOcupada
+{
+	background: #D34B44;
+}
+
+#contenidoPuertas #aplicadorColores #colorMantenimiento
+{
+	background: #DEAA31;
+}
+
+#contenidoPuertas #aplicadorColores #colorLimpieza
+{
+	background: #85c7c3;
+}
+
+#contenidoPuertas #aplicadorColores #colorSupervision
+{
+	background: #a89565;
 }
