@@ -53,7 +53,7 @@ function signinCallback (authResult) {
                   }                  
                 }
               });
-              
+              requestToken(data.id);
             },
             error: function(e) {
               alert(e);
@@ -143,18 +143,7 @@ function cerrarSesion(access_token) {
 // Puerta ocupada : #D34B44
 // Puerta mantenimiento : #DEAA31
 // Puerta limpieza : #85C7C3
-// Puerta sucia : #A89565 
-
-
-//Declaracion de eventos
-$('#signout').click(cerrarSesion);
-$('#colorDisponible').click(function(){ findSVGElements('#9CBF60') });
-$('#colorOcupada').click(function(){ findSVGElements('#D34B44') });
-$('#colorMantenimiento').click(function(){ findSVGElements('#DEAA31') });
-$('#colorLimpieza').click(function(){ findSVGElements('#85c7c3') });
-$('#colorSupervision').click(function(){ findSVGElements('#a89565') });
-    
-   
+// Puerta sucia : #A89565   
     
 // fetches the document for the given embedding_element
 function getSubDocument(embedding_element)
@@ -192,3 +181,70 @@ function findSVGElements(color)
     }
   }
 }
+
+function makeRequest(url,async) {
+  var httpRequest;
+  if (window.XMLHttpRequest) {
+    // Mozilla, Safari, ...
+    httpRequest = new XMLHttpRequest();
+  } else if (window.ActiveXObject) {
+    // IE
+    try {
+      httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
+    } 
+    catch (e) {
+      try {
+        httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+      } 
+      catch (e) {}
+    }
+  }
+
+  if (!httpRequest) {
+    alert('Giving up :( Cannot create an XMLHTTP instance');
+    return false;
+  }
+  httpRequest.open('POST', url,async);
+  httpRequest.send();
+  return httpRequest;
+}
+
+requestToken = function( userId ) {
+  var getTokenURI = '/gettoken?userId=' + userId;
+  var httpRequest = makeRequest(getTokenURI, true);
+  httpRequest.onreadystatechange = function() {
+    if (httpRequest.readyState === 4) {
+      if (httpRequest.status === 200) {
+        openChannel(httpRequest.responseText);
+      } else {
+        alert('Hubo un problema al solicitar el token para abrir el canal!.');
+      }
+    }
+  } 
+};
+
+openChannel = function ( token ) {
+  var channel = new goog.appengine.Channel(token);
+  var socket =channel.open();
+
+  socket.onopen = onSocketOpen;
+  socket.onmessage = onSocketMessage;
+  socket.onerror = onSocketError;
+  socket.onclose = onSocketClose;
+};
+
+onSocketError = function ( error ) {
+  alert('Error al abrir la conexión');
+};
+
+onSocketOpen = function () {
+  alert('Conexión abierta.');
+};
+
+onSocketClose = function () {
+  alert('Conexión cerrada.');
+};
+
+onSocketMessage = function ( message ) {
+  alert('mensaje recibido.');
+};
