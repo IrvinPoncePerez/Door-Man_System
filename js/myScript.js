@@ -89,25 +89,33 @@ function cargarPuertas(){
     success: function(data){
       $('#contenidoPuertas').append('<section id="seccionPuertas"></section>');
       for (var i = 0; i < data.puertas.length; i++){
-        var habitacion = '<article id="puerta' + (i + 1)+ '" class="contPuerta">' +
+
+        var habitacion = '<article id="' + data.puertas[i].id + '" class="contPuerta">' +
                             '<p class="tituloPuerta">' + data.puertas[i].puerta + '</p>' +
                             '<div class="contDatos">' +
-                              '<figure><object id="svgPuerta' + (i + 1) + '" data="' + svgPuerta + '"></object></figure>' +
+                              '<figure><object id="svg' + data.puertas[i].id + '" type="image/svg+xml" data="' + svgPuerta + '"></object></figure>' +
                               '<div class="contInfo">' +
-                                '<p class="infoBateria">' + data.puertas[i].bateria +'</p>' +
-                                '<p class="infoTiempo">' + data.puertas[i].tiempo +'</p>' +
-                                '<p class="infoEntrada">' + data.puertas[i].entrada +'</p>' +
-                                '<p class="infoSalida">' + data.puertas[i].salida +'</p>' +
-                                '<p class="infoDescripcion">' + data.puertas[i].descripcion +'</p>' +
+                                '<p class="infoBateria"></p>' +
+                                '<p class="infoTiempo"></p>' +
+                                '<p class="infoEntrada"></p>' +
+                                '<p class="infoSalida"></p>' +
+                                '<p class="infoDescripcion"></p>' +
                               '</div>' +
                             '</div>' +
                           '</article>';
 
         $('#seccionPuertas').append(habitacion);
+
       }
     }    
   });
 }
+
+//Declaracion de eventos
+$('#signout').click(cerrarSesion);
+
+//Variable global socket
+var socket;
 
 function cerrarSesion(access_token) {
   var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' + access_token;
@@ -119,18 +127,17 @@ function cerrarSesion(access_token) {
     contentType : 'appication/json',
     dataType : 'jsonp',
     success : function(){
-      $('#usuario').slideToggle('fast', function(){
+        $('#usuario').slideToggle('fast', function(){
         $('#login').slideToggle('fast');
         $('#footer').slideToggle('fast');
         $('#contenido').slideToggle('fast');
         //
         // Aplicador de colores
         //
-        $('#aplicadorColores').slideToggle();
-
         $('#nombreUsuario').remove();
         $('#avatar img').remove();
         $('#seccionPuertas').remove();
+        socket.close();
       });
     },
     error : function(e) {
@@ -162,70 +169,58 @@ function getSubDocument(embedding_element)
   }
 }
     
-function findSVGElements(color)
+function findSVGElements(puerta, color)
 {
-  $('#seccionPuertas .contPuerta .contDatos figure').css('border-color', color);
-  var elms = document.querySelectorAll("object");
-  for (var i = 0; i < elms.length; i++)
-  {
-    var subdoc = getSubDocument(elms[i]);
-    if (subdoc){
-      var fondos = subdoc.getElementsByClassName('fondo');
-      var marcos = subdoc.getElementsByClassName('marco')
+  $('#' + puerta + ' .contDatos figure').css('border-color', color);
+  var svgObject = document.getElementById('svg' + puerta);
+  var svgDocument = getSubDocument(svgObject);
+  
+  if (svgDocument){
+    var fondos = svgDocument.getElementsByClassName('fondo');
+    var marcos = svgDocument.getElementsByClassName('marco')
       for (var j = 0; j < fondos.length; j++){
         fondos[j].setAttribute('fill', color);
       }
       for (var j = 0; j < marcos.length; j++){
         marcos[j].setAttribute('stroke', color);
       }
-    }
   }
 }
 
-function makeRequest(url,async) {
-  var httpRequest;
-  if (window.XMLHttpRequest) {
-    // Mozilla, Safari, ...
-    httpRequest = new XMLHttpRequest();
-  } else if (window.ActiveXObject) {
-    // IE
-    try {
-      httpRequest = new ActiveXObject("Msxml2.XMLHTTP");
-    } 
-    catch (e) {
-      try {
-        httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-      } 
-      catch (e) {}
-    }
-  }
+function setPuerta(puerta){
+  var idPuerta = puerta.id;
 
-  if (!httpRequest) {
-    alert('Giving up :( Cannot create an XMLHTTP instance');
-    return false;
-  }
-  httpRequest.open('POST', url,async);
-  httpRequest.send();
-  return httpRequest;
+  $('#'+ idPuerta + ' .contDatos .contInfo .infoBateria').html(puerta.bateria);
+  $('#'+ idPuerta + ' .contDatos .contInfo .infoTiempo').html(puerta.tiempo);
+  $('#'+ idPuerta + ' .contDatos .contInfo .infoEntrada').html(puerta.entrada);
+  $('#'+ idPuerta + ' .contDatos .contInfo .infoSalida').html(puerta.salida);
+  $('#'+ idPuerta + ' .contDatos .contInfo .infoDescripcion').html(puerta.descripcion);
+  findSVGElements(puerta.id, puerta.estatus);
 }
+
+/*
+ *  Código para realizar la conexión con Socket al 
+ *  servidor App Engine.
+ *
+ */
 
 requestToken = function( userId ) {
   var getTokenURI = '/gettoken?userId=' + userId;
-  var httpRequest = makeRequest(getTokenURI, true);
-  httpRequest.onreadystatechange = function() {
-    if (httpRequest.readyState === 4) {
-      if (httpRequest.status === 200) {
-        openChannel(httpRequest.responseText);
-      } else {
-        alert('Hubo un problema al solicitar el token para abrir el canal!.');
-      }
-    }
-  } 
+
+  $.ajax({
+    type: 'POST',
+    url: getTokenURI,
+    async: true,
+    contentType: 'text/plain',
+    data: 'text',
+    success: openChannel
+  });
+
 };
 
 openChannel = function ( token ) {
   var channel = new goog.appengine.Channel(token);
-  var socket =channel.open();
+  socket = channel.open();
 
   socket.onopen = onSocketOpen;
   socket.onmessage = onSocketMessage;
@@ -238,7 +233,15 @@ onSocketError = function ( error ) {
 };
 
 onSocketOpen = function () {
-  alert('Conexión abierta.');
+  $.ajax({
+    url: 'json/estatusPuertas.json',
+    dataType: 'json',
+    success: function(data){
+      for (var i = 0; i < data.puertas.length; i++){
+        setPuerta(data.puertas[i]);
+      }
+    }
+  });
 };
 
 onSocketClose = function () {

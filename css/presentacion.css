@@ -372,13 +372,12 @@ header .titulo_header
 	border-radius: 5px;
 	box-shadow: 0px 0px 10px 1px #999;
 	display: inline-block;
-	margin: 1em 0.5em;
+	margin: 0.5em 0.5em;
 	width: 300px;
 }
 
 #seccionPuertas .contPuerta .tituloPuerta
 {
-	border-bottom: solid #999 1px;
 	display: inline-block;
 	font-weight: bold;
 	padding: 0.5em 0px;
@@ -391,7 +390,7 @@ header .titulo_header
 	border-right: solid #999 0.3em;
 	border-top: solid #999 0.3em;
 	display: inline-block;
-	margin: 0.5em 0;
+	margin: 0.5em 0 1em 0;
 	padding: 1px 1px 0px 1px;
 	perspective: 10em;
 }
@@ -403,13 +402,13 @@ header .titulo_header
 	transition: 1s;
 }
 
-/*#seccionPuertas .contPuerta .contDatos object:nth-child(odd):hover
+#seccionPuertas .contPuerta .contDatos object .inside
 {
 	transform-origin: 0 50% 0;
 	transform: rotateY(60deg);
-}*/
+}
 
-#seccionPuertas .contPuerta .contDatos object:hover
+#seccionPuertas .contPuerta .contDatos object .outside
 {
 	transform-origin: 0 50% 0;
 	transform: rotateY(-60deg);
@@ -422,6 +421,11 @@ header .titulo_header
 	text-align: center;
 	vertical-align: top;
 	width: 200px;
+}
+
+#seccionPuertas .contPuerta .contDatos .contInfo .infoDescripcion
+{
+	margin-left: 1em;	
 }
 
 #seccionPuertas .contPuerta .contDatos .contInfo p

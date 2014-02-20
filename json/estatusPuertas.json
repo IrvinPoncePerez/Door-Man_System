@@ -1,0 +1,120 @@
+{
+	"puertas" : [{
+			"id" : "puerta1",
+			"puerta" : "Habitacion 1",
+			"bateria" : "100%",
+			"tiempo" : "0 minutos",
+			"entrada" : "9:30 am",
+			"salida" : "9:35 am",
+			"descripcion" : "Disponible.",
+			"estatus" : "#9CBF60"
+		},{
+			"id" : "puerta2",
+			"puerta" : "Habitacion 2",
+			"bateria" : "80%",
+			"tiempo" : "120 minutos",
+			"entrada" : "11:30 am",
+			"salida" : "11:50 am",
+			"descripcion" : "Bocho azul.",
+			"estatus" : "#D34B44"
+		},{
+			"id" : "puerta3",
+			"puerta" : "Habitacion 3",
+			"bateria" : "95%",
+			"tiempo" : "60 minutos",
+			"entrada" : "11:30 am",
+			"salida" : "12:50 am",
+			"descripcion" : "Nissan Roja.",
+			"estatus" : "#D34B44"
+		},{
+			"id" : "puerta4",
+			"puerta" : "Habitacion 4",
+			"bateria" : "80%",
+			"tiempo" : "120 minutos",
+			"entrada" : "11:00 am",
+			"salida" : "11:10 am",
+			"descripcion" : "Mantenimiento de regadera.",
+			"estatus" : "#DEAA31"
+		},{
+			"id" : "puerta5",
+			"puerta" : "Habitacion 5",
+			"bateria" : "100%",
+			"tiempo" : "180 minutos",
+			"entrada" : "11:00 am",
+			"salida" : "12:30 am",
+			"descripcion" : "Moto Yamaha, solicita servicio.",
+			"estatus" : "#D34B44"
+		},{
+			"id" : "puerta6",
+			"puerta" : "Habitacion 6",
+			"bateria" : "100%",
+			"tiempo" : "0 minutos",
+			"entrada" : "12:00 am",
+			"salida" : "12:10 am",
+			"descripcion" : "Disponible.",
+			"estatus" : "#9CBF60"
+		},{
+			"id" : "puerta7",
+			"puerta" : "Habitacion 7",
+			"bateria" : "95%",
+			"tiempo" : "0 minutos",
+			"entrada" : "10:30 am",
+			"salida" : "10:35 am",
+			"descripcion" : "Disponible.",
+			"estatus" : "#9CBF60"
+		},{
+			"id" : "puerta8",
+			"puerta" : "Habitacion 8",
+			"bateria" : "75%",
+			"tiempo" : "10 minutos",
+			"entrada" : "10:00 am",
+			"salida" : "10:05 am",
+			"descripcion" : "Cambio de sabanas.",
+			"estatus" : "#85C7C3"
+		},{
+			"id" : "puerta9",
+			"puerta" : "Habitacion 9",
+			"bateria" : "80%",
+			"tiempo" : "120 minutos",
+			"entrada" : "11:30 am",
+			"salida" : "01:00 pm",
+			"descripcion" : "Ford K Rojo.",
+			"estatus" : "#D34B44"
+		},{
+			"id" : "puerta10",
+			"puerta" : "Habitacion 10",
+			"bateria" : "60%",
+			"tiempo" : "0 minutos",
+			"entrada" : "11:30 am",
+			"salida" : "11:35 pm",
+			"descripcion" : "Disponible.",
+			"estatus" : "#9CBF60"
+		},{
+			"id" : "puerta11",
+			"puerta" : "Habitacion 11",
+			"bateria" : "100%",
+			"tiempo" : "5 minutos",
+			"entrada" : "12:30 am",
+			"salida" : "12:35 am",
+			"descripcion" : "Salida del cliente, revisión de habitación.",
+			"estatus" : "#A89565"
+		},{
+			"id" : "puerta12",
+			"puerta" : "Habitacion 12",
+			"bateria" : "60%",
+			"tiempo" : "15 minutos",
+			"entrada" : "9:30 am",
+			"salida" : "9:45 am",
+			"descripcion" : "En limpieza de pisos.",
+			"estatus" : "#85C7C3"
+		},{
+			"id" : "puerta13",
+			"puerta" : "Habitacion 13",
+			"bateria" : "95%",
+			"tiempo" : "90 minutos",
+			"entrada" : "10:30 am",
+			"salida" : "12:50 am",
+			"descripcion" : "Pareja a pie.",
+			"estatus" : "#D34B44"
+		}]
+}

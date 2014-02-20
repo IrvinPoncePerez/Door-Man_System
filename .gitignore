@@ -27,7 +27,6 @@ src/
 *.png
 *.jpg
 META-INF/
-WEB-INF/
 fonts/
 normalize.css
 

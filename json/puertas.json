@@ -1,115 +1,42 @@
 {
 	"puertas" : [{
-			"puerta" : "Habitacion 1",
-			"bateria" : "100%",
-			"tiempo" : "60 minutos",
-			"entrada" : "10:00 am",
-			"salida" : "12:00 pm",
-			"descripcion" : "pareja a pie",
-			"color" : "#22BCE0"
+			"id" : "puerta1",
+			"puerta" : "Habitacion 1"
 		},{
-			"puerta" : "Habitacion 2",
-			"bateria" : "100%",
-			"tiempo" : "60 minutos",
-			"entrada" : "10:00 am",
-			"salida" : "12:00 pm",
-			"descripcion" : "pareja a pie",
-			"color" : "#22BCE0"
+			"id" : "puerta2",
+			"puerta" : "Habitacion 2"
 		},{
-			"puerta" : "Habitacion 3",
-			"bateria" : "100%",
-			"tiempo" : "60 minutos",
-			"entrada" : "10:00 am",
-			"salida" : "12:00 pm",
-			"descripcion" : "pareja a pie",
-			"color" : "#22BCE0"
+			"id" : "puerta3",
+			"puerta" : "Habitacion 3"
 		},{
-			"puerta" : "Habitacion 4",
-			"bateria" : "100%",
-			"tiempo" : "60 minutos",
-			"entrada" : "10:00 am",
-			"salida" : "12:00 pm",
-			"descripcion" : "pareja a pie",
-			"color" : "#22BCE0"
+			"id" : "puerta4",
+			"puerta" : "Habitacion 4"
 		},{
-			"puerta" : "Habitacion 5",
-			"bateria" : "100%",
-			"tiempo" : "60 minutos",
-			"entrada" : "10:00 am",
-			"salida" : "12:00 pm",
-			"descripcion" : "pareja a pie",
-			"color" : "#22BCE0"
+			"id" : "puerta5",
+			"puerta" : "Habitacion 5"
 		},{
-			"puerta" : "Habitacion 6",
-			"bateria" : "100%",
-			"tiempo" : "60 minutos",
-			"entrada" : "10:00 am",
-			"salida" : "12:00 pm",
-			"descripcion" : "pareja a pie",
-			"color" : "#22BCE0"
+			"id" : "puerta6",
+			"puerta" : "Habitacion 6"
 		},{
-			"puerta" : "Habitacion 7",
-			"bateria" : "100%",
-			"tiempo" : "60 minutos",
-			"entrada" : "10:00 am",
-			"salida" : "12:00 pm",
-			"descripcion" : "pareja a pie",
-			"color" : "#22BCE0"
+			"id" : "puerta7",
+			"puerta" : "Habitacion 7"
 		},{
-			"puerta" : "Habitacion 8",
-			"bateria" : "100%",
-			"tiempo" : "60 minutos",
-			"entrada" : "10:00 am",
-			"salida" : "12:00 pm",
-			"descripcion" : "pareja a pie",
-			"color" : "#22BCE0"
+			"id" : "puerta8",
+			"puerta" : "Habitacion 8"
 		},{
-			"puerta" : "Habitacion 9",
-			"bateria" : "100%",
-			"tiempo" : "60 minutos",
-			"entrada" : "10:00 am",
-			"salida" : "12:00 pm",
-			"descripcion" : "pareja a pie",
-			"color" : "#22BCE0"
+			"id" : "puerta9",
+			"puerta" : "Habitacion 9"
 		},{
-			"puerta" : "Habitacion 10",
-			"bateria" : "100%",
-			"tiempo" : "60 minutos",
-			"entrada" : "10:00 am",
-			"salida" : "12:00 pm",
-			"descripcion" : "pareja a pie",
-			"color" : "#22BCE0"
+			"id" : "puerta10",
+			"puerta" : "Habitacion 10"
 		},{
-			"puerta" : "Habitacion 11",
-			"bateria" : "100%",
-			"tiempo" : "60 minutos",
-			"entrada" : "10:00 am",
-			"salida" : "12:00 pm",
-			"descripcion" : "pareja a pie",
-			"color" : "#22BCE0"
+			"id" : "puerta11",
+			"puerta" : "Habitacion 11"
 		},{
-			"puerta" : "Habitacion 12",
-			"bateria" : "100%",
-			"tiempo" : "60 minutos",
-			"entrada" : "10:00 am",
-			"salida" : "12:00 pm",
-			"descripcion" : "pareja a pie",
-			"color" : "#22BCE0"
+			"id" : "puerta12",
+			"puerta" : "Habitacion 12"
 		},{
-			"puerta" : "Habitacion 13",
-			"bateria" : "100%",
-			"tiempo" : "60 minutos",
-			"entrada" : "10:00 am",
-			"salida" : "12:00 pm",
-			"descripcion" : "pareja a pie",
-			"color" : "#22BCE0"
-		},{
-			"puerta" : "Habitacion 14",
-			"bateria" : "100%",
-			"tiempo" : "60 minutos",
-			"entrada" : "10:00 am",
-			"salida" : "12:00 pm",
-			"descripcion" : "pareja a pie",
-			"color" : "#22BCE0"
+			"id" : "puerta13",
+			"puerta" : "Habitacion 13"
 		}]
 }
