@@ -29,8 +29,10 @@ public class TokenServlet extends HttpServlet{
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String userId = request.getParameter("userId");
+		UsersStore objUsersStore = UsersStore.getInstance();
 		if (userId != null && !"".equals(userId)) {
 			String token = createChannel(userId);
+			objUsersStore.addUser(userId);
 			writeIntoChannel(response, token);
 		}
 	}

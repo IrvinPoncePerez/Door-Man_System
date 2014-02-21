@@ -38,6 +38,7 @@ public class EstatusServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		JSONObject objJSON = new JSONObject();
+		UsersStore objUsersStore = UsersStore.getInstance();
 		try {
 			
 			objJSON.put("type", "updateEstatus");
@@ -45,9 +46,12 @@ public class EstatusServlet extends HttpServlet{
 			objJSON.put("bateria", request.getParameter("bateria"));
 			objJSON.put("actividad", request.getParameter("actividad"));
 			objJSON.put("hora", request.getParameter("hora"));
+					
+			 for (String user : objUsersStore.getUsers()){
+				 logger.log(Level.INFO, "sending estatus info to the channel " + user);
+				 sendEstatusToChannel(user, objJSON.toString());
+			 }
 			
-			logger.log(Level.INFO, "sending estatus info to the channel.");
-			sendEstatusToChannel("115380400632455375055", objJSON.toString());
 		} catch (ChannelFailureException ex) {
 			logger.log(Level.WARNING, "Failed in sending message to channel");
 			//borrar el usuario.
