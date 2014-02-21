@@ -53,7 +53,9 @@ function signinCallback (authResult) {
                   }                  
                 }
               });
-              requestToken(data.id);
+              sessionOpen = true;
+              userId = data.id;
+              requestToken(userId);
             },
             error: function(e) {
               alert(e);
@@ -70,6 +72,21 @@ function signinCallback (authResult) {
         }           
       }
 }
+
+/*
+ *  Declaracion de eventos
+ */
+
+$('#signout').click(cerrarSesion);
+
+
+/*
+ *Variable global socket
+ *
+ */
+var socket;
+var sessionOpen; 
+var userId;
 
 function cargarPuertas(){
   $('#contenido').slideToggle('fast');
@@ -111,12 +128,6 @@ function cargarPuertas(){
   });
 }
 
-//Declaracion de eventos
-$('#signout').click(cerrarSesion);
-
-//Variable global socket
-var socket;
-
 function cerrarSesion(access_token) {
   var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' + access_token;
 
@@ -137,6 +148,7 @@ function cerrarSesion(access_token) {
         $('#nombreUsuario').remove();
         $('#avatar img').remove();
         $('#seccionPuertas').remove();
+        sessionOpen = false;
         socket.close();
       });
     },
@@ -245,9 +257,40 @@ onSocketOpen = function () {
 };
 
 onSocketClose = function () {
-  alert('Conexión cerrada.');
+  if (sessionOpen) {
+    requestToken(userId);
+  }
 };
 
-onSocketMessage = function ( message ) {
-  alert('mensaje recibido.');
+onSocketMessage = function (message) {
+  var data = JSON.parse(message.data);
+  if (data.type == 'updateEstatus'){
+    updateEstatus(data);
+  }
 };
+
+/*
+ * Funciones para la atualizacion de los mensajes recibidos.
+ *
+ */
+
+function updateEstatus(puerta){
+  var idPuerta = puerta.id;
+
+  $('#' + idPuerta + ' .contDatos .contInfo .infoBateria').html(puerta.bateria);
+  if (puerta.actividad == 'insideOpen') {
+    $('#' + idPuerta + ' .contDatos .contInfo .infoSalida').html(puerta.hora);
+    $('#' + idPuerta + ' .contDatos figure object').addClass(puerta.actividad)
+  } else if (puerta.actividad == 'outsideOpen') {
+    $('#' + idPuerta + ' .contDatos .contInfo .infoEntrada').html(puerta.hora);
+    $('#' + idPuerta + ' .contDatos figure object').addClass(puerta.actividad)
+  } else if (puerta.actividad == 'closed') {
+    if ($('#' + idPuerta + ' .contDatos figure object').hasClass('insideOpen')) {
+      $('#' + idPuerta + ' .contDatos figure object').removeClass('insideOpen')
+    } 
+    if ($('#' + idPuerta + ' .contDatos figure object').hasClass('outsideOpen')) {
+      $('#' + idPuerta + ' .contDatos figure object').removeClass('outsideOpen')
+    }
+
+  }  
+}
