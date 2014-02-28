@@ -56,6 +56,7 @@ function signinCallback (authResult) {
               sessionOpen = true;
               userId = data.id;
               requestToken(userId);
+              interval = setInterval(updateTime, 60000);
             },
             error: function(e) {
               alert(e);
@@ -87,6 +88,16 @@ $('#signout').click(cerrarSesion);
 var socket;
 var sessionOpen; 
 var userId;
+var interval;
+
+function updateTime(){
+  var timers = $('.infoTiempo');
+  for (var i = 0; i < timers.length; i++){
+    var tagTime = $(timers[i]);
+    var time = parseInt(tagTime.text()) + 1;
+    tagTime.text(time);
+  }
+}
 
 function cargarPuertas(){
   $('#contenido').slideToggle('fast');
@@ -150,6 +161,7 @@ function cerrarSesion(access_token) {
         $('#seccionPuertas').remove();
         sessionOpen = false;
         socket.close();
+        clearInterval(interval);
       });
     },
     error : function(e) {
