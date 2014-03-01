@@ -1,0 +1,42 @@
+{
+	"doors" : [{
+			"id" : "door1",
+			"door" : "Habitacion 1"
+		},{
+			"id" : "door2",
+			"door" : "Habitacion 2"
+		},{
+			"id" : "door3",
+			"door" : "Habitacion 3"
+		},{
+			"id" : "door4",
+			"door" : "Habitacion 4"
+		},{
+			"id" : "door5",
+			"door" : "Habitacion 5"
+		},{
+			"id" : "door6",
+			"door" : "Habitacion 6"
+		},{
+			"id" : "door7",
+			"door" : "Habitacion 7"
+		},{
+			"id" : "door8",
+			"door" : "Habitacion 8"
+		},{
+			"id" : "door9",
+			"door" : "Habitacion 9"
+		},{
+			"id" : "door10",
+			"door" : "Habitacion 10"
+		},{
+			"id" : "door11",
+			"door" : "Habitacion 11"
+		},{
+			"id" : "door12",
+			"door" : "Habitacion 12"
+		},{
+			"id" : "door13",
+			"door" : "Habitacion 13"
+		}]
+}

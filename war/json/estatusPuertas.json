@@ -1,0 +1,120 @@
+{
+	"doors" : [{
+			"id" : "door1",
+			"door" : "Habitacion 1",
+			"battery" : "100",
+			"time" : "0",
+			"input" : "9:30 am",
+			"output" : "9:35 am",
+			"description" : "Disponible.",
+			"status" : "#9CBF60"
+		},{
+			"id" : "door2",
+			"door" : "Habitacion 2",
+			"battery" : "80",
+			"time" : "120",
+			"input" : "11:30 am",
+			"output" : "11:50 am",
+			"description" : "Bocho azul.",
+			"status" : "#D34B44"
+		},{
+			"id" : "door3",
+			"door" : "Habitacion 3",
+			"battery" : "95",
+			"time" : "60",
+			"input" : "11:30 am",
+			"output" : "12:50 am",
+			"description" : "Nissan Roja.",
+			"status" : "#D34B44"
+		},{
+			"id" : "door4",
+			"door" : "Habitacion 4",
+			"battery" : "80",
+			"time" : "120",
+			"input" : "11:00 am",
+			"output" : "11:10 am",
+			"description" : "Mantenimiento de regadera.",
+			"status" : "#DEAA31"
+		},{
+			"id" : "door5",
+			"door" : "Habitacion 5",
+			"battery" : "100",
+			"time" : "180",
+			"input" : "11:00 am",
+			"output" : "12:30 am",
+			"description" : "Moto Yamaha, solicita servicio.",
+			"status" : "#D34B44"
+		},{
+			"id" : "door6",
+			"door" : "Habitacion 6",
+			"battery" : "100",
+			"time" : "0",
+			"input" : "12:00 am",
+			"output" : "12:10 am",
+			"description" : "Disponible.",
+			"status" : "#9CBF60"
+		},{
+			"id" : "door7",
+			"door" : "Habitacion 7",
+			"battery" : "95",
+			"time" : "0",
+			"input" : "10:30 am",
+			"output" : "10:35 am",
+			"description" : "Disponible.",
+			"status" : "#9CBF60"
+		},{
+			"id" : "door8",
+			"door" : "Habitacion 8",
+			"battery" : "75",
+			"time" : "10",
+			"input" : "10:00 am",
+			"output" : "10:05 am",
+			"description" : "Cambio de sabanas.",
+			"status" : "#85C7C3"
+		},{
+			"id" : "door9",
+			"door" : "Habitacion 9",
+			"battery" : "80",
+			"time" : "120",
+			"input" : "11:30 am",
+			"output" : "01:00 pm",
+			"description" : "Ford K Rojo.",
+			"status" : "#D34B44"
+		},{
+			"id" : "door10",
+			"door" : "Habitacion 10",
+			"battery" : "60",
+			"time" : "0",
+			"input" : "11:30 am",
+			"output" : "11:35 pm",
+			"description" : "Disponible.",
+			"status" : "#9CBF60"
+		},{
+			"id" : "door11",
+			"door" : "Habitacion 11",
+			"battery" : "100",
+			"time" : "5",
+			"input" : "12:30 am",
+			"output" : "12:35 am",
+			"description" : "Salida del cliente, revisión de habitación.",
+			"status" : "#A89565"
+		},{
+			"id" : "door12",
+			"door" : "Habitacion 12",
+			"battery" : "60",
+			"time" : "15",
+			"input" : "9:30 am",
+			"output" : "9:45 am",
+			"description" : "En limpieza de pisos.",
+			"status" : "#85C7C3"
+		},{
+			"id" : "door13",
+			"door" : "Habitacion 13",
+			"battery" : "95",
+			"time" : "90",
+			"input" : "10:30 am",
+			"output" : "12:50 am",
+			"description" : "Pareja a pie.",
+			"status" : "#D34B44"
+		}]
+}

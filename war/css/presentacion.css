@@ -60,8 +60,8 @@ footer #footer
 	text-align: center;
 }
 
-footer #footer #contacto,
-footer #footer #localizacion
+footer #footer #contact,
+footer #footer #location
 {
 	display: inline-block;
 	margin-left: 2%;
@@ -70,12 +70,12 @@ footer #footer #localizacion
 	width: 290px;
 }
 
-footer #footer #contacto
+footer #footer #contact
 {
 	margin-top: 30px;
 }
 
-footer #footer #contacto a
+footer #footer #contact a
 {
 	background: white;
 	border-radius: 50%;
@@ -84,57 +84,57 @@ footer #footer #contacto a
 	padding: 0.4em 0.5em;
 }
 
-footer #footer #contacto h3,
-footer #footer #localizacion h3
+footer #footer #contact h3,
+footer #footer #location h3
 {
 	padding-bottom: 2em;
 }
 
-footer #footer #contacto #gplus:after
+footer #footer #contact #gplus:after
 {
 	content: "\e607";
 	font-family: 'icomoon';
 }
 
-footer #footer #contacto #gplus:hover
+footer #footer #contact #gplus:hover
 {
 	color: #D44332;
 }
 
-footer #footer #contacto #skype:after
+footer #footer #contact #skype:after
 {
 	content: "\e601";
 	font-family: 'icomoon';
 }
 
-footer #footer #contacto #skype:hover
+footer #footer #contact #skype:hover
 {
 	color: #00B0F6;
 }
 
-footer #footer #contacto #twitter:after
+footer #footer #contact #twitter:after
 {
 	content: "\e602";
 	font-family: 'icomoon';
 }
 
-footer #footer #contacto #twitter:hover
+footer #footer #contact #twitter:hover
 {
 	color: #00aced;
 }
 
-footer #desarrollador
+footer #developer
 {
 	display: none;
 }
 
-footer #footer #localizacion
+footer #footer #location
 {
 	padding-bottom: 1em;
 	margin-top: 50px;
 }
 
-footer #footer #localizacion p
+footer #footer #location p
 {
 	text-align: left;
 	padding-bottom: 0.5em;
@@ -176,7 +176,7 @@ header #login:hover
 	background: #e74b37;
 }
 
-header #login .iconLogin
+header #login .icon_login
 {
 	background: url('../img/btn_red1.png') transparent 10px 50% no-repeat;
 	display: inline-block;
@@ -185,7 +185,7 @@ header #login .iconLogin
     height: 35px;
 }
 
-header #titulo
+header #title
 {
 	border-right: 40px solid transparent;
     border-top: 100px solid #fff;
@@ -195,12 +195,12 @@ header #titulo
 	-webkit-filter: drop-shadow(0px 0px 10px #999);
 }
 
-header #titulo #logo
+header #title #logo
 {
 	margin-top: -100px
 }
 
-header #titulo #logo img
+header #title #logo img
 {
 	width: 70px;
 }
@@ -209,7 +209,7 @@ header #titulo #logo img
  *CSS para los datos del usuario.
  */
 
-header #usuario
+header #user
 {
 	display: none;
 	position: absolute;
@@ -217,20 +217,20 @@ header #usuario
 	right: 5px;
 }
 
-header #usuario div,
-header #usuario div .datos,
-header #usuario div #apuntador,
-header #usuario #avatar
+header #user div,
+header #user div .data_user,
+header #user div #arrow,
+header #user #avatar
 {
 	display: inline-block;
 }
 
-header #usuario div
+header #user div
 {
 	display: none;
 }
 
-header #usuario div #apuntador
+header #user div #arrow
 {
 	border-top: 10px solid transparent;
  	border-bottom: 10px solid transparent;
@@ -242,7 +242,7 @@ header #usuario div #apuntador
  	-webkit-filter: drop-shadow(rgba(153, 153, 153, 1) 1.5px 0px 0px);
 }
 
-header #usuario div .datos{
+header #user div .data_user{
 	background: #fff;
 	border-radius: 5px 2px 5px 5px;
 	box-shadow: 0px 0px 1px 1px #999;
@@ -250,28 +250,28 @@ header #usuario div .datos{
 	text-align: right;
 }
 
-header #usuario div .datos #nombreUsuario
+header #user div .data_user #user_name
 {
 	font-weight: bold;
 }
 
-header #usuario div .datos #signout
+header #user div .data_user #signout
 {
 	color: #cc3732;
 	cursor: pointer;
 }
 
-header #usuario div .datos #signout:hover
+header #user div .data_user #signout:hover
 {
 	text-decoration: underline;
 }
 
-header #usuario figure
+header #user figure
 {
 	margin-left: -10px;
 }
 
-header #usuario #avatar img
+header #user #avatar img
 {
 	border-radius: 50%;
 	box-shadow: 0px 0px 1px 1px #999;
@@ -279,7 +279,7 @@ header #usuario #avatar img
 	width: 50px;
 }
 
-header .titulo_header
+header .title_header
 {
 	font-family: 'Kite One', sans-serif;
 	margin-bottom: 0px;
@@ -292,12 +292,12 @@ header .titulo_header
  *		Diseño del Contenido de Presentacion
  */
 
-#contenido
+#content_presentation
 {
 	text-align: center;
 }
 
-#contenido .elemento
+#content_presentation .item
 {
 	display: inline-block;
 	margin: 10px 0px;
@@ -307,7 +307,7 @@ header .titulo_header
 	width: 220px;
 }
 
-#contenido .elemento .chapa
+#content_presentation .item .icon_description
 {
 	
 	border-radius: 50%;
@@ -319,37 +319,37 @@ header .titulo_header
 	text-align: center;
 }
 
-#contenido .elemento #chapa1
+#content_presentation .item #icon_description1
 {
 	background: #9CBF60;
 }
 
-#contenido .elemento #chapa1:after
+#content_presentation .item #icon_description1:after
 {
 	content: "\e603";
 }
 
-#contenido .elemento #chapa2
+#content_presentation .item #icon_description2
 {
 	background: #D34B44;
 }
 
-#contenido .elemento #chapa2:after
+#content_presentation .item #icon_description2:after
 {
 	content: "\e604";
 }
 
-#contenido .elemento #chapa3
+#content_presentation .item #icon_description3
 {
 	background: #E2A326;
 }
 
-#contenido .elemento #chapa3:after
+#content_presentation .item #icon_description3:after
 {
 	content: "\e606";
 }
 
-#contenido .elemento .descripcion
+#content_presentation .item .description
 {
 	font-size: 1.5em;
 	margin: 1em 0.5em;
@@ -361,12 +361,12 @@ header .titulo_header
  * Diseño de los contenedores de las puertas
  */
 
-#seccionPuertas
+#section_doors
 {
 	text-align: center;
 }
 
-#seccionPuertas .contPuerta
+#section_doors .content_door
 {
 	background: white;
 	border-radius: 5px;
@@ -376,7 +376,7 @@ header .titulo_header
 	width: 300px;
 }
 
-#seccionPuertas .contPuerta .tituloPuerta
+#section_doors .content_door .title_door
 {
 	display: inline-block;
 	font-weight: bold;
@@ -384,7 +384,7 @@ header .titulo_header
 	width: 280px;
 }
 
-#seccionPuertas .contPuerta .contDatos figure
+#section_doors .content_door .content_info figure
 {
 	border-left: solid #999 0.3em;
 	border-right: solid #999 0.3em;
@@ -395,26 +395,26 @@ header .titulo_header
 	perspective: 10em;
 }
 
-#seccionPuertas .contPuerta .contDatos object
+#section_doors .content_door .content_info object
 {
 	height: 55px;
 	width: 40px;
 	transition: 1s;
 }
 
-#seccionPuertas .contPuerta .contDatos object.outsideOpen
+#section_doors .content_door .content_info object.outside_open
 {
 	transform-origin: 0 50% 0;
 	transform: rotateY(60deg);
 }
 
-#seccionPuertas .contPuerta .contDatos object.insideOpen
+#section_doors .content_door .content_info object.inside_open
 {
 	transform-origin: 0 50% 0;
 	transform: rotateY(-60deg);
 }
 
-#seccionPuertas .contPuerta .contDatos .contInfo
+#section_doors .content_door .content_info .info
 {
 	display: inline-block;
 	margin: 0.5em;
@@ -423,12 +423,12 @@ header .titulo_header
 	width: 200px;
 }
 
-#seccionPuertas .contPuerta .contDatos .contInfo .infoDescripcion
+#section_doors .content_door .content_info .info .info_description
 {
 	margin-left: 1em;	
 }
 
-#seccionPuertas .contPuerta .contDatos .contInfo p
+#section_doors .content_door .content_info .info p
 {
 	display: inline-block;
 	font-size: 0.8em;
@@ -436,18 +436,18 @@ header .titulo_header
 	width: 90px;
 }
 
-#seccionPuertas .contPuerta .contDatos .contInfo p:nth-child(5)
+#section_doors .content_door .content_info .info p:nth-child(5)
 {
 	text-align: left;
 	width: 100%;
 }
 
-#seccionPuertas .contPuerta .contDatos .contInfo .infoBateria:after
+#section_doors .content_door .content_info .info .info_battery:after
 {
 	content: ' %';
 }
 
-#seccionPuertas .contPuerta .contDatos .contInfo .infoBateria:before
+#section_doors .content_door .content_info .info .info_battery:before
 {
 	color: #FBD600;
 	content: "\e605";
@@ -455,12 +455,12 @@ header .titulo_header
 	margin-right: 3px;
 }
 
-#seccionPuertas .contPuerta .contDatos .contInfo .infoTiempo:after
+#section_doors .content_door .content_info .info .info_time:after
 {
 	content: ' minutos';
 }
 
-#seccionPuertas .contPuerta .contDatos .contInfo .infoTiempo:before
+#section_doors .content_door .content_info .info .info_time:before
 {
 	color: #000;
 	content: "\e608";
@@ -468,7 +468,7 @@ header .titulo_header
 	margin-right: 3px;
 }
 
-#seccionPuertas .contPuerta .contDatos .contInfo .infoEntrada:before
+#section_doors .content_door .content_info .info .info_input:before
 {
 	color: #3AB54A;
 	content: "\e609";
@@ -476,7 +476,7 @@ header .titulo_header
 	margin-right: 3px;
 }
 
-#seccionPuertas .contPuerta .contDatos .contInfo .infoSalida:before
+#section_doors .content_door .content_info .info .info_output:before
 {
 	color: #EC1B23;
 	content: "\e60a";
@@ -484,7 +484,7 @@ header .titulo_header
 	margin-right: 3px;
 }
 
-#seccionPuertas .contPuerta .contDatos .contInfo .infoDescripcion:before
+#section_doors .content_door .content_info .info .info_description:before
 {
 	color: #3F7BCB;
 	content: "\e60b";

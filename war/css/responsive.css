@@ -16,15 +16,15 @@
 	 *		a su diseño original
 	 */
 
-	footer #footer #contacto,
-	footer #footer #localizacion
+	footer #footer #contact,
+	footer #footer #location
 	{
 		margin-right: 2%;
 		margin-top: 50px;	
 		width: 300px;
 	}
 
-	footer #footer #desarrollador
+	footer #footer #developer
 	{
 		background: #fff;
 		box-shadow: 3px 3px 5px #999;
@@ -42,19 +42,19 @@
 		transform: rotateZ(-10deg);
 	}
 
-	footer #footer #desarrollador h3
+	footer #footer #developer h3
 	{
 		color: #4C4C4C;
 		margin-top: 1em;
 	}
 
-	footer #footer #desarrollador p
+	footer #footer #developer p
 	{
 		font-family: 'Gloria Hallelujah', cursive;
 		margin-top: 1em;
 	}
 
-	footer #footer #desarrollador #foto
+	footer #footer #developer #photo
 	{
 		border: solid white 3px;
 		box-shadow: 1px 1px 5px #999;
@@ -63,7 +63,7 @@
 		margin-right: 10px;
 	}
 
-	footer #footer #desarrollador #foto img
+	footer #footer #developer #photo img
 	{
 		width: 100px;
 	}
@@ -73,36 +73,36 @@
 		width: 130px;
 	}
 
-	header #login .textLogin
+	header #login .text_login
 	{
 		margin-left: 8px;
 		margin-right: 5px;
 		vertical-align: middle;
 	}
 
-	header #login .textLogin:after
+	header #login .text_login:after
 	{
 		content: "Sign in";
 		font-weight: bold;
 	}
 
-	header #usuario div #apuntador
+	header #user div #arrow
 	{
 		top: -20px;
 	}
 
-	header #titulo
+	header #title
 	{
 		margin-right: 30%;
 		padding: 1em;	
 	}	
 
-	header #titulo #logo img
+	header #title #logo img
 	{
 		width: 80px;
 	}
 
-	header .titulo_header
+	header .title_header
 	{
 		margin-left: 105px;
 	}
@@ -113,20 +113,20 @@
 	 *		para dar su diseño original
 	 */
 
-	#contenido .elemento
+	#content_presentation .item
 	{
 		margin: 10px 30px;
 		padding: 2em;
 		width: 300px;
 	}
 
-	#contenido .elemento .descripcion
+	#content_presentation .item .description
 	{
 		font-size: 1em;
 		margin-top: 2em;
 	}
 
-	#contenido .elemento .chapa
+	#content_presentation .item .icon_description
 	{
 		font-size: 2em;
 	}
@@ -135,7 +135,7 @@
 
 @media screen and (min-width: 680px)
 {
-	header #usuario div
+	header #user div
 	{
 		display: inline-block;
 	}
@@ -148,7 +148,7 @@
 		font-size: 120%;
 	}
 
-	footer #footer #desarrollador
+	footer #footer #developer
 	{
 		width: 410px;
 	}
@@ -170,40 +170,40 @@
 		width: 150px;
 	}
 
-	header #login .iconLogin
+	header #login .icon_login
 	{
 		background: url('../img/btn_red2.png') transparent 10px 50% no-repeat;
 		width: 50px;
 		height: 50px;
 	}
 
-	header #titulo
+	header #title
 	{
 		border-top: 120px solid #fff;
 	}
 
-	header #titulo #logo
+	header #title #logo
 	{
 		margin-top:  -130px;
 	}
 
-	header #titulo #logo img
+	header #title #logo img
 	{
 		width: 100px;
 	}
 
-	header #usuario div #apuntador
+	header #user div #arrow
 	{
 		left: -6px;
 		top: -28px;
 	}
 
-	header #usuario #avatar img
+	header #user #avatar img
 	{
 		width: 80px;
 	}
 	
-	header .titulo_header
+	header .title_header
 	{
 		margin-left: 125px;
 	}

@@ -31,25 +31,25 @@ function signinCallback (authResult) {
             contentType : 'appication/json',
             dataType : 'jsonp',
             success: function(data) {
-              var nombreUsuario = data.displayName;
-              var imgUsuario = data.image.url;
-              var urlUsuario = imgUsuario.slice(0, -2);
+              var userName = data.displayName;
+              var imgUser = data.image.url;
+              var urlUser = imgUser.slice(0, -2);
               var picAvatar = new Image();
-              picAvatar.src = urlUsuario + '200';
+              picAvatar.src = urlUser + '200';
 
-              $('header #usuario .datos').prepend('<p id="nombreUsuario">' + nombreUsuario + '</p>');
-              $('header #usuario #avatar').prepend(picAvatar);
+              $('header #user .data_user').prepend('<p id="user_name">' + userName + '</p>');
+              $('header #user #avatar').prepend(picAvatar);
               
               $('#login').slideToggle('fast', function(){
-                $('#usuario').slideToggle('fast');
+                $('#user').slideToggle('fast');
               });
 
               $('#avatar img').click(function() {
                 if ($(window).width() <= 680){
-                  if ($('header #usuario div').css('display') === 'none'){
-                    $('header #usuario div').css('display', 'inline-block');
+                  if ($('header #user div').css('display') === 'none'){
+                    $('header #user div').css('display', 'inline-block');
                   } else {
-                    $('header #usuario div').css('display', 'none');
+                    $('header #user div').css('display', 'none');
                   }                  
                 }
               });
@@ -62,7 +62,7 @@ function signinCallback (authResult) {
               alert(e);
             }
           });
-          cargarPuertas();
+          loadDoors();
       } else {
         //en caso de error, avisar al usuario :
         if (authResult['access_denied']) {
@@ -78,7 +78,7 @@ function signinCallback (authResult) {
  *  Declaracion de eventos
  */
 
-$('#signout').click(cerrarSesion);
+$('#signout').click(closeSession);
 
 
 /*
@@ -91,7 +91,7 @@ var userId;
 var interval;
 
 function updateTime(){
-  var timers = $('.infoTiempo');
+  var timers = $('.info_time');
   for (var i = 0; i < timers.length; i++){
     var tagTime = $(timers[i]);
     var time = parseInt(tagTime.text()) + 1;
@@ -99,47 +99,42 @@ function updateTime(){
   }
 }
 
-function cargarPuertas(){
-  $('#contenido').slideToggle('fast');
-  //
-  // Aplicador de colores
-  //
-  $('#aplicadorColores').slideToggle();
-
+function loadDoors(){
+  $('#content_presentation').slideToggle('fast');
   $('#footer').slideToggle('fast');
   $('footer #copyright p:first-child').css('padding-top', '0px');
 
-  var svgPuerta = 'img/puerta.svg';
+  var svgDoor = 'img/puerta.svg';
   
   $.ajax({
     url: 'json/puertas.json',
     dataType: 'json',
     success: function(data){
-      $('#contenidoPuertas').append('<section id="seccionPuertas"></section>');
-      for (var i = 0; i < data.puertas.length; i++){
+      $('#content_doors').append('<section id="section_doors"></section>');
+      for (var i = 0; i < data.doors.length; i++){
 
-        var habitacion = '<article id="' + data.puertas[i].id + '" class="contPuerta">' +
-                            '<p class="tituloPuerta">' + data.puertas[i].puerta + '</p>' +
-                            '<div class="contDatos">' +
-                              '<figure><object id="svg' + data.puertas[i].id + '" type="image/svg+xml" data="' + svgPuerta + '"></object></figure>' +
-                              '<div class="contInfo">' +
-                                '<p class="infoBateria"></p>' +
-                                '<p class="infoTiempo"></p>' +
-                                '<p class="infoEntrada"></p>' +
-                                '<p class="infoSalida"></p>' +
-                                '<p class="infoDescripcion"></p>' +
+        var room = '<article id="' + data.doors[i].id + '" class="content_door">' +
+                            '<p class="title_door">' + data.doors[i].door + '</p>' +
+                            '<div class="content_info">' +
+                              '<figure><object id="svg' + data.doors[i].id + '" type="image/svg+xml" data="' + svgDoor + '"></object></figure>' +
+                              '<div class="info">' +
+                                '<p class="info_battery"></p>' +
+                                '<p class="info_time"></p>' +
+                                '<p class="info_input"></p>' +
+                                '<p class="info_output"></p>' +
+                                '<p class="info_description"></p>' +
                               '</div>' +
                             '</div>' +
                           '</article>';
 
-        $('#seccionPuertas').append(habitacion);
+        $('#section_doors').append(room);
 
       }
     }    
   });
 }
 
-function cerrarSesion(access_token) {
+function closeSession(access_token) {
   var revokeUrl = 'https://accounts.google.com/o/oauth2/revoke?token=' + access_token;
 
   $.ajax({
@@ -149,16 +144,16 @@ function cerrarSesion(access_token) {
     contentType : 'appication/json',
     dataType : 'jsonp',
     success : function(){
-        $('#usuario').slideToggle('fast', function(){
+        $('#user').slideToggle('fast', function(){
         $('#login').slideToggle('fast');
         $('#footer').slideToggle('fast');
-        $('#contenido').slideToggle('fast');
+        $('#content_presentation').slideToggle('fast');
         //
         // Aplicador de colores
         //
-        $('#nombreUsuario').remove();
+        $('#user_name').remove();
         $('#avatar img').remove();
-        $('#seccionPuertas').remove();
+        $('#section_doors').remove();
         sessionOpen = false;
         socket.close();
         clearInterval(interval);
@@ -170,11 +165,11 @@ function cerrarSesion(access_token) {
   });
 }
 
-// Puerta disponible : #9CBF60
-// Puerta ocupada : #D34B44
-// Puerta mantenimiento : #DEAA31
-// Puerta limpieza : #85C7C3
-// Puerta sucia : #A89565   
+// door disponible : #9CBF60
+// door ocupada : #D34B44
+// door mantenimiento : #DEAA31
+// door limpieza : #85C7C3
+// door sucia : #A89565   
     
 // fetches the document for the given embedding_element
 function getSubDocument(embedding_element)
@@ -193,33 +188,33 @@ function getSubDocument(embedding_element)
   }
 }
     
-function findSVGElements(puerta, color)
+function findSVGElements(door, color)
 {
-  $('#' + puerta + ' .contDatos figure').css('border-color', color);
-  var svgObject = document.getElementById('svg' + puerta);
+  $('#' + door + ' .content_info figure').css('border-color', color);
+  var svgObject = document.getElementById('svg' + door);
   var svgDocument = getSubDocument(svgObject);
   
   if (svgDocument){
-    var fondos = svgDocument.getElementsByClassName('fondo');
-    var marcos = svgDocument.getElementsByClassName('marco')
-      for (var j = 0; j < fondos.length; j++){
-        fondos[j].setAttribute('fill', color);
+    var fills = svgDocument.getElementsByClassName('fondo');
+    var strokes = svgDocument.getElementsByClassName('marco')
+      for (var j = 0; j < fills.length; j++){
+        fills[j].setAttribute('fill', color);
       }
-      for (var j = 0; j < marcos.length; j++){
-        marcos[j].setAttribute('stroke', color);
+      for (var j = 0; j < strokes.length; j++){
+        strokes[j].setAttribute('stroke', color);
       }
   }
 }
 
-function setPuerta(puerta){
-  var idPuerta = puerta.id;
+function setDoor(door){
+  var idDoor = door.id;
 
-  $('#'+ idPuerta + ' .contDatos .contInfo .infoBateria').html(puerta.bateria);
-  $('#'+ idPuerta + ' .contDatos .contInfo .infoTiempo').html(puerta.tiempo);
-  $('#'+ idPuerta + ' .contDatos .contInfo .infoEntrada').html(puerta.entrada);
-  $('#'+ idPuerta + ' .contDatos .contInfo .infoSalida').html(puerta.salida);
-  $('#'+ idPuerta + ' .contDatos .contInfo .infoDescripcion').html(puerta.descripcion);
-  findSVGElements(puerta.id, puerta.estatus);
+  $('#'+ idDoor + ' .content_info .info .info_battery').html(door.battery);
+  $('#'+ idDoor + ' .content_info .info .info_time').html(door.time);
+  $('#'+ idDoor + ' .content_info .info .info_input').html(door.input);
+  $('#'+ idDoor + ' .content_info .info .info_output').html(door.output);
+  $('#'+ idDoor + ' .content_info .info .info_description').html(door.description);
+  findSVGElements(door.id, door.status);
 }
 
 /*
@@ -228,7 +223,7 @@ function setPuerta(puerta){
  *
  */
 
-requestToken = function( userId ) {
+requestToken = function(userId) {
   var getTokenURI = '/gettoken?userId=' + userId;
 
   $.ajax({
@@ -242,7 +237,7 @@ requestToken = function( userId ) {
 
 };
 
-openChannel = function ( token ) {
+openChannel = function (token) {
   var channel = new goog.appengine.Channel(token);
   socket = channel.open();
 
@@ -252,7 +247,7 @@ openChannel = function ( token ) {
   socket.onclose = onSocketClose;
 };
 
-onSocketError = function ( error ) {
+onSocketError = function (error) {
   alert('Error al abrir la conexión');
 };
 
@@ -261,8 +256,8 @@ onSocketOpen = function () {
     url: 'json/estatusPuertas.json',
     dataType: 'json',
     success: function(data){
-      for (var i = 0; i < data.puertas.length; i++){
-        setPuerta(data.puertas[i]);
+      for (var i = 0; i < data.doors.length; i++){
+        setDoor(data.doors[i]);
       }
     }
   });
@@ -276,8 +271,8 @@ onSocketClose = function () {
 
 onSocketMessage = function (message) {
   var data = JSON.parse(message.data);
-  if (data.type == 'updateEstatus'){
-    updateEstatus(data);
+  if (data.type == 'update_status'){
+    updateStatus(data);
   }
 };
 
@@ -286,22 +281,22 @@ onSocketMessage = function (message) {
  *
  */
 
-function updateEstatus(puerta){
-  var idPuerta = puerta.id;
+function updateStatus(door){
+  var idDoor = door.id;
 
-  $('#' + idPuerta + ' .contDatos .contInfo .infoBateria').html(puerta.bateria);
-  if (puerta.actividad == 'insideOpen') {
-    $('#' + idPuerta + ' .contDatos .contInfo .infoSalida').html(puerta.hora);
-    $('#' + idPuerta + ' .contDatos figure object').addClass(puerta.actividad)
-  } else if (puerta.actividad == 'outsideOpen') {
-    $('#' + idPuerta + ' .contDatos .contInfo .infoEntrada').html(puerta.hora);
-    $('#' + idPuerta + ' .contDatos figure object').addClass(puerta.actividad)
-  } else if (puerta.actividad == 'closed') {
-    if ($('#' + idPuerta + ' .contDatos figure object').hasClass('insideOpen')) {
-      $('#' + idPuerta + ' .contDatos figure object').removeClass('insideOpen')
+  $('#' + idDoor + ' .content_info .info .info_battery').html(door.battery);
+  if (door.activity == 'inside_open') {
+    $('#' + idDoor + ' .content_info .info .info_output').html(door.hour);
+    $('#' + idDoor + ' .content_info figure object').addClass(door.activity);
+  } else if (door.activity == 'outside_open') {
+    $('#' + idDoor + ' .content_info .info .info_input').html(door.hour);
+    $('#' + idDoor + ' .content_info figure object').addClass(door.activity);
+  } else if (door.activity == 'closed') {
+    if ($('#' + idDoor + ' .content_info figure object').hasClass('inside_open')) {
+      $('#' + idDoor + ' .content_info figure object').removeClass('inside_open');
     } 
-    if ($('#' + idPuerta + ' .contDatos figure object').hasClass('outsideOpen')) {
-      $('#' + idPuerta + ' .contDatos figure object').removeClass('outsideOpen')
+    if ($('#' + idDoor + ' .content_info figure object').hasClass('outside_open')) {
+      $('#' + idDoor + ' .content_info figure object').removeClass('outside_open');
     }
 
   }  

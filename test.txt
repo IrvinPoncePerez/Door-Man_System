@@ -1,7 +1,10 @@
 
 //URL para hacer el cambio del estatus.
 
-$.ajax({type:'POST', url:'/estatus?puerta=puerta1&bateria=90&actividad=outsideOpen&hora=11:35 am'});
-$.ajax({type:'POST', url:'/estatus?puerta=puerta1&bateria=80&actividad=closed&hora=11:40 am'});
-$.ajax({type:'POST', url:'/estatus?puerta=puerta1&bateria=70&actividad=insideOpen&hora=12:30 pm'});
-$.ajax({type:'POST', url:'/estatus?puerta=puerta1&bateria=80&actividad=closed&hora=12:35 pm'});
+$.ajax({type:'POST', url:'/estatus?door=door1&battery=90&activity=outside_open&hour=11:35 am'});
+
+$.ajax({type:'POST', url:'/estatus?door=door1&battery=80&activity=closed&hour=11:40 am'});
+
+$.ajax({type:'POST', url:'/estatus?door=door1&battery=70&activity=inside_open&hour=12:30 pm'});
+
+$.ajax({type:'POST', url:'/estatus?door=door1&battery=80&activity=closed&hour=12:35 pm'});
