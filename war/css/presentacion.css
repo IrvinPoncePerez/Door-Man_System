@@ -393,13 +393,16 @@ header .title_header
 	margin: 0.5em 0 1em 0;
 	padding: 1px 1px 0px 1px;
 	perspective: 10em;
+	z-index: 99;
 }
 
 #section_doors .content_door .content_info object
 {
 	height: 55px;
 	width: 40px;
+	pointer-events: none;
 	transition: 1s;
+	z-index: 0;
 }
 
 #section_doors .content_door .content_info object.outside_open
@@ -492,3 +495,36 @@ header .title_header
 	margin-right: 3px;
 }
 
+/*
+ * CSS para modal dialog de escritura
+ * de las tarjetas de la habitación.
+ */
+
+ #content_doors .modal_dialog
+ {
+ 	background: rgba(0,0,0,0.5);
+ 	bottom: 0;
+ 	left: 0;
+ 	opacity: 0;
+ 	pointer-events: none;
+ 	position: fixed;
+ 	right: 0;
+ 	top: 0;
+ 	transition: opacity 400ms ease-in; 	
+ 	z-index: 99999;
+ }
+
+ #content_doors .modal_dialog.show
+ {
+ 	opacity: 1;
+ 	pointer-events: auto;
+ }
+ #content_doors .modal_dialog .dialog
+ {
+ 	background-image: url('../img/background.png');	
+ 	border-radius: 15px;
+ 	margin: auto auto;
+ 	padding: 10px;
+ 	position: relative;
+ 	width: 300px;
+ }

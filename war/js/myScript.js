@@ -116,7 +116,7 @@ function loadDoors(){
         var room = '<article id="' + data.doors[i].id + '" class="content_door">' +
                             '<p class="title_door">' + data.doors[i].door + '</p>' +
                             '<div class="content_info">' +
-                              '<figure><object id="svg' + data.doors[i].id + '" type="image/svg+xml" data="' + svgDoor + '"></object></figure>' +
+                              '<figure onClick="setRoom(' + data.doors[i].id + ')"><object id="svg' + data.doors[i].id + '" type="image/svg+xml" data="' + svgDoor + '"></object></figure>' +
                               '<div class="info">' +
                                 '<p class="info_battery"></p>' +
                                 '<p class="info_time"></p>' +
@@ -128,10 +128,24 @@ function loadDoors(){
                           '</article>';
 
         $('#section_doors').append(room);
-
       }
     }    
   });
+}
+
+function setRoom(data){
+  var color = $(data).find('figure').css('border-color');
+  if (color == 'rgb(156, 191, 96)'){ //Disponible
+    $('#open_modal').addClass('show');
+  } else if (color == 'rgb(211, 75, 68)') { //Ocupada
+
+  } else if (color == 'rgb(222, 170, 49)') { //Mantenimiento
+
+  } else if (color == 'rgb(168, 149, 101)') { //Supervisor
+
+  } else if (color == 'rgb(133, 199, 195)') { //Limpieza
+
+  }
 }
 
 function closeSession(access_token) {

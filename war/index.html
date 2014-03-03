@@ -65,7 +65,38 @@
     </section>
 
     <!-- Contenido de las puertas -->
-    <section id="content_doors"></section>
+    <section id="content_doors">
+        <div id="open_modal" class="modal_dialog">
+            <div class="dialog">
+                <p class="close">X</p>
+                <form>
+                    <legend id="title_room"></legend>
+                    <fieldset>
+                        <legend>Seleccione el tipo de usuario.</legend>
+                        <input type="radio" name="type_user" id="type_client" value="client">
+                        <label for="type_client">Cliente</label>
+
+                        <input type="radio" name="type_user" id="type_supervisor" value="supervisor">
+                        <label for="type_supervisor">Supervisor</label>
+
+                        <input type="radio" name="type_user" id="type_maintenance" value="maintenance">
+                        <label for="type_maintenance">Mantenimiento</label>
+
+                        <input type="radio" name="type_user" id="type_cleaning" value="cleaning">
+                        <label for="type_cleaning">Limpieza</label>
+
+                        <input type="radio" name="type_user" id="type_available" value="available">
+                        <label for="type_available">Disponible</label>
+                    </fieldset>                    
+                    <fieldset>
+                        <p id="estatus_dialog"></p>
+                        <input type="submit" class="button_dialog" value="Aceptar">
+                        <input type="submit" class="button_dialog" value="Cerrar">
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </section>
 
 
     <!-- Pie de Página -->
