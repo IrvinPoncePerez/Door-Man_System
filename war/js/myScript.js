@@ -79,6 +79,9 @@ function signinCallback (authResult) {
  */
 
 $('#signout').click(closeSession);
+$('.modal_dialog .dialog .close').click(function(){
+  $('.modal_dialog').removeClass('show');
+});
 
 
 /*
@@ -135,7 +138,9 @@ function loadDoors(){
 
 function setRoom(data){
   var color = $(data).find('figure').css('border-color');
-  if (color == 'rgb(156, 191, 96)'){ //Disponible
+  if (color == 'rgb(156, 191, 96)' && userId == '115380400632455375055'){ //Disponible
+    var title = $(data).find('.title_door').text();
+    $('#title_room').text(title);
     $('#open_modal').addClass('show');
   } else if (color == 'rgb(211, 75, 68)') { //Ocupada
 
