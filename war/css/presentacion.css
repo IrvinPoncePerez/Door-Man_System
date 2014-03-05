@@ -518,18 +518,20 @@ header .title_header
  	opacity: 1;
  	pointer-events: auto;
  }
- .modal_dialog .dialog
+
+ #dialog_write
  {
  	background-image: url('../img/background.png');	
  	border-radius: 15px;
  	box-shadow: 0px 0px 0px 7px rgba(34, 188, 224, 0.5);
  	display: inline-block;
+ 	margin-top: 20%;
  	padding: 10px;
  	position: relative;
  	width: 260px;
  }
 
- .modal_dialog .dialog .close
+ #dialog_write .close
  {
  	background: white;
  	border: solid #22BCE0 2px;
@@ -551,21 +553,155 @@ header .title_header
  				background 100ms ease-in;
  }
 
- .modal_dialog .dialog .close:hover
+ #dialog_write .close:hover
  {
  	color: white;
  	background: #22BCE0;
  }
 
- .modal_dialog .dialog form #title_room
+ #dialog_write form #title_room
  {
  	background: #22bce0;
- 	border-radius: 15px 0 0 0;
+ 	border-radius: 15px 15px 0 0;
  	color: white;
  	font-weight: bold;
  	margin: -10px 0 0 -10px;
  	padding: 10px 0;
  	text-align: center; 	
- 	width: 280px; 	
+ 	width: 278px; 	
+ }
+
+ #dialog_write form input[type="submit"]
+ {
+ 	background: white;
+ 	border: solid #A9CF00 2px;
+ 	border-radius: 10px;
+ 	font-weight: bold;
+ 	color: #A9CF00;
+ 	padding: 5px 15px;
+ 	transition: background 100ms ease-in,
+ 				color 100ms ease-in;
+ }
+
+#dialog_write form input[type="submit"].show
+{
+	display: inline-block;
+}
+
+#dialog_write form div
+{
+	display: block;
+	height: 40px;
+}
+
+#dialog_write form input[type="submit"]:hover
+{
+	background:  #A9CF00;
+	color: white;
+}
+
+ #dialog_write form fieldset
+ {
+ 	background: white;
+ 	border: solid #22BCE0 1px;
+ 	border-radius: 10px;
+ 	margin: 10px 0;
+ 	padding: 5px;
+ }
+
+ #dialog_write form fieldset label
+ {
+ 	display: flex;
+ 	margin: 7px 0 10px 25px;
+ }
+
+ #dialog_write form fieldset input[type="radio"]
+ {
+ 	display: none;
+ }
+
+#dialog_write form fieldset input[type="radio"] + label > span
+{	
+	background: white;
+	border-radius: 50%;
+	display: inline-block;	
+	height: 25px;
+	margin: -5px 5px 0 0;
+	vertical-align: top;
+	width: 25px;
+}
+
+#dialog_write form fieldset #type_available[type="radio"] + label > span
+{
+	border: solid #9CBF60 2px;
+}
+
+#dialog_write form fieldset #type_client[type="radio"] + label > span
+{
+	border: solid #D34B44 2px;
+}
+
+#dialog_write form fieldset #type_supervisor[type="radio"] + label > span
+{
+	border: solid #A89565 2px;
+}
+
+#dialog_write form fieldset #type_cleaning[type="radio"] + label > span
+{
+	border: solid #85C7C3 2px;
+}
+
+#dialog_write form fieldset #type_maintenance[type="radio"] + label > span
+{
+	border: solid #DEAA31 2px;
+}
+
+#dialog_write form fieldset input[type="radio"]:checked + label > span span
+{
+	border-radius: 50%;
+	display: inline-block;
+	height: 19px;
+	margin: 3px 0 0 0;
+	width: 19px;
+}
+
+#dialog_write form fieldset #type_available[type="radio"]:checked + label > span span
+{
+	background: #9CBF60;
+}
+
+#dialog_write form fieldset #type_client[type="radio"]:checked + label > span span
+{
+	background: #D34B44;
+}
+
+#dialog_write form fieldset #type_supervisor[type="radio"]:checked + label > span span
+{
+	background: #A89565;
+}
+
+#dialog_write form fieldset #type_cleaning[type="radio"]:checked + label > span span
+{
+	background: #85C7C3;
+}
+
+#dialog_write form fieldset #type_maintenance[type="radio"]:checked + label > span span
+{
+	background: #DEAA31;
+}
+
+ #dialog_write form legend
+ {
+ 	background: white;
+ 	border: solid #22BCE0 1px;
+ 	border-radius: 10px;
+ 	padding: 2px 10px;
+ }
+
+ #dialog_write form #status_dialog
+ {
+ 	font-weight: bold;
+ 	font-size: 10px;
+ 	margin: 10px 0;
  }
 

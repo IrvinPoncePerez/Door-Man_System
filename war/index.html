@@ -17,6 +17,10 @@
     
 </head>
 <body>
+
+    <!-- Contenido del Dialog -->
+    <div id="open_modal" class="modal_dialog">
+    </div>
     
     <!-- Encabezado de la Página -->
     <header>
@@ -63,38 +67,6 @@
     		<p class="description">Supervisa el uso de las habitaciones, horarios de entrada y salida, tiempos de mantenimiento y limpieza con reportes detallados que ayuden en la toma de decisiones administrativas.</p>
     	</article>
     </section>
-
-    <!-- Contenido del Dialog -->
-    <div id="open_modal" class="modal_dialog">
-        <div class="dialog">
-            <p class="close">X</p>
-            <form>
-                <legend id="title_room"></legend>
-                <fieldset>
-                    <legend>Seleccione el tipo de usuario</legend>
-                    <input type="radio" name="type_user" id="type_client" value="client">
-                    <label for="type_client">Cliente</label>
-
-                    <input type="radio" name="type_user" id="type_supervisor" value="supervisor">
-                    <label for="type_supervisor">Supervisor</label>
-
-                    <input type="radio" name="type_user" id="type_maintenance" value="maintenance">
-                    <label for="type_maintenance">Mantenimiento</label>
-
-                    <input type="radio" name="type_user" id="type_cleaning" value="cleaning">
-                    <label for="type_cleaning">Limpieza</label>
-
-                    <input type="radio" name="type_user" id="type_available" value="available">
-                    <label for="type_available">Disponible</label>
-                </fieldset>                    
-                <fieldset>
-                    <p id="estatus_dialog"></p>
-                    <input type="submit" class="button_dialog" value="Aceptar">
-                    <input type="submit" class="button_dialog" value="Cerrar">
-                </fieldset>
-            </form>
-        </div>
-    </div>
 
 
     <!-- Contenido de las puertas -->

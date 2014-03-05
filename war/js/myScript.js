@@ -79,9 +79,6 @@ function signinCallback (authResult) {
  */
 
 $('#signout').click(closeSession);
-$('.modal_dialog .dialog .close').click(function(){
-  $('.modal_dialog').removeClass('show');
-});
 
 
 /*
@@ -139,9 +136,24 @@ function loadDoors(){
 function setRoom(data){
   var color = $(data).find('figure').css('border-color');
   if (color == 'rgb(156, 191, 96)' && userId == '115380400632455375055'){ //Disponible
-    var title = $(data).find('.title_door').text();
-    $('#title_room').text(title);
-    $('#open_modal').addClass('show');
+
+    $.ajax({
+      type: 'GET',
+      url: 'html/escritura.html',
+      async :false,
+      success: function(dialog){
+        $('#open_modal').append(dialog);
+        var title = $(data).find('.title_door').text();
+        $('#title_room').text(title);
+        $('#open_modal').addClass('show');        
+        $('#dialog_write .close').click(function(){
+          $('.modal_dialog').removeClass('show');
+          $('#dialog_write').remove();
+          
+        });
+      }
+    });
+    
   } else if (color == 'rgb(211, 75, 68)') { //Ocupada
 
   } else if (color == 'rgb(222, 170, 49)') { //Mantenimiento
@@ -222,6 +234,10 @@ function findSVGElements(door, color)
       for (var j = 0; j < strokes.length; j++){
         strokes[j].setAttribute('stroke', color);
       }
+  }
+
+  if (color == '#9CBF60'){
+    $('#' + door + ' .content_info figure').css('cursor', 'pointer');
   }
 }
 
