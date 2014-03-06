@@ -142,15 +142,29 @@ function setRoom(data){
       url: 'html/escritura.html',
       async :false,
       success: function(dialog){
-        $('#open_modal').append(dialog);
+
         var title = $(data).find('.title_door').text();
+
+        $('#open_modal').append(dialog);        
         $('#title_room').text(title);
         $('#open_modal').addClass('show');        
         $('#dialog_write .close').click(function(){
           $('.modal_dialog').removeClass('show');
           $('#dialog_write').remove();
-          
         });
+
+        var radioButtons = $('#dialog_write form fieldset input[type="radio"]')
+        for (var i = 0; i < radioButtons.length; i++){
+          $(radioButtons[i]).change(function(){
+            var valRadio = $(this).val();
+            var sendButton = $('#send_button');
+            var textStatus = "Esperando el envió de datos tipo " + valRadio + "...";
+            $('#status_dialog').text(textStatus);
+            if (sendButton.css('display') == 'none'){
+              sendButton.addClass('show');
+            }
+          });
+        }
       }
     });
     
@@ -163,6 +177,11 @@ function setRoom(data){
   } else if (color == 'rgb(133, 199, 195)') { //Limpieza
 
   }
+}
+
+function sendWriteCard(){
+  console.log('hola');
+  return false;
 }
 
 function closeSession(access_token) {

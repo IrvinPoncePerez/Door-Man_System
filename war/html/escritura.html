@@ -6,35 +6,35 @@
             <legend>Seleccione el tipo de usuario</legend>
 
             <!-- Habitacion Disponible -->
-            <input type="radio" name="type_user" id="type_available" value="available">
+            <input type="radio" name="type_user" id="type_available" value="Disponible">
             <label for="type_available">
             	<span><span></span></span>
             	Disponible
             </label>
 
             <!-- Habitación para el Cliente -->
-            <input type="radio" name="type_user" id="type_client" value="client">
+            <input type="radio" name="type_user" id="type_client" value="Cliente">
             <label for="type_client">
             	<span><span></span></span>
             	Cliente
             </label>
 
             <!-- Habitación para supervisores -->
-            <input type="radio" name="type_user" id="type_supervisor" value="supervisor">
+            <input type="radio" name="type_user" id="type_supervisor" value="Supervisor">
             <label for="type_supervisor">
             	<span><span></span></span>
             	Supervisor
             </label>       
 
             <!-- Habitación para el servicio de limpieza -->
-            <input type="radio" name="type_user" id="type_cleaning" value="cleaning">
+            <input type="radio" name="type_user" id="type_cleaning" value="Limpieza">
             <label for="type_cleaning">
             	<span><span></span></span>
             	Limpieza
             </label>
 
             <!-- Habitación para el personal de limpieza -->
-            <input type="radio" name="type_user" id="type_maintenance" value="maintenance">
+            <input type="radio" name="type_user" id="type_maintenance" value="Mantenimiento">
             <label for="type_maintenance">
             	<span><span></span></span>
             	Mantenimiento
@@ -42,8 +42,8 @@
 
         </fieldset> 
         <div>    
-            <input type="submit" id="send_button" class="button_dialog" value="Enviar">
-            <input type="submit" id="close_button" class="button_dialog" value="Cerrar">
+            <a id="send_button" class="button_dialog" href="javascript: sendWriteCard();">Enviar</a>
+            <a id="close_button" class="button_dialog" href="#">Cerrar</a>
         </div>
         <p id="status_dialog">Esperando definición del usuario...</p>
     </form>

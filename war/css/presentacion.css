@@ -525,7 +525,7 @@ header .title_header
  	border-radius: 15px;
  	box-shadow: 0px 0px 0px 7px rgba(34, 188, 224, 0.5);
  	display: inline-block;
- 	margin-top: 20%;
+ 	margin-top: 10%;
  	padding: 10px;
  	position: relative;
  	width: 260px;
@@ -571,19 +571,21 @@ header .title_header
  	width: 278px; 	
  }
 
- #dialog_write form input[type="submit"]
+ #dialog_write form div a
  {
  	background: white;
  	border: solid #A9CF00 2px;
  	border-radius: 10px;
+ 	display: none;
  	font-weight: bold;
  	color: #A9CF00;
  	padding: 5px 15px;
  	transition: background 100ms ease-in,
  				color 100ms ease-in;
+
  }
 
-#dialog_write form input[type="submit"].show
+#dialog_write form div a.show
 {
 	display: inline-block;
 }
@@ -594,7 +596,7 @@ header .title_header
 	height: 40px;
 }
 
-#dialog_write form input[type="submit"]:hover
+#dialog_write form div a:hover
 {
 	background:  #A9CF00;
 	color: white;
