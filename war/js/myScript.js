@@ -180,7 +180,22 @@ function setRoom(data){
 }
 
 function sendWriteCard(){
-  console.log('hola');
+  var type_user = $('#dialog_write form fieldset input[type="radio"]:checked').val();
+   $.ajax({
+    type : 'POST',
+    url : '/writecard?userId=' + userId + '&type=' + type_user,
+    async : false,
+    success : function(data){
+      if (data == 'wait'){
+        $('#status_dialog').text('Coloque la tarjeta a escribir, esperando...');
+        $('#dialog_write .close').css('display', 'none');
+        $('#send_button').css('display', 'none');
+      }else if (data == 'error'){
+        alert("Error al almacenar los datos de escritura.");
+      }
+    }
+   }); 
+
   return false;
 }
 
@@ -216,10 +231,10 @@ function closeSession(access_token) {
 }
 
 // door disponible : #9CBF60
-// door ocupada : #D34B44
+// door cliente : #D34B44
 // door mantenimiento : #DEAA31
 // door limpieza : #85C7C3
-// door sucia : #A89565   
+// door supervisor : #A89565   
     
 // fetches the document for the given embedding_element
 function getSubDocument(embedding_element)

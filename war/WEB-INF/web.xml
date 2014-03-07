@@ -13,6 +13,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/gettoken/*</url-pattern>
 	</servlet-mapping>
 	
+	
 	<servlet>
 	    <servlet-name>EstatusServlet</servlet-name>
 	    <servlet-class>door_man.EstatusServlet</servlet-class>
@@ -23,6 +24,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	</servlet-mapping>
 	
 	
+	<servlet>
+	    <servlet-name>WriteCardServlet</servlet-name>
+	    <servlet-class>door_man.WriteCardServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+	    <servlet-name>WriteCardServlet</servlet-name>
+	    <url-pattern>/writecard/*</url-pattern>
+	</servlet-mapping>
+	
+		
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
