@@ -89,6 +89,7 @@ var socket;
 var sessionOpen; 
 var userId;
 var interval;
+var doorId;
 
 function updateTime(){
   var timers = $('.info_time');
@@ -135,6 +136,7 @@ function loadDoors(){
 
 function setRoom(data){
   var color = $(data).find('figure').css('border-color');
+  doorId = $(data).attr('id');
   if (color == 'rgb(156, 191, 96)' && userId == '115380400632455375055'){ //Disponible
 
     $.ajax({
@@ -179,24 +181,44 @@ function setRoom(data){
   }
 }
 
-function sendWriteCard(){
+function sendDialogWrite(){
+  var textButton = $('#send_button').text();
+  
+  if (textButton == 'Enviar'){
+    sendDataWrite();
+  } else if (textButton == "Cancelar"){
+    cancelDataWriter();
+  } else if (textButton == "Cerrar"){
+
+  }
+
+  return false;
+}
+
+function sendDataWrite(){
   var type_user = $('#dialog_write form fieldset input[type="radio"]:checked').val();
    $.ajax({
     type : 'POST',
-    url : '/writecard?userId=' + userId + '&type=' + type_user,
+    url : '/writecard?function=store&doorId=' + doorId + '&userId=' + userId + '&typeCard=' + type_user + '&forWriter=Arduino1',
     async : false,
     success : function(data){
       if (data == 'wait'){
         $('#status_dialog').text('Coloque la tarjeta a escribir, esperando...');
         $('#dialog_write .close').css('display', 'none');
-        $('#send_button').css('display', 'none');
+        $('#send_button').text('Cancelar');
+        $('#send_button').addClass('cancel');
       }else if (data == 'error'){
         alert("Error al almacenar los datos de escritura.");
       }
+    },
+    error : function(e){
+      alert(e);
     }
    }); 
+}
 
-  return false;
+function cancelDataWriter(){
+
 }
 
 function closeSession(access_token) {

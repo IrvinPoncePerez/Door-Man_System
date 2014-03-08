@@ -571,6 +571,12 @@ header .title_header
  	width: 278px; 	
  }
 
+#dialog_write form div
+{
+	display: block;
+	height: 40px;
+}
+
  #dialog_write form div a
  {
  	background: white;
@@ -590,15 +596,23 @@ header .title_header
 	display: inline-block;
 }
 
-#dialog_write form div
-{
-	display: block;
-	height: 40px;
-}
-
-#dialog_write form div a:hover
+#dialog_write form div a.show:hover
 {
 	background:  #A9CF00;
+	color: white;
+}
+
+#dialog_write form div a.show.cancel
+{
+	color: #E90000;
+	border-color:  #E90000;
+	transition: background 100ms ease-in,
+ 				color 100ms ease-in;	
+}
+
+#dialog_write form div a.show.cancel:hover
+{
+	background: #E90000;
 	color: white;
 }
 
