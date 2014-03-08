@@ -22,7 +22,6 @@ local.properties
 ## Ignore other files of my project
 ## .ico .png .jpg
 #################
-src/
 *.ico
 *.png
 *.jpg
