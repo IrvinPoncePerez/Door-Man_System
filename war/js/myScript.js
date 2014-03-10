@@ -186,13 +186,27 @@ function sendDialogWrite(){
   
   if (textButton == 'Enviar'){
     sendDataWrite();
-  } else if (textButton == "Cancelar"){
-    cancelDataWriter();
-  } else if (textButton == "Cerrar"){
+  } else if (textButton == 'Cancelar'){
+    cancelDataWrite();
+  } else if (textButton == 'Cerrar'){
 
   }
 
   return false;
+}
+
+function cancelDataWrite(){
+  $.ajax({
+    type: 'POST',
+    url: '/writecard?function=cancel&userId=' + userId + '&doorId=' + doorId,
+    async: false,
+    success: function(data){
+      if (data == 'cancel'){
+        $('.modal_dialog').removeClass('show');
+        $('#dialog_write').remove();
+      }
+    }
+  });
 }
 
 function sendDataWrite(){
@@ -210,15 +224,8 @@ function sendDataWrite(){
       }else if (data == 'error'){
         alert("Error al almacenar los datos de escritura.");
       }
-    },
-    error : function(e){
-      alert(e);
     }
    }); 
-}
-
-function cancelDataWriter(){
-
 }
 
 function closeSession(access_token) {

@@ -13,7 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
-
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
 
 
 @SuppressWarnings("serial")
@@ -26,9 +31,9 @@ public class WriteCardServlet extends HttpServlet{
 		String function = request.getParameter("function");
 		if (function.equals("store")){			
 			storingData(request, response);			
-		}else if (function == "cancel"){
+		}else if (function.equals("cancel")){
 			cancelData(request, response);
-		}else if (function == "write") {
+		}else if (function.equals("write")) {
 			
 		}
 	}
@@ -39,7 +44,7 @@ public class WriteCardServlet extends HttpServlet{
 	
 	private void storingData(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		try{
-			Date today = new Date();
+			Date today = DateNow.getDateTime();
 			String doorId = request.getParameter("doorId");
 			String userId = request.getParameter("userId");
 			String typeCard = request.getParameter("typeCard");
@@ -66,7 +71,29 @@ public class WriteCardServlet extends HttpServlet{
 		}
 	}
 	
-	private void cancelData(HttpServletRequest request, HttpServletResponse response){
+	private void cancelData(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		String userId = request.getParameter("userId");
+		String doorId = request.getParameter("doorId");
+		
+		Filter doorFilter = new FilterPredicate("DoorId", FilterOperator.EQUAL, doorId);
+		Filter userFilter = new FilterPredicate("UserId", FilterOperator.EQUAL, userId);
+		Filter activeFilter = new FilterPredicate("Active", FilterOperator.EQUAL, true);
+		Filter validFilter = CompositeFilterOperator.and(doorFilter, userFilter, activeFilter);
+		
+		Query objQuery = new Query("Card").setFilter(validFilter);
+		PreparedQuery objPreparedQuery = datastore.prepare(objQuery);
+		Entity card = objPreparedQuery.asSingleEntity();
+		
+		card.setProperty("Active", false);
+		datastore.put(card);
+		
+		try {
+			response.getWriter().print("cancel");
+		} catch (IOException e) {
+			logger.log(Level.WARNING, e.getMessage() + "**" + e.getStackTrace() + "**");
+			response.getWriter().print("error");
+		}
 		
 	}
 	
