@@ -2,6 +2,7 @@
 #include <Ethernet.h>
 #include <SPI.h>
 #include <Time.h>
+#include <aJSON.h>
 
 //Pines LED RGB
 const int PIN_RED = 5;
@@ -51,27 +52,11 @@ void setup(){
   
   //*****Peticion del Tiempo del Servidor para Sincronizacion de la Arduino.
   if (client.connected()){
-
-    client.println("GET /sync?board=Arduino1 HTTP/1.1");
-    client.println("Host: 192.168.0.106");
-    client.println();
-    
-    while (!client.available()) {
-    }
-    
-    String strTime = "";
-    while (client.available()) {
-      char character = client.read();
-      strTime.concat(character);
-      Serial.println(strTime);
-    }
-    delay(500);
-    
-    client.stop();
+    setRequestGET("/sync?board=Arduino1");    
+    String response = getResponseGET();
+    Serial.println(response);
   }
-  Serial.println("Sincronizando Arduino Board...");
-  setTime(1394585131542);
-  
+  Serial.println("Sincronizando Arduino Board...");  
   
 }
 
@@ -88,4 +73,35 @@ void setColor(boolean red, boolean green, boolean blue){
   digitalWrite(PIN_RED, red);
   digitalWrite(PIN_GREEN, green);
   digitalWrite(PIN_BLUE, blue);
+}
+
+//******************************************************************************
+//  Realiza la Petición GET a la URL asignada.
+//******************************************************************************
+void setRequestGET(String URL){
+   client.println("GET " + URL + " HTTP/1.1");
+   client.println("Host: 192.168.0.106");   
+   client.println("Connection: keep-alive");
+   client.println("Content-Type: application/x-www-form-urlencoded");
+   client.println();
+}
+
+//******************************************************************************
+//  Lee la respuesta realizada por el servidor y la devuelve como tipo cadena
+//******************************************************************************
+String getResponseGET(){
+      while (!client.available()) {
+    }
+    
+    String response = "";
+    while (client.available()) {
+      char character = client.read();
+      response.concat(character);
+    }    
+    client.stop();
+    
+    int indexOf = response.indexOf("{");
+    response = response.substring(indexOf);
+    
+    return response;
 }
