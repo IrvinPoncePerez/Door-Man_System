@@ -15,5 +15,14 @@ public class DateNow {
 		return new Date(convertedTime);
 		
 	}
+	
+	public static long getLongTime(){
+		TimeZone objTimeZone = TimeZone.getTimeZone("America/Mexico_City");
+		
+		long currentTime = new Date().getTime();
+		long convertedTime = currentTime + objTimeZone.getOffset(currentTime);
+				
+		return convertedTime;
+	}
 
 }

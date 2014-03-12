@@ -9,7 +9,7 @@ int pinRed = 7;
 //Dirección MAC de la tarjeta Ethernet.
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 //IPAddress server(127, 0, 0, 1); //IP del servidor local.
-char server[] = "door-man.appspot.com";
+char server[] = "192.168.0.106";
 //char server[] = {127, 0, 0, 1};
 IPAddress ip(192, 168, 0 , 111); //IP de la tarjeta.
 int port = 80;
@@ -50,9 +50,10 @@ void loop(){
   digitalWrite(pinServer, HIGH);
   
   if (client.connected()) {
-    String data = "puerta=puerta1&bateria=90&actividad=outsideOpen&hora=11:35am";
+    Serial.println("Enviando POST");
+    String data = "door=door1&battery=90&activity=outside_open&hour=11:35 am";
     client.println("POST /estatus HTTP/1.1");
-    client.println("Host: door-man.appspot.com");
+    client.println("Host: 192.168.0.106");
     client.println("Connection: keep-alive");
     client.print("Content-Length: ");
     client.println(data.length());
