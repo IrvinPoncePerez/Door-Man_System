@@ -1,12 +1,14 @@
 #include <Ethernet.h>
 #include <SPI.h>
 #include <Time.h>
-#include <aJSON.h>
+#include <JsonParser.h>
 
 //Pines LED RGB
 const int PIN_RED = 5;
 const int PIN_GREEN = 6;
 const int PIN_BLUE = 7;
+
+JsonParser<32> parser;
 
 
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED }; //Direccion MAC Arduino Ethernet.
@@ -51,11 +53,7 @@ void setup(){
   //*****Peticion del Tiempo del Servidor para Sincronizacion de la Arduino.
   if (client.connected()){
     setRequestGET("/sync?board=Arduino1");  
-    aJsonObject* objJson = stringToJson(getResponseGET());
-    aJsonObject* time = aJson.getObjectItem(objJson, "time");
-    long longTime = atol(time->valuestring);
-    setTime(longTime);
-    setColor(true, true, false);
+    setTimeArduino(getResponseGET());    
   }
   
   printDate();
@@ -110,17 +108,25 @@ String getResponseGET(){
 }
 
 //-----------------------------------------------------------------
-//    Función para convertir Strign to aJsonObject.
+//    Función para Establecer la fecha hora de la tarjeta
 //-----------------------------------------------------------------
-aJsonObject* stringToJson(String JSON){
+void setTimeArduino(String JSON){
   int lenght = JSON.length();  
   char buffer[lenght];
   JSON.toCharArray(buffer, lenght +1); 
-  
+
   //JSON Parse.
-  aJsonObject* objJson = aJson.parse(buffer);
+  JsonHashTable objJson = parser.parseHashTable(buffer);
+  char* strTime = objJson.getString("time");
+  Serial.println(strTime);
+  long loTime = atol(strTime);
+  Serial.println(loTime);
   
-  return objJson;
+  if (objJson.success()){
+    
+  } else {
+    for(;;){}
+  }
 }
 
 void printDate(){
