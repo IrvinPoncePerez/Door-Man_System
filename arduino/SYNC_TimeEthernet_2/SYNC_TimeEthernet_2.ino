@@ -1,18 +1,20 @@
 #include <Ethernet.h>
 #include <SPI.h>
-#include <Time.h>
 #include <JsonParser.h>
+#include <Time.h>
+#include <DateTimeStrings.h>
 
 //Pines LED RGB
 const int PIN_RED = 5;
 const int PIN_GREEN = 6;
 const int PIN_BLUE = 7;
 
+//Objeto Json para realizar el json.parse();
 JsonParser<32> parser;
 
 
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED }; //Direccion MAC Arduino Ethernet.
-char server[] = "192.168.0.106";                     //URL del Servidor.
+char server[] = "door-man.appspot.com";                     //URL del Servidor.
 IPAddress ip (192, 168, 0, 111);                     //IP de la Arduino Ethernet.
 int port = 80;                                       //Puerto de comunicacion.
 EthernetClient client;                               //Inicializacion de la libreria.
@@ -55,13 +57,16 @@ void setup(){
     setRequestGET("/sync?board=Arduino1");  
     setTimeArduino(getResponseGET());    
   }
-  
-  printDate();
-   
-  
+  delay(500);
+  setColor(false, false, false);
 }
 
+//**************************************************************************
+//                Ciclo de la Arduino Ethernet
+//**************************************************************************
 void loop(){
+  delay(1000);
+  printDate();
 }
 
 //*****************************************************************************
@@ -81,7 +86,7 @@ void setColor(boolean red, boolean green, boolean blue){
 //******************************************************************************
 void setRequestGET(String URL){
    client.println("GET " + URL + " HTTP/1.1");
-   client.println("Host: 192.168.0.106");   
+   client.println("Host: door-man.appspot.com");   
    client.println("Connection: keep-alive");
    client.println("Content-Type: application/x-www-form-urlencoded");
    client.println();
@@ -117,22 +122,28 @@ void setTimeArduino(String JSON){
 
   //JSON Parse.
   JsonHashTable objJson = parser.parseHashTable(buffer);
-  char* strTime = objJson.getString("time");
-  Serial.println(strTime);
-  long loTime = atol(strTime);
-  Serial.println(loTime);
   
-  if (objJson.success()){
-    
-  } else {
-    for(;;){}
-  }
+  int Year = objJson.getLong("year");
+  int Month = objJson.getLong("month");
+  int Day = objJson.getLong("day");
+  int Hour = objJson.getLong("hour");
+  int Minute = objJson.getLong("minute");
+  int Second = objJson.getLong("second");
+  setTime(Hour, Minute, Second, Day, Month, Year);
+  
+  setColor(false, true, false);
 }
 
 void printDate(){
   Serial.print(hour());
   printDigits(minute());
   printDigits(second());
+  Serial.print(" ");
+  if (isAM()){
+    Serial.print("AM");
+  } else if(isPM()){
+    Serial.print("PM");
+  }
   Serial.print(" ");
   Serial.print(dayStr(weekday()));
   Serial.print(" ");
