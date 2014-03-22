@@ -3,18 +3,37 @@
 #include <JsonParser.h>
 #include <Time.h>
 #include <DateTimeStrings.h>
+#include <Wire.h>
+#include <Adafruit_NFCShield_I2C.h>
 
-/********  Pines LED RGB  ********/
+/*!
+ *  Definiciones para el NFC Shield.
+ */
+#define IRQ (2)
+#define RESET (3)
+
+Adafruit_NFCShield_I2C nfc(IRQ, RESET);
+
+uint8_t uid[] = {0, 0, 0, 0, 0, 0, 0};
+uint8_t uidLength;
+uint8_t key[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+
+/*!
+ *  Definición de Pines del LED RGB.
+ */
 const int PIN_RED = 5;
 const int PIN_GREEN = 6;
 const int PIN_BLUE = 7;
 
-/********  Objeto Json para realizar el json.parse()  ********/
+/*!
+ *  Objeto Json para realizar el parse del 
+ *  resultado del servidor.
+ */
 JsonParser<32> parser;
 
 
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED }; //Direccion MAC Arduino Ethernet.
-char server[] = "door-man.appspot.com";                     //URL del Servidor.
+char server[] = "door-man.appspot.com";              //URL del Servidor.
 IPAddress ip (192, 168, 0, 111);                     //IP de la Arduino Ethernet.
 int port = 80;                                       //Puerto de comunicacion.
 EthernetClient client;                               //Inicializacion de la libreria.
