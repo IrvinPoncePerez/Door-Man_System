@@ -4,12 +4,12 @@
 #include <Time.h>
 #include <DateTimeStrings.h>
 
-//Pines LED RGB
+/********  Pines LED RGB  ********/
 const int PIN_RED = 5;
 const int PIN_GREEN = 6;
 const int PIN_BLUE = 7;
 
-//Objeto Json para realizar el json.parse();
+/********  Objeto Json para realizar el json.parse()  ********/
 JsonParser<32> parser;
 
 
@@ -19,20 +19,20 @@ IPAddress ip (192, 168, 0, 111);                     //IP de la Arduino Ethernet
 int port = 80;                                       //Puerto de comunicacion.
 EthernetClient client;                               //Inicializacion de la libreria.
 
-//----------------------------------------------------------
+/**********************************************************/
 //      Inicializacion de la Arduino Ethernet.
-//----------------------------------------------------------
+/**********************************************************/
 void setup(){
   Serial.begin(9600);
   
  
-  //******Configuración de Pines Entrada y Salida.******
+  /******Configuración de Pines Entrada y Salida.******/
   pinMode(PIN_RED, OUTPUT);
   pinMode(PIN_GREEN, OUTPUT);
   pinMode(PIN_BLUE, OUTPUT);
   
   
-  //*****Configuración de la Dirección IP y MAC de la Arduino Ethernet.*****
+  /*****Configuración de la Dirección IP y MAC de la Arduino Ethernet.*****/
   if(Ethernet.begin(mac) == 0){
     Serial.println("Tarjeta Ethernet configurada, usando IP estatica.");
     Ethernet.begin(mac, ip);
@@ -43,7 +43,7 @@ void setup(){
   delay(500);  
   
   
-  //*****Conexión con el Servidor door-man.appspot.com*****
+  /*****Conexión con el Servidor door-man.appspot.com*****/
   while(!client.connected()){
     client.connect(server, port);
   }
@@ -52,7 +52,7 @@ void setup(){
     delay(500);
   }
   
-  //*****Peticion del Tiempo del Servidor para Sincronizacion de la Arduino.
+  /*****Peticion del Tiempo del Servidor para Sincronizacion de la Arduino  *****/
   if (client.connected()){
     setRequestGET("/sync?board=Arduino1");  
     setTimeArduino(getResponseGET());    
@@ -61,29 +61,40 @@ void setup(){
   setColor(false, false, false);
 }
 
-//**************************************************************************
+/**************************************************************************/
 //                Ciclo de la Arduino Ethernet
-//**************************************************************************
+/**************************************************************************/
 void loop(){
   delay(1000);
   printDate();
 }
 
-//*****************************************************************************
-//    Establece el color a mostrar, de acuerdo al estatus de la tarjeta
-//  OFF(false, false, false)  RED(true, false, false)    GREEN(false, true, false)
-//  BLUE(false, false, blue)  YELLOW(true, true, false)  CYAN(false, true, true)
-//  PURPLE(true, false, true) WHITE(true, true, true)
-//*****************************************************************************
+/*****************************************************************************/
+/*!    
+  Establece el color a mostrar, de acuerdo al estatus de la tarjeta
+  OFF(false, false, false)  RED(true, false, false)    GREEN(false, true, false)
+  BLUE(false, false, blue)  YELLOW(true, true, false)  CYAN(false, true, true)
+  PURPLE(true, false, true) WHITE(true, true, true)
+  
+  @param red  :  valor del pin del LED Rojo.
+  @param green  :  valor del pin del LED Verde.
+  @param blue :  valor del pin del LED Azul.
+*/
+/*****************************************************************************/
 void setColor(boolean red, boolean green, boolean blue){
   digitalWrite(PIN_RED, red);
   digitalWrite(PIN_GREEN, green);
   digitalWrite(PIN_BLUE, blue);
 }
 
-//******************************************************************************
-//  Realiza la Petición GET a la URL asignada.
-//******************************************************************************
+/******************************************************************************/
+/*!
+  Realiza la Petición GET a la URL asignada.
+  
+  @param URL :  Cadena de Texto de la URL de la petición al 
+                servidor.
+  */
+/******************************************************************************/
 void setRequestGET(String URL){
    client.println("GET " + URL + " HTTP/1.1");
    client.println("Host: door-man.appspot.com");   
@@ -92,9 +103,13 @@ void setRequestGET(String URL){
    client.println();
 }
 
-//******************************************************************************
-//  Lee la respuesta realizada por el servidor y la devuelve como tipo cadena
-//******************************************************************************
+/******************************************************************************/
+/*!
+  Lee la respuesta realizada por el servidor y la devuelve como tipo cadena
+  
+  @return  :  String del JSON devuelto del servidor.
+*/
+/******************************************************************************/
 String getResponseGET(){
       while (!client.available()) {
     }
@@ -112,9 +127,14 @@ String getResponseGET(){
     return response;
 }
 
-//-----------------------------------------------------------------
-//    Función para Establecer la fecha hora de la tarjeta
-//-----------------------------------------------------------------
+/*****************************************************************/
+/*!
+  Función para Establecer la fecha hora de la tarjeta.
+  
+  @param JSON  :  Objeto JSON de tipo String para estbalecer la fecha
+                  y hora de la tarjeta Arduino.
+  */
+/*****************************************************************/
 void setTimeArduino(String JSON){
   int lenght = JSON.length();  
   char buffer[lenght];
@@ -133,6 +153,8 @@ void setTimeArduino(String JSON){
   
   setColor(false, true, false);
 }
+
+
 
 void printDate(){
   Serial.print(hour());
