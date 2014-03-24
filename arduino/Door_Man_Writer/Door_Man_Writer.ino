@@ -111,6 +111,7 @@ void setup(){
     setColor(true, false, false);
     while (true){}
   } else {
+    nfc.SAMConfig();
     setColor(false, true, false);
   }
   offLED(500);
@@ -120,6 +121,9 @@ void setup(){
 //                Ciclo de la Arduino Ethernet
 /**************************************************************************/
 void loop(){
+  uint8_t success;
+  
+  
 }
 
 
