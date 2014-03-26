@@ -98,8 +98,8 @@ void setup(){
 
   //4
   if (client.connected()){
-    setRequestGET("/sync?board=Arduino1");  
-    setTimeArduino(getResponseGET()); 
+    doGET("/sync?board=Arduino1");  
+    setTimeArduino(getResponse()); 
     setColor(false, true, false);   
   }
   offLED(500);
@@ -119,10 +119,21 @@ void setup(){
 
 /**************************************************************************/
 //                Ciclo de la Arduino Ethernet
+//  1 : Detección y escritura de las tarjetas.
 /**************************************************************************/
 void loop(){
-  uint8_t success;
   
+  //1
+  uint8_t success;
+  success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, &uid[0], &uidLength);
+  if (success){
+    setColor(false, true, false);
+    doGET("/writecard?forwriter=Arduino1");
+    writeCard(getResponse());
+  }
+  else if (!success){
+    offLED(0);
+  }
   
 }
 
@@ -136,7 +147,7 @@ void loop(){
  servidor.
  */
 /******************************************************************************/
-void setRequestGET(String URL){
+void doGET(String URL){
   client.println("GET " + URL + " HTTP/1.1");
   client.println("Host: door-man.appspot.com");   
   client.println("Connection: keep-alive");
@@ -151,7 +162,7 @@ void setRequestGET(String URL){
  @return  :  String del JSON devuelto del servidor.
  */
 /******************************************************************************/
-String getResponseGET(){
+String getResponse(){
   while (!client.available()) {
   }
 
@@ -195,6 +206,24 @@ void setTimeArduino(String JSON){
   setColor(false, true, false);
 }
 
+/*****************************************************************/
+/*!
+ *    Escribre los datos solicitados en la tarjeta previamente
+ *    identificada, realiza la autenticación de la tarjeta.
+ *
+ *    @param JSON : String JSON de el response.
+ */
+/*****************************************************************/
+void writeCard(String JSON){
+  int length = JSON.length();
+  char buffer[length];
+  JSON.toCharArray(buffer, length +1);
+  
+  JsonHashTable objJson = parser.parseHashTable(buffer);
+  
+  Serial.begin(9600);
+  Serial.println(JSON);
+}
 
 /*****************************************************************************/
 /*!    
