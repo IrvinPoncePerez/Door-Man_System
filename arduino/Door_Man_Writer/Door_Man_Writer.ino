@@ -55,7 +55,7 @@ JsonParser<32> parser;
  */
 byte mac[] = { 
   0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
-char server[] = "door-man.appspot.com";
+char server[] = "192.168.0.106";
 IPAddress ip (192, 168, 0, 111);
 int port = 80;
 EthernetClient client;
@@ -88,9 +88,7 @@ void setup(){
   offLED(500);
 
   //3
-  while(!client.connected()){
-    client.connect(server, port);
-  }
+  connectBoard();
   if (client.connected()){
     setColor(false, true, false);
   }
@@ -118,6 +116,17 @@ void setup(){
 }
 
 /**************************************************************************/
+/*!
+ *    Espera hasta que se realice la conexión con el servidor.
+ */
+/**************************************************************************/
+void connectBoard(){
+  while(!client.connected()){
+    client.connect(server, port);
+  }
+}
+
+/**************************************************************************/
 //                Ciclo de la Arduino Ethernet
 //  1 : Detección y escritura de las tarjetas.
 /**************************************************************************/
@@ -128,8 +137,15 @@ void loop(){
   success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, &uid[0], &uidLength);
   if (success){
     setColor(false, true, false);
-    doGET("/writecard?forwriter=Arduino1");
-    writeCard(getResponse());
+    offLED(100);
+    connectBoard();
+    if (client.connected()){
+      setColor(false, false, true);
+      offLED(100);
+      doGET("/writecard?forwriter=Arduino1");
+      writeCard(getResponse());
+      offLED(500);
+    }
   }
   else if (!success){
     offLED(0);
@@ -149,7 +165,7 @@ void loop(){
 /******************************************************************************/
 void doGET(String URL){
   client.println("GET " + URL + " HTTP/1.1");
-  client.println("Host: door-man.appspot.com");   
+  client.println("Host: 192.168.0.106");   
   client.println("Connection: keep-alive");
   client.println("Content-Type: application/x-www-form-urlencoded");
   client.println();
@@ -215,14 +231,19 @@ void setTimeArduino(String JSON){
  */
 /*****************************************************************/
 void writeCard(String JSON){
-  int length = JSON.length();
-  char buffer[length];
-  JSON.toCharArray(buffer, length +1);
-  
+  int lenght = JSON.length();  
+  char buffer[lenght];
+  JSON.toCharArray(buffer, lenght +1); 
+
+  //JSON Parse.
   JsonHashTable objJson = parser.parseHashTable(buffer);
-  
-  Serial.begin(9600);
-  Serial.println(JSON);
+
+  Serial.println(objJson.getString("doorId"));
+  Serial.println(objJson.getString("typeCard"));
+  Serial.println(objJson.getString("userId"));
+}
+
+void writeCard(String value, uint8_t block){
 }
 
 /*****************************************************************************/
