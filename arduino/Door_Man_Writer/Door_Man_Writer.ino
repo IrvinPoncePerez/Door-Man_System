@@ -88,7 +88,9 @@ void setup(){
   offLED(500);
 
   //3
-  connectBoard();
+  while (!client.connected()){
+    client.connect(server, port);
+  }
   if (client.connected()){
     setColor(false, true, false);
   }
@@ -116,17 +118,6 @@ void setup(){
 }
 
 /**************************************************************************/
-/*!
- *    Espera hasta que se realice la conexión con el servidor.
- */
-/**************************************************************************/
-void connectBoard(){
-  while(!client.connected()){
-    client.connect(server, port);
-  }
-}
-
-/**************************************************************************/
 //                Ciclo de la Arduino Ethernet
 //  1 : Detección y escritura de las tarjetas.
 /**************************************************************************/
@@ -136,24 +127,22 @@ void loop(){
   uint8_t success;
   success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, &uid[0], &uidLength);
   if (success){
-    setColor(false, true, false);
-    offLED(100);
-    connectBoard();
-    if (client.connected()){
-      setColor(false, false, true);
-      offLED(100);
-      doGET("/writecard?forwriter=Arduino1");
-      writeCard(getResponse());
-      offLED(500);
+    setColor(false, false, true);
+    offLED(200);
+    doGET("/writecard?writer=Arduino1");
+    String userId = writeCard(getResponse());
+    if (userId.length() > 0){
+      Serial.println(userId);
+      doPOST("/writecard", "function=write&writer=Arduino1&userId=" + userId);
+      getResponse();
     }
+    offLED(500);
   }
   else if (!success){
     offLED(0);
   }
   
 }
-
-
 
 /******************************************************************************/
 /*!
@@ -164,11 +153,46 @@ void loop(){
  */
 /******************************************************************************/
 void doGET(String URL){
-  client.println("GET " + URL + " HTTP/1.1");
-  client.println("Host: 192.168.0.106");   
-  client.println("Connection: keep-alive");
-  client.println("Content-Type: application/x-www-form-urlencoded");
-  client.println();
+  while(!client.connected()){
+    client.connect(server, port);
+  }
+  
+  if (client.connected()){
+    client.println("GET " + URL + " HTTP/1.1");
+    client.println("Host: 192.168.0.106");   
+    client.println("Connection: keep-alive");
+    client.println("Content-Type: application/x-www-form-urlencoded");
+    client.println();
+  }
+}
+
+/******************************************************************************/
+/*!
+ Realiza la Petición POST a la URL asignada.
+ 
+ @param URL :  Cadena de Texto de la URL de la petición al 
+ servidor.
+ */
+/******************************************************************************/
+void doPOST(String URL, String data){
+  while(!client.connected()){
+    client.connect(server, port);
+  }
+  
+  Serial.println(URL);
+  Serial.println(data);
+  
+  if (client.connected()){
+    client.println("POST " + URL + " HTTP/1.1");
+    client.println("Host: 192.168.0.106");   
+    client.println("Connection: keep-alive");
+    client.print("Content-Length: ");
+    client.println(data.length());
+    client.println("Content-Type: application/x-www-form-urlencoded");
+    client.println();
+    client.print(data);
+    client.println();
+  }
 }
 
 /******************************************************************************/
@@ -210,40 +234,85 @@ void setTimeArduino(String JSON){
 
   //JSON Parse.
   JsonHashTable objJson = parser.parseHashTable(buffer);
+  if (objJson.success()){
+    int Year = objJson.getLong("year");
+    int Month = objJson.getLong("month");
+    int Day = objJson.getLong("day");
+    int Hour = objJson.getLong("hour");
+    int Minute = objJson.getLong("minute");
+    int Second = objJson.getLong("second");
+    setTime(Hour, Minute, Second, Day, Month, Year);
 
-  int Year = objJson.getLong("year");
-  int Month = objJson.getLong("month");
-  int Day = objJson.getLong("day");
-  int Hour = objJson.getLong("hour");
-  int Minute = objJson.getLong("minute");
-  int Second = objJson.getLong("second");
-  setTime(Hour, Minute, Second, Day, Month, Year);
-
-  setColor(false, true, false);
+    setColor(false, true, false);
+  } else {
+    setColor(true, true, false);
+  }
 }
 
 /*****************************************************************/
 /*!
- *    Escribre los datos solicitados en la tarjeta previamente
- *    identificada, realiza la autenticación de la tarjeta.
+ *    Obtiene los valores del String JSON para ser escrito en 
+ *    los bloques de la tarjeta.
  *
  *    @param JSON : String JSON de el response.
+ *    @return String : String del userId para realizar el POST
+ *                     y el servidor pueda notficar al canal adecuado.
  */
 /*****************************************************************/
-void writeCard(String JSON){
-  int lenght = JSON.length();  
-  char buffer[lenght];
-  JSON.toCharArray(buffer, lenght +1); 
+String writeCard(String JSON){
+  if (JSON.equals("")){
+    setColor(true, false, true);
+    offLED(200);
+    return "";
+  } else {
+    int lenght = JSON.length();  
+    char buffer[lenght];
+    JSON.toCharArray(buffer, lenght +1); 
 
-  //JSON Parse.
-  JsonHashTable objJson = parser.parseHashTable(buffer);
-
-  Serial.println(objJson.getString("doorId"));
-  Serial.println(objJson.getString("typeCard"));
-  Serial.println(objJson.getString("userId"));
+    //JSON Parse.
+    JsonHashTable objJson = parser.parseHashTable(buffer);
+    if (objJson.success()){
+      writeData(objJson.getString("doorId"), 4);
+      writeData(objJson.getString("typeCard"), 5);
+    } else {
+      setColor(true, false, true);
+      offLED(200);
+    }
+    return objJson.getString("userId");
+  }
 }
 
-void writeCard(String value, uint8_t block){
+/*****************************************************************************/
+/*!    
+ *    Escribe los datos pasados en el bloque indicado, notifica enciendo el 
+ *    LED de color rojo si no se pueden escribir los datos en la tarjeta o 
+ *    blanco si la escritura se realizo correctamente.
+ *
+ *      @param value : datos a escribir en el bloque.
+ *      @param block : bloque en el que seran escrito los datos.
+ */
+/*****************************************************************************/
+void writeData(String value, uint8_t block){
+  uint8_t success;
+  uint8_t data[16] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+  for (int i = 0; i < value.length(); i++){
+    data[i] = value[i];
+  }
+  
+  success = nfc.mifareclassic_AuthenticateBlock(uid, uidLength, block, 0 , key);
+  if (success){
+    success = nfc.mifareclassic_WriteDataBlock(block, data);
+    if (success){
+      setColor(true, true, true);
+    } else if (!success){
+      setColor(true, false, false);
+    }
+    offLED(300);
+  } else if (!success){
+    setColor(true, false, false);
+    offLED(300);
+  }
+
 }
 
 /*****************************************************************************/
