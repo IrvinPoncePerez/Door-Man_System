@@ -55,7 +55,8 @@ function signinCallback (authResult) {
               });
               sessionOpen = true;
               userId = data.id;
-              requestToken(userId);
+              name = data.displayName;
+              requestToken();
               interval = setInterval(updateTime, 60000);
             },
             error: function(e) {
@@ -88,6 +89,7 @@ $('#signout').click(closeSession);
 var socket;
 var sessionOpen; 
 var userId;
+var name;
 var interval;
 var doorId;
 
@@ -189,7 +191,8 @@ function sendDialogWrite(){
   } else if (textButton == 'Cancelar'){
     cancelDataWrite();
   } else if (textButton == 'Cerrar'){
-
+    $('.modal_dialog').removeClass('show');
+    $('#dialog_write').remove();
   }
 
   return false;
@@ -213,7 +216,7 @@ function sendDataWrite(){
   var type_user = $('#dialog_write form fieldset input[type="radio"]:checked').val();
    $.ajax({
     type : 'POST',
-    url : '/writecard?function=store&doorId=' + doorId + '&userId=' + userId + '&typeCard=' + type_user + '&forWriter=Arduino1',
+    url : '/writecard?function=store&doorId=' + doorId + '&userId=' + userId + '&typeCard=' + type_user + '&writer=Arduino1',
     async : false,
     success : function(data){
       if (data == 'wait'){
@@ -321,8 +324,8 @@ function setDoor(door){
  *
  */
 
-requestToken = function(userId) {
-  var getTokenURI = '/gettoken?userId=' + userId;
+requestToken = function() {
+  var getTokenURI = '/gettoken?userId=' + userId + '&name=' + name;
 
   $.ajax({
     type: 'POST',
@@ -363,7 +366,7 @@ onSocketOpen = function () {
 
 onSocketClose = function () {
   if (sessionOpen) {
-    requestToken(userId);
+    requestToken();
   }
 };
 
@@ -371,6 +374,10 @@ onSocketMessage = function (message) {
   var data = JSON.parse(message.data);
   if (data.type == 'update_status'){
     updateStatus(data);
+  } else if (data.type == 'writed'){
+    $('#status_dialog').text('Tarjeta escrita correctamente...');
+    $('#send_button').text('Cerrar');
+    $('#send_button').removeClass('cancel');
   }
 };
 

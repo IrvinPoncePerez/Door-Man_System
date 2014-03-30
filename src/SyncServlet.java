@@ -1,6 +1,8 @@
 package door_man;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,16 +22,23 @@ public class SyncServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String board = request.getParameter("board");
-		Long time =  DateNow.getLongTime();
+		Date objDate = DateNow.getDateTime();
+		Calendar objCalendar = Calendar.getInstance();
+		objCalendar.setTime(objDate);
 		
 		JSONObject objJSON = new JSONObject();
 		
 		try {
-			objJSON.put("time", time.toString());
+			objJSON.put("year", objCalendar.get(Calendar.YEAR));
+			objJSON.put("month", objCalendar.get(Calendar.MONTH) +1);
+			objJSON.put("day", objCalendar.get(Calendar.DAY_OF_MONTH));
+			objJSON.put("hour", objCalendar.get(Calendar.HOUR_OF_DAY));
+			objJSON.put("minute", objCalendar.get(Calendar.MINUTE));
+			objJSON.put("second", objCalendar.get(Calendar.SECOND));
+					
 		} catch (JSONException e) {
 			logger.log(Level.WARNING, e.getMessage() + "**" + e.getStackTrace() + "**");
 		}
-		
 		response.getWriter().print(objJSON.toString());
 		logger.log(Level.INFO, "Sync board " + board);
 	}

@@ -19,12 +19,14 @@ import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
+import com.google.appengine.labs.repackaged.org.json.JSONException;
+import com.google.appengine.labs.repackaged.org.json.JSONObject;
 
 
 @SuppressWarnings("serial")
 public class WriteCardServlet extends HttpServlet{
 	
-	private static final Logger logger = Logger.getLogger(TokenServlet.class.getCanonicalName());
+	private static final Logger logger = Logger.getLogger(ChannelServlet.class.getCanonicalName());
 	private static DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 	
 	protected void doPost(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException{
@@ -34,11 +36,34 @@ public class WriteCardServlet extends HttpServlet{
 		}else if (function.equals("cancel")){
 			cancelData(request, response);
 		}else if (function.equals("write")) {
-			
+			confirm(request);
 		}
 	}
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		String writer = request.getParameter("writer");
+		
+		Filter writerFilter = new FilterPredicate("Writer", FilterOperator.EQUAL, writer);
+		Filter activeFilter = new FilterPredicate("Active", FilterOperator.EQUAL, true);
+		Filter validFilter = CompositeFilterOperator.and(writerFilter, activeFilter);
+		
+		Query objQuery = new Query("Card").setFilter(validFilter);
+		PreparedQuery objPreparedQuery = datastore.prepare(objQuery);
+		Entity card = objPreparedQuery.asSingleEntity();
+		if (card != null){
+			JSONObject objJsonObject = new JSONObject();
+			try{
+				objJsonObject.put("doorId", card.getProperty("DoorId"));
+				objJsonObject.put("typeCard", card.getProperty("TypeCard"));
+				objJsonObject.put("userId", card.getProperty("UserId"));
+			} catch (JSONException e){
+				logger.log(Level.WARNING, e.getMessage() + "**" + e.getStackTrace() + "**");
+			}
+			response.getWriter().print(objJsonObject.toString());
+			logger.log(Level.INFO, "Write Card for " + card.getProperty("DoorId"));
+		} else {
+			logger.log(Level.INFO, "Card Null! " + writer);
+		}
 		
 	}
 	
@@ -48,7 +73,7 @@ public class WriteCardServlet extends HttpServlet{
 			String doorId = request.getParameter("doorId");
 			String userId = request.getParameter("userId");
 			String typeCard = request.getParameter("typeCard");
-			String forWriter = request.getParameter("forWriter");
+			String writer = request.getParameter("writer");
 		
 			Entity card = new Entity("Card");
 			
@@ -58,7 +83,7 @@ public class WriteCardServlet extends HttpServlet{
 			card.setProperty("DateWrite", String.format("%tD", today));
 			card.setProperty("TimeSend", String.format("%tr", today));
 			card.setProperty("TimeWrite", String.format("%tr", today));
-			card.setProperty("ForWriter", forWriter);
+			card.setProperty("Writer", writer);
 			card.setProperty("IsWrite", false);
 			card.setProperty("Active", true);
 		
@@ -95,6 +120,35 @@ public class WriteCardServlet extends HttpServlet{
 			response.getWriter().print("error");
 		}
 		
+	}
+
+	private void confirm(HttpServletRequest request){
+		String writer = request.getParameter("writer");
+		String userId = request.getParameter("userId");
+		Date today = DateNow.getDateTime();
+		
+		Filter writerFilter = new FilterPredicate("Writer", FilterOperator.EQUAL, writer);
+		Filter userFilter = new FilterPredicate("UserId", FilterOperator.EQUAL, userId);
+		Filter activeFilter = new FilterPredicate("Active", FilterOperator.EQUAL, true);
+		Filter validFilter = CompositeFilterOperator.and(writerFilter, userFilter, activeFilter);
+		
+		Query objQuery = new Query("Card").setFilter(validFilter);
+		PreparedQuery objPreparedQuery = datastore.prepare(objQuery);
+		Entity card = objPreparedQuery.asSingleEntity();
+		
+		card.setProperty("Active", false);
+		card.setProperty("IsWrite", true);
+		card.setProperty("TimeWrite", String.format("%tr", today));
+		datastore.put(card);
+		
+		JSONObject objJsonObject = new JSONObject();
+		try{
+			objJsonObject.put("type", "writed");
+		} catch(JSONException e){
+			logger.log(Level.WARNING ,e.getMessage());
+		}
+		
+		ChannelServlet.sendMessage(userId, objJsonObject.toString());
 	}
 	
 }
