@@ -25,6 +25,7 @@
  
  #include <SPI.h>
  #include <MFRC522.h>
+ #include <Servo.h>
  
  /*!
   *   Definiciones para el lector RFID MF-RC522
@@ -40,11 +41,12 @@
  const byte TYPE_BLOCK = 5;
  
  /*!
-  *  Definición de Pines del LED RGB.
+  *  Definición de Pines.
   */
  const int PIN_RED = 2;
  const int PIN_GREEN = 3;
  const int PIN_BLUE = 4;
+ const int PIN_SERVO = 8; 
  
  /*!
   *  Definición de Variables de las Tarjetas.
@@ -55,16 +57,23 @@
  const String DOOR = "door10";
  const String TYPE = "Cliente";
  
+ /*!
+  * Otras declaraciones.
+  */
+ Servo servo;
+ 
  /*****************************************************************/
  /*!
   *      Inicialización de la Arduino UNO
   *  1  :  Inicialización de los pines del LED RGB
   *  2  :  Inicialización del lector RFID-RC522.
+  *  3  :  Reseteo del Servo a 0 grados.
   */ 
  /*****************************************************************/
 void setup(){
   Serial.begin(9600);
   
+  servo.attach(PIN_SERVO);
   //1
   pinMode(PIN_RED, OUTPUT);
   pinMode(PIN_GREEN, OUTPUT);
@@ -75,6 +84,9 @@ void setup(){
   mfrc522.PCD_Init();
   setColor(false, true, false);
   offLED(500);
+  
+  //3
+  setServo(0);
 }
 
 /**************************************************************************/
@@ -91,8 +103,10 @@ void loop(){
       if (readTag()){
         if (DOOR.equals(door)){
           setColor(false, true, false);
+          setServo(180);
         } else {
           setColor(true, false, false);
+          setServo(0);
         }
       } else {
         setColor(true, true, false);
@@ -101,6 +115,18 @@ void loop(){
     }
     offLED(500);
   }
+}
+
+/**************************************************************************/
+/*!
+ *     Desbloquea el pasador girando el servo en los grados dados.
+ */
+/**************************************************************************/
+void setServo(int degree){
+  servo.attach(PIN_SERVO);
+  servo.write(degree);
+  delay(500);
+  servo.detach();
 }
 
 /**************************************************************************/
@@ -123,6 +149,14 @@ boolean readTag(){
    }
 }
 
+/**************************************************************************/
+/*!
+ *     Realiza la lectura de los bloques 4 y 5 y asigna el valor recuperado
+ *     a las variables door y type
+ *       @return  : Booleano correspondiente a la lectura satisfactoria de 
+                    los dos bloques leidos. 
+ */
+/**************************************************************************/
 boolean readed(){
   
    byte readDoor;
