@@ -48,6 +48,10 @@
  const int PIN_BLUE = 4;
  const int PIN_SERVO = 8; 
  
+ const int PIN_DOOR = 0;
+ const int PIN_INSIDE = 1;
+ const int PIN_OUTSIDE = 2;
+ 
  /*!
   *  Definición de Variables de las Tarjetas.
   */
@@ -115,6 +119,19 @@ void loop(){
     }
     offLED(500);
   }
+}
+
+/**************************************************************************/
+/*!
+ *    Obtiene el estado del interuptor
+ *
+ *    @param pin : pin del interuptor que sera consultado
+ *    @return : boolean del estado del interuptor.
+ */
+/**************************************************************************/
+boolean getSwitch(int pin){
+  int value = map(analogRead(pin), 0, 1023, 0, 2);
+  return (boolean)value;
 }
 
 /**************************************************************************/
