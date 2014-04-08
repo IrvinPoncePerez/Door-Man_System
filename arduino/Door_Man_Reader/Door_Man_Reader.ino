@@ -22,9 +22,9 @@
  *  RST   : Pin 9
  *  3.3V  :  3.3V
  */
- 
+
  #include <SPI.h>
- #include <MFRC522.h>
+ #include <MFRC522.h> 
  #include <Servo.h>
  
  /*!
@@ -36,48 +36,52 @@
  
  MFRC522 mfrc522(SDA_PIN, RST_PIN);
  MFRC522::MIFARE_Key key = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+ 
  const byte TRAILER_BLOCK = 7;
  const byte DOOR_BLOCK = 4;
- const byte TYPE_BLOCK = 5;
+ const byte CARD_BLOCK = 5;
  
  /*!
   *  Definición de Pines.
   */
- const int PIN_RED = 2;
- const int PIN_GREEN = 3;
- const int PIN_BLUE = 4;
- const int PIN_SERVO = 8; 
+ const int PIN_RED = 5;
+ const int PIN_GREEN = 6;
+ const int PIN_BLUE = 7;
+ 
+ const int PIN_TRANSMITTER = 4;
  
  const int PIN_DOOR = 0;
- const int PIN_INSIDE = 1;
- const int PIN_OUTSIDE = 2;
  
+ const int PIN_INSIDE = 0; //pin AttachInterrupt 0
+ const int PIN_OUTSIDE = 1; //pin attachInterrupt 1
+  
  /*!
   *  Definición de Variables de las Tarjetas.
   */
  String door;
- String type;
+ String card;
  
  const String DOOR = "door10";
- const String TYPE = "Cliente";
  
  /*!
   * Otras declaraciones.
   */
  Servo servo;
+ const int PIN_SERVO = 8;
  
  /*****************************************************************/
  /*!
   *      Inicialización de la Arduino UNO
   *  1  :  Inicialización de los pines del LED RGB
   *  2  :  Inicialización del lector RFID-RC522.
-  *  3  :  Reseteo del Servo a 0 grados.
+  *  3  :  Inicializacion del transmisor de datos.
+  *  4  :  delaracion de los pines 2 y 3 para el manejo de estado change.
+  *  5  :  declaracion e instancia del servo.
   */ 
  /*****************************************************************/
 void setup(){
   Serial.begin(9600);
-  
-  servo.attach(PIN_SERVO);
+ 
   //1
   pinMode(PIN_RED, OUTPUT);
   pinMode(PIN_GREEN, OUTPUT);
@@ -90,6 +94,13 @@ void setup(){
   offLED(500);
   
   //3
+  
+  //4
+  attachInterrupt(PIN_INSIDE, changeInside, CHANGE);
+  attachInterrupt(PIN_OUTSIDE, changeOutside, CHANGE);
+  
+  //5
+  servo.attach(PIN_SERVO);
   setServo(0);
 }
 
@@ -134,6 +145,14 @@ boolean getSwitch(int pin){
   return (boolean)value;
 }
 
+void changeInside(){
+  Serial.println("inside");
+}
+
+void changeOutside(){
+  Serial.println("outside");
+}
+
 /**************************************************************************/
 /*!
  *     Desbloquea el pasador girando el servo en los grados dados.
@@ -169,7 +188,7 @@ boolean readTag(){
 /**************************************************************************/
 /*!
  *     Realiza la lectura de los bloques 4 y 5 y asigna el valor recuperado
- *     a las variables door y type
+ *     a las variables door y card
  *       @return  : Booleano correspondiente a la lectura satisfactoria de 
                     los dos bloques leidos. 
  */
@@ -177,12 +196,12 @@ boolean readTag(){
 boolean readed(){
   
    byte readDoor;
-   byte readType;
+   byte readCard;
    byte buffer[18];
    byte size = sizeof(buffer);
    
    door = "";
-   type = "";
+   card = "";
    
    readDoor = mfrc522.MIFARE_Read(DOOR_BLOCK, buffer, &size);
    if (readDoor == MFRC522::STATUS_OK){
@@ -192,25 +211,26 @@ boolean readed(){
          door.concat(c);
        }
      }
-     Serial.println();
    }
       
-   readType = mfrc522.MIFARE_Read(TYPE_BLOCK, buffer, &size);
-   if (readType == MFRC522::STATUS_OK){
+   readCard = mfrc522.MIFARE_Read(CARD_BLOCK, buffer, &size);
+   if (readCard == MFRC522::STATUS_OK){
      for (int i = 0; i < 16; i++){
        if (buffer[i] != 0){
          char c = buffer[i];       
-         type.concat(c);
+         card.concat(c);
        }
      }
-     Serial.println();
    }
    
-   if (readDoor == MFRC522::STATUS_OK && readType == MFRC522::STATUS_OK){
+   
+   Serial.println(door+"-"+card);
+   
+   if (readDoor == MFRC522::STATUS_OK && readCard == MFRC522::STATUS_OK){
      return true;
    } else {
      door = "";
-     type = "";
+     card = "";
      return false;
    }
    

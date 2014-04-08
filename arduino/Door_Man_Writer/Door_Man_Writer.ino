@@ -33,11 +33,12 @@ uint8_t uidLength;
 uint8_t key[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
 /*!
- *  Definición de Pines del LED RGB.
+ *  Definición de Pines.
  */
 const int PIN_RED = 5;
 const int PIN_GREEN = 6;
 const int PIN_BLUE = 7;
+
 
 /*!
  *  Objeto Json para realizar el parse del 
@@ -64,6 +65,7 @@ EthernetClient client;
 /*!
  *        Inicializacion de la Arduino Ethernet.
  *  1 : Configuración de los pines de salida para el indicador LED.
+ *  2 : Configuracion del receptor de Datos.
  *  2 : Inicializacion de la libreria Ethernet.
  *  3 : Test de conexión con el servidor.
  *  4 : Sincronización del tiempo de la unidad de escritura.
@@ -76,8 +78,10 @@ void setup(){
   pinMode(PIN_RED, OUTPUT);
   pinMode(PIN_GREEN, OUTPUT);
   pinMode(PIN_BLUE, OUTPUT);
-
+  
   //2
+
+  //3
   if(Ethernet.begin(mac) == 0){
     Ethernet.begin(mac, ip);
     setColor(true, true, false); //Ilumina de color amarillo si establecio la dirección IP de forma estatica.
@@ -87,7 +91,7 @@ void setup(){
   }
   offLED(500);
 
-  //3
+  //4
   while (!client.connected()){
     client.connect(server, port);
   }
@@ -96,7 +100,7 @@ void setup(){
   }
   offLED(500);
 
-  //4
+  //5
   if (client.connected()){
     doGET("/sync?board=Arduino1");  
     setTimeArduino(getResponse()); 
@@ -104,7 +108,7 @@ void setup(){
   }
   offLED(500);
 
-  //5
+  //6
   nfc.begin();
   uint32_t versiondata = nfc.getFirmwareVersion();
   if (!versiondata){
@@ -132,7 +136,6 @@ void loop(){
     doGET("/writecard?writer=Arduino1");
     String userId = writeCard(getResponse());
     if (userId.length() > 0){
-      Serial.println(userId);
       doPOST("/writecard", "function=write&writer=Arduino1&userId=" + userId);
       getResponse();
     }
@@ -179,9 +182,6 @@ void doPOST(String URL, String data){
     client.connect(server, port);
   }
   
-  Serial.println(URL);
-  Serial.println(data);
-  
   if (client.connected()){
     client.println("POST " + URL + " HTTP/1.1");
     client.println("Host: 192.168.0.106");   
@@ -215,7 +215,7 @@ String getResponse(){
 
   int indexOf = response.indexOf("{");
   response = response.substring(indexOf);
-
+  
   return response;
 }
 
@@ -273,7 +273,7 @@ String writeCard(String JSON){
     JsonHashTable objJson = parser.parseHashTable(buffer);
     if (objJson.success()){
       writeData(objJson.getString("doorId"), 4);
-      writeData(objJson.getString("typeCard"), 5);
+      writeData(objJson.getString("card"), 5);
     } else {
       setColor(true, false, true);
       offLED(200);
