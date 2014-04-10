@@ -18,13 +18,15 @@
 #include <Time.h>
 #include <DateTimeStrings.h>
 #include <Wire.h>
-#include <Adafruit_NFCShield_I2C.h>
+#include <Adafruit_NFCShield_I2C.h> 
+#include <Manchester.h>
 
 /*!
  *  Definiciones para el NFC Shield.
  */
 #define IRQ (2)
 #define RESET (3)
+#define RX_PIN 4
 
 Adafruit_NFCShield_I2C nfc(IRQ, RESET);
 
@@ -54,12 +56,17 @@ JsonParser<32> parser;
  *   port : puerto de comunicación.
  *   client : cliente ethernet para comunicarse con el servidor.
  */
-byte mac[] = { 
-  0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
+byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 char server[] = "192.168.0.106";
 IPAddress ip (192, 168, 0, 111);
 int port = 80;
 EthernetClient client;
+
+/*!
+ *  Otras definiciones.
+ */
+String userId;
+uint8_t buffer[20];
 
 /*********************************************************************************/
 /*!
@@ -80,6 +87,8 @@ void setup(){
   pinMode(PIN_BLUE, OUTPUT);
   
   //2
+  man.setupReceive(RX_PIN, MAN_4800);
+  man.beginReceiveArray(20, buffer);
 
   //3
   if(Ethernet.begin(mac) == 0){
@@ -124,6 +133,7 @@ void setup(){
 /**************************************************************************/
 //                Ciclo de la Arduino Ethernet
 //  1 : Detección y escritura de las tarjetas.
+//  2 : Recepcion de actividades de la cerradura.
 /**************************************************************************/
 void loop(){
   
@@ -143,6 +153,11 @@ void loop(){
   }
   else if (!success){
     offLED(0);
+  }
+  
+  //2
+  if (man.receiveComplete()){
+    Serial.println("Receive");
   }
   
 }
@@ -215,7 +230,7 @@ String getResponse(){
 
   int indexOf = response.indexOf("{");
   response = response.substring(indexOf);
-  
+
   return response;
 }
 
@@ -275,9 +290,10 @@ String writeCard(String JSON){
       writeData(objJson.getString("doorId"), 4);
       writeData(objJson.getString("card"), 5);
     } else {
-      setColor(true, false, true);
+      setColor(true, false, false);
       offLED(200);
     }
+    
     return objJson.getString("userId");
   }
 }

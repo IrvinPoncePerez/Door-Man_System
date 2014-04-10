@@ -22,15 +22,14 @@
  *  RST   : Pin 9
  *  3.3V  :  3.3V
  */
-
  #include <SPI.h>
  #include <MFRC522.h> 
  #include <Servo.h>
+ #include <Manchester.h>
  
  /*!
   *   Definiciones para el lector RFID MF-RC522
   */
-
  #define SDA_PIN 10
  #define RST_PIN 9
  
@@ -42,18 +41,22 @@
  const byte CARD_BLOCK = 5;
  
  /*!
-  *  Definición de Pines.
+  *  Definición de Pines LED RGB.
   */
  const int PIN_RED = 5;
  const int PIN_GREEN = 6;
  const int PIN_BLUE = 7;
  
- const int PIN_TRANSMITTER = 4;
- 
- const int PIN_DOOR = 0;
- 
- const int PIN_INSIDE = 0; //pin AttachInterrupt 0
- const int PIN_OUTSIDE = 1; //pin attachInterrupt 1
+ /*!
+  *  Definición para los interruptores.
+  */
+ const int PIN_CLOSED = 0;
+ const int PIN_INSIDE = 1;
+ const int PIN_OUTSIDE = 2;
+
+ boolean isInside;
+ boolean isOutside; 
+ boolean isClosed;
   
  /*!
   *  Definición de Variables de las Tarjetas.
@@ -64,10 +67,16 @@
  const String DOOR = "door10";
  
  /*!
-  * Otras declaraciones.
+  * Definiciones para el servo.
   */
  Servo servo;
  const int PIN_SERVO = 8;
+ 
+ /*!
+  * Definiciones para el transmisor.
+  */
+ #define TX_PIN 4
+ const int PIN_RESET = 3;
  
  /*****************************************************************/
  /*!
@@ -77,10 +86,10 @@
   *  3  :  Inicializacion del transmisor de datos.
   *  4  :  delaracion de los pines 2 y 3 para el manejo de estado change.
   *  5  :  declaracion e instancia del servo.
+  *  6  :  Inicializacion de los interruptores.
   */ 
  /*****************************************************************/
 void setup(){
-  Serial.begin(9600);
  
   //1
   pinMode(PIN_RED, OUTPUT);
@@ -94,24 +103,33 @@ void setup(){
   offLED(500);
   
   //3
-  
-  //4
-  attachInterrupt(PIN_INSIDE, changeInside, CHANGE);
-  attachInterrupt(PIN_OUTSIDE, changeOutside, CHANGE);
+  man.setupTransmit(TX_PIN, MAN_1200);
   
   //5
   servo.attach(PIN_SERVO);
   setServo(0);
+  
+  //6
+  isInside = getSwitch(PIN_INSIDE);
+  isOutside = getSwitch(PIN_OUTSIDE);
+  isClosed = getSwitch(PIN_CLOSED);
+  
+  pinMode(PIN_RESET, OUTPUT);
+  digitalWrite(PIN_RESET, LOW);
 }
 
 /**************************************************************************/
-//                Ciclo de la Arduino Ethernet
-//  1 : Detección y escritura de las tarjetas.
+/*!                Ciclo de la Arduino Ethernet
+ *  1 : Detección y escritura de las tarjetas.
+ *  2 : Consulta del estado del sensor interno.
+ *  3 : Consutla del estado del sensor externo.
+ */
 /**************************************************************************/
 void loop(){
 
   //1
   if (mfrc522.PICC_IsNewCardPresent()){
+    Serial.println("New tag");
     if (mfrc522.PICC_ReadCardSerial()){
       setColor(true, true, true);
       delay(500);
@@ -130,6 +148,32 @@ void loop(){
     }
     offLED(500);
   }
+  
+  //2
+  if (getSwitch(PIN_INSIDE) != isInside){
+    changeInside();
+  }
+  
+  //3
+  if (getSwitch(PIN_OUTSIDE) != isOutside){
+    changeOutside();
+  }
+  
+}
+
+/******************************************************************************/
+/*!
+ *  Envia el mensaje
+ */
+/******************************************************************************/
+String sendMessage(String message){
+  uint8_t data[message.length()];
+  for (int i = 0; i < message.length(); i++){
+    data[i] = message[i];
+  }
+  man.transmitArray(message.length(), data);
+  setColor(true, true, true);
+  offLED(1000);
 }
 
 /**************************************************************************/
@@ -146,11 +190,21 @@ boolean getSwitch(int pin){
 }
 
 void changeInside(){
-  Serial.println("inside");
+  isInside = !isInside;
+  if (isInside){
+    sendMessage("Hola");
+  } else{
+    sendMessage("Hola");
+  }
 }
 
 void changeOutside(){
-  Serial.println("outside");
+  isOutside = !isOutside;
+  if (isOutside){
+    sendMessage("Hola");
+  } else{
+    sendMessage("Hola");
+  }
 }
 
 /**************************************************************************/
@@ -217,14 +271,11 @@ boolean readed(){
    if (readCard == MFRC522::STATUS_OK){
      for (int i = 0; i < 16; i++){
        if (buffer[i] != 0){
-         char c = buffer[i];       
+         char c = buffer[i];  
          card.concat(c);
        }
      }
    }
-   
-   
-   Serial.println(door+"-"+card);
    
    if (readDoor == MFRC522::STATUS_OK && readCard == MFRC522::STATUS_OK){
      return true;
