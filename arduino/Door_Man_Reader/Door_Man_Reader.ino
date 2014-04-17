@@ -90,7 +90,7 @@
   */ 
  /*****************************************************************/
 void setup(){
- 
+   Serial.begin(9600);
   //1
   pinMode(PIN_RED, OUTPUT);
   pinMode(PIN_GREEN, OUTPUT);
@@ -115,7 +115,6 @@ void setup(){
   isClosed = getSwitch(PIN_CLOSED);
   
   pinMode(PIN_RESET, OUTPUT);
-  digitalWrite(PIN_RESET, LOW);
 }
 
 /**************************************************************************/
