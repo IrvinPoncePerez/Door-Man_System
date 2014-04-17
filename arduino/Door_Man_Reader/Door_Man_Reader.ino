@@ -177,9 +177,9 @@ void loop(){
  *  Envia el mensaje
  */
 /******************************************************************************/
-String sendMessage(String side){
+void sendMessage(String side){
   String data = "{";
-  data += "door=" + door + "&";
+  data += "door=" + DOOR + "&";
   data += "battery=" + getBattery() + "&";
   data += "activity=" + side + "&";
   data += "card=" + card ;
@@ -188,7 +188,6 @@ String sendMessage(String side){
   for (int i = 0; i < data.length(); i++){
     uint16_t c = data[i];
     man.transmit(c);
-    Serial.println(c);
     delay(10);
   }
   
@@ -221,44 +220,47 @@ boolean getSwitch(int pin){
 void changeInside(){
   isInside = !isInside;
   if (isInside){
-    waitOpen("inside_open");
+     int mili = 0;
+
+     while (true){
+       mili += 10;
+       delay(10);
+  
+       if (getSwitch(PIN_CLOSED)){
+         sendMessage("inside_open");
+         break;
+       }
+  
+       if (mili == 1000){
+         break;
+       }  
+  
+     } 
   } 
 }
 
 void changeOutside(){
   isOutside = !isOutside;
   if (isOutside){
-    waitOpen("outside_open");
+     int mili = 0;
+
+     while (true){
+       mili += 10;
+       delay(10);
+  
+       if (getSwitch(PIN_CLOSED)){
+         sendMessage("outside_open");
+         break;
+       }
+  
+       if (mili == 1000){
+         break;
+       }  
+  
+     } 
   } 
   else {
     setServo(0);
-  }
-}
-
-
-/**************************************************************************/
-/*!
- *  Metodos de consulta del estado del interruptor de la puerta
- *  FALSE : la puerta esta cerrada.
- *  TRUE  : la puerta esta abriendo o abierta.
- */
-/**************************************************************************/
-void waitOpen(String side){
-  int mili = 0;
-
-  while (true){
-    mili += 10;
-    delay(10);
-
-    if (getSwitch(PIN_CLOSED)){
-      sendMessage(side);
-      break;
-    }
-
-    if (mili == 1000){
-      break;
-    }  
-
   }
 }
 
@@ -344,10 +346,9 @@ boolean readed(){
   if (DOOR.equals(_door)){
     door = _door;
     card = _card;
+  } else {
+    door = _door;
   }
-  
-  Serial.println(door);
-  Serial.println(card);
 
   if (readDoor == MFRC522::STATUS_OK && readCard == MFRC522::STATUS_OK){
     return true;
