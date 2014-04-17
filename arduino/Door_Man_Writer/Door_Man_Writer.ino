@@ -12,21 +12,20 @@
  cerradura al servidor door-man.appspot.com
  */
 /*********************************************************************************/
+
 #include <Ethernet.h>
 #include <SPI.h>
 #include <JsonParser.h>
-#include <Time.h>
-#include <DateTimeStrings.h>
 #include <Wire.h>
 #include <Adafruit_NFCShield_I2C.h> 
-#include <Manchester.h>
+#include <Time.h>
+#include <DateTimeStrings.h>
 
 /*!
  *  Definiciones para el NFC Shield.
  */
 #define IRQ (2)
 #define RESET (3)
-#define RX_PIN 4
 
 Adafruit_NFCShield_I2C nfc(IRQ, RESET);
 
@@ -37,9 +36,10 @@ uint8_t key[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 /*!
  *  Definición de Pines.
  */
-const int PIN_RED = 5;
-const int PIN_GREEN = 6;
-const int PIN_BLUE = 7;
+#define PIN_RED 5
+#define PIN_GREEN 6
+#define PIN_BLUE 7
+#define PIN_Rx 4
 
 
 /*!
@@ -62,11 +62,6 @@ IPAddress ip (192, 168, 0, 111);
 int port = 80;
 EthernetClient client;
 
-/*!
- *  Otras definiciones.
- */
-String userId;
-uint8_t buffer[20];
 
 /*********************************************************************************/
 /*!
@@ -81,15 +76,17 @@ uint8_t buffer[20];
 /*********************************************************************************/
 void setup(){
   Serial.begin(9600);
+  
   //1
   pinMode(PIN_RED, OUTPUT);
   pinMode(PIN_GREEN, OUTPUT);
   pinMode(PIN_BLUE, OUTPUT);
   
   //2
-  man.setupReceive(RX_PIN, MAN_4800);
-  man.beginReceiveArray(20, buffer);
-
+//  vw_setup(4800);
+//  vw_set_rx_pin(PIN_Rx);
+//  vw_rx_start();
+  
   //3
   if(Ethernet.begin(mac) == 0){
     Ethernet.begin(mac, ip);
@@ -156,9 +153,16 @@ void loop(){
   }
   
   //2
-  if (man.receiveComplete()){
-    Serial.println("Receive");
-  }
+//  uint8_t buffer[VW_MAX_MESSAGE_LEN];
+//  uint8_t bufferLen = VW_MAX_MESSAGE_LEN;
+//  
+//  if (vw_get_message(buffer, &bufferLen)){
+//    Serial.print("Receiving Message! ");
+//    for (int i = 0; i < bufferLen; i++){
+//      Serial.print((char)buffer[i]);
+//    }
+//    Serial.println();
+//  }
   
 }
 
@@ -231,6 +235,8 @@ String getResponse(){
   int indexOf = response.indexOf("{");
   response = response.substring(indexOf);
 
+Serial.println(response);
+  
   return response;
 }
 

@@ -22,6 +22,7 @@
  *  RST   : Pin 9
  *  3.3V  :  3.3V
  */
+ 
  #include <SPI.h>
  #include <MFRC522.h> 
  #include <Servo.h>
@@ -50,9 +51,10 @@
  /*!
   *  Definición para los interruptores.
   */
- const int PIN_CLOSED = 0;
- const int PIN_INSIDE = 1;
- const int PIN_OUTSIDE = 2;
+ const int ATTACH_PIN_CLOSED = 1;
+ const int PIN_CLOSED = 3;
+ const int PIN_INSIDE = 0;
+ const int PIN_OUTSIDE = 1;
 
  boolean isInside;
  boolean isOutside; 
@@ -76,7 +78,11 @@
   * Definiciones para el transmisor.
   */
  #define TX_PIN 4
- const int PIN_RESET = 3;
+ 
+ /*!
+  *  Definicion para el indicador de bateria.
+  */
+ const int PIN_BATTERY = 2;
  
  /*****************************************************************/
  /*!
@@ -90,7 +96,7 @@
   */ 
  /*****************************************************************/
 void setup(){
-   Serial.begin(9600);
+  Serial.begin(9600);
   //1
   pinMode(PIN_RED, OUTPUT);
   pinMode(PIN_GREEN, OUTPUT);
@@ -103,18 +109,17 @@ void setup(){
   offLED(500);
   
   //3
-  man.setupTransmit(TX_PIN, MAN_1200);
+  man.setupTransmit(TX_PIN, MAN_4800);
   
   //5
-  servo.attach(PIN_SERVO);
   setServo(0);
   
   //6
   isInside = getSwitch(PIN_INSIDE);
   isOutside = getSwitch(PIN_OUTSIDE);
   isClosed = getSwitch(PIN_CLOSED);
+  attachInterrupt(ATTACH_PIN_CLOSED, changeClosed, FALLING);
   
-  pinMode(PIN_RESET, OUTPUT);
 }
 
 /**************************************************************************/
@@ -128,7 +133,6 @@ void loop(){
 
   //1
   if (mfrc522.PICC_IsNewCardPresent()){
-    Serial.println("New tag");
     if (mfrc522.PICC_ReadCardSerial()){
       setColor(true, true, true);
       delay(500);
@@ -149,6 +153,8 @@ void loop(){
   }
   
   //2
+  // FALSE : sin movimiento.
+  //  TRUE : abriendo.
   if (getSwitch(PIN_INSIDE) != isInside){
     changeInside();
   }
@@ -166,13 +172,8 @@ void loop(){
  */
 /******************************************************************************/
 String sendMessage(String message){
-  uint8_t data[message.length()];
-  for (int i = 0; i < message.length(); i++){
-    data[i] = message[i];
-  }
-  man.transmitArray(message.length(), data);
-  setColor(true, true, true);
-  offLED(1000);
+  String data = "{" + message + "}";
+  Serial.println(data);
 }
 
 /**************************************************************************/
@@ -191,19 +192,33 @@ boolean getSwitch(int pin){
 void changeInside(){
   isInside = !isInside;
   if (isInside){
-    sendMessage("Hola");
-  } else{
-    sendMessage("Hola");
-  }
+    waitOpen();
+  } 
 }
 
 void changeOutside(){
   isOutside = !isOutside;
   if (isOutside){
-    sendMessage("Hola");
-  } else{
-    sendMessage("Hola");
+    waitOpen();
+  } else {
+    setServo(0);
   }
+}
+
+
+/**************************************************************************/
+/*!
+ *  Metodos de consulta del estado del interruptor de la puerta
+ *  FALSE : la puerta esta cerrada.
+ *  TRUE  : la puerta esta abriendo o abierta.
+ */
+/**************************************************************************/
+void waitOpen(){
+  Serial.println("wait");
+}
+
+void changeClosed(){
+  Serial.println("closed");
 }
 
 /**************************************************************************/
@@ -214,7 +229,7 @@ void changeOutside(){
 void setServo(int degree){
   servo.attach(PIN_SERVO);
   servo.write(degree);
-  delay(500);
+    delay(1000);
   servo.detach();
 }
 
@@ -275,6 +290,9 @@ boolean readed(){
        }
      }
    }
+   
+   Serial.println(door);
+   Serial.println(card);
    
    if (readDoor == MFRC522::STATUS_OK && readCard == MFRC522::STATUS_OK){
      return true;
