@@ -178,12 +178,11 @@ void loop(){
  */
 /******************************************************************************/
 void sendMessage(String side){
-  String data = "{";
-  data += "door=" + DOOR + "&";
-  data += "battery=" + getBattery() + "&";
-  data += "activity=" + side + "&";
-  data += "card=" + card ;
-  data += "}";
+  String data = "";
+  data += "&#" + DOOR;
+  data += "/" + getBattery();
+  data += "/" + side;
+  data += "/" + card + "$";
   
   for (int i = 0; i < data.length(); i++){
     uint16_t c = data[i];
