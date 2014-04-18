@@ -20,6 +20,7 @@
 #include <Adafruit_NFCShield_I2C.h> 
 #include <Time.h>
 #include <DateTimeStrings.h>
+#include <Manchester.h>
 
 /*!
  *  Definiciones para el NFC Shield.
@@ -36,10 +37,11 @@ uint8_t key[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 /*!
  *  Definición de Pines.
  */
-#define PIN_RED 5
-#define PIN_GREEN 6
-#define PIN_BLUE 7
-#define PIN_Rx 4
+#define PIN_RED 8
+#define PIN_GREEN 9
+#define PIN_BLUE 10
+
+#define RX_PIN 7
 
 
 /*!
@@ -83,9 +85,8 @@ void setup(){
   pinMode(PIN_BLUE, OUTPUT);
   
   //2
-//  vw_setup(4800);
-//  vw_set_rx_pin(PIN_Rx);
-//  vw_rx_start();
+  man.setupReceive(RX_PIN, MAN_4800);
+  man.beginReceive();
   
   //3
   if(Ethernet.begin(mac) == 0){
@@ -142,6 +143,7 @@ void loop(){
     offLED(200);
     doGET("/writecard?writer=Arduino1");
     String userId = writeCard(getResponse());
+    
     if (userId.length() > 0){
       doPOST("/writecard", "function=write&writer=Arduino1&userId=" + userId);
       getResponse();
@@ -153,16 +155,9 @@ void loop(){
   }
   
   //2
-//  uint8_t buffer[VW_MAX_MESSAGE_LEN];
-//  uint8_t bufferLen = VW_MAX_MESSAGE_LEN;
-//  
-//  if (vw_get_message(buffer, &bufferLen)){
-//    Serial.print("Receiving Message! ");
-//    for (int i = 0; i < bufferLen; i++){
-//      Serial.print((char)buffer[i]);
-//    }
-//    Serial.println();
-//  }
+  if (man.receiveComplete()){
+    
+  }
   
 }
 
@@ -234,8 +229,6 @@ String getResponse(){
 
   int indexOf = response.indexOf("{");
   response = response.substring(indexOf);
-
-Serial.println(response);
   
   return response;
 }
@@ -281,10 +274,12 @@ void setTimeArduino(String JSON){
  */
 /*****************************************************************/
 String writeCard(String JSON){
+  String userStr;
+  
   if (JSON.equals("")){
     setColor(true, false, true);
     offLED(200);
-    return "";
+    userStr = "";
   } else {
     int lenght = JSON.length();  
     char buffer[lenght];
@@ -300,8 +295,10 @@ String writeCard(String JSON){
       offLED(200);
     }
     
-    return objJson.getString("userId");
+    userStr = objJson.getString("userId");
   }
+  
+  return userStr;
 }
 
 /*****************************************************************************/
