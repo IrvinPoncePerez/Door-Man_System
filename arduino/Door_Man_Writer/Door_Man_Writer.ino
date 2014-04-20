@@ -78,7 +78,7 @@ EthernetClient client;
 /*********************************************************************************/
 void setup(){
   Serial.begin(9600);
-  
+  Serial.println("setup");
   //1
   pinMode(PIN_RED, OUTPUT);
   pinMode(PIN_GREEN, OUTPUT);
@@ -156,8 +156,27 @@ void loop(){
   
   //2
   if (man.receiveComplete()){
-    
+    receiveMessage();   
+    Serial.println("onReceive");
   }
+  
+}
+
+/******************************************************************************/
+/*!
+ *  Recibe el mensaje de actividad de la cerradura.
+ */
+/******************************************************************************/
+void receiveMessage(){
+  String message = "";
+  uint16_t data = man.getMessage();
+  
+  Serial.println("Receiving");
+  if ((data == '&') || (data == '#')){
+    Serial.println("Receiving Message");
+  }
+  
+  man.beginReceive();
   
 }
 
