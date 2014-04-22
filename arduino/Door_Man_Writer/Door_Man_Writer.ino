@@ -37,11 +37,11 @@ uint8_t key[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 /*!
  *  Definición de Pines.
  */
-#define PIN_RED 8
-#define PIN_GREEN 9
-#define PIN_BLUE 10
+#define PIN_RED 5
+#define PIN_GREEN 6
+#define PIN_BLUE 7
 
-#define RX_PIN 7
+#define RX_PIN 4
 
 
 /*!
@@ -134,7 +134,7 @@ void setup(){
 //  2 : Recepcion de actividades de la cerradura.
 /**************************************************************************/
 void loop(){
-  
+    
   //1
   uint8_t success;
   success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, &uid[0], &uidLength);
@@ -152,14 +152,14 @@ void loop(){
   }
   else if (!success){
     offLED(0);
-  }
-  
-  //2
+  }  
+
   if (man.receiveComplete()){
-    receiveMessage();   
-    Serial.println("onReceive");
+    uint16_t data = man.getMessage();
+    char c = (char)data;
+    Serial.println(c);
+    man.beginReceive();
   }
-  
 }
 
 /******************************************************************************/
@@ -167,18 +167,18 @@ void loop(){
  *  Recibe el mensaje de actividad de la cerradura.
  */
 /******************************************************************************/
-void receiveMessage(){
-  String message = "";
-  uint16_t data = man.getMessage();
-  
-  Serial.println("Receiving");
-  if ((data == '&') || (data == '#')){
-    Serial.println("Receiving Message");
-  }
-  
-  man.beginReceive();
-  
-}
+//void receiveMessage(){
+//  String message = "";
+//  uint16_t data = man.getMessage();
+//  
+//  Serial.println("Receiving");
+//  if ((data == '&') || (data == '#')){
+//    Serial.println("Receiving Message");
+//  }
+//  
+//  man.beginReceive();
+//  
+//}
 
 /******************************************************************************/
 /*!
@@ -246,9 +246,11 @@ String getResponse(){
   }    
   client.stop();
 
-  int indexOf = response.indexOf("{");
-  response = response.substring(indexOf);
-  
+  Serial.println(response);
+  int index = response.indexOf("{");
+  response = response.substring(index);
+  Serial.println(index);
+  Serial.println(response);
   return response;
 }
 

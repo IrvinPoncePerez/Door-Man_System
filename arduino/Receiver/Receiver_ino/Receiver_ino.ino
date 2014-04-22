@@ -10,13 +10,12 @@ void setup(){
 }
 
 void loop(){
-  String message = "";
   if (man.receiveComplete()){
-    uint16_t c = man.getMessage();
-    message.concat((char)c);
+    uint16_t data = man.getMessage();
+    char c = (char)data;
+    Serial.println(c);
     man.beginReceive();
-    Serial.print((char)c);
-  }
- 
+  } 
 }
+
 
