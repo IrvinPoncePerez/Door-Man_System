@@ -17,10 +17,9 @@
 #include <SPI.h>
 #include <JsonParser.h>
 #include <Wire.h>
-#include <Adafruit_NFCShield_I2C.h> 
+#include <Adafruit_NFCShield.h> 
 #include <Time.h>
 #include <DateTimeStrings.h>
-#include <Manchester.h>
 
 /*!
  *  Definiciones para el NFC Shield.
@@ -28,7 +27,7 @@
 #define IRQ (2)
 #define RESET (3)
 
-Adafruit_NFCShield_I2C nfc(IRQ, RESET);
+Adafruit_NFCShield nfc(IRQ, RESET);
 
 uint8_t uid[] = {0, 0, 0, 0, 0, 0, 0};
 uint8_t uidLength;
@@ -40,9 +39,6 @@ uint8_t key[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 #define PIN_RED 5
 #define PIN_GREEN 6
 #define PIN_BLUE 7
-
-#define RX_PIN 4
-
 
 /*!
  *  Objeto Json para realizar el parse del 
@@ -64,6 +60,9 @@ IPAddress ip (192, 168, 0, 111);
 int port = 80;
 EthernetClient client;
 
+/*!
+ * Otras definiciones
+ */
 
 /*********************************************************************************/
 /*!
@@ -77,16 +76,14 @@ EthernetClient client;
  */
 /*********************************************************************************/
 void setup(){
-  Serial.begin(9600);
-  Serial.println("setup");
+  
   //1
   pinMode(PIN_RED, OUTPUT);
   pinMode(PIN_GREEN, OUTPUT);
   pinMode(PIN_BLUE, OUTPUT);
   
   //2
-  man.setupReceive(RX_PIN, MAN_4800);
-  man.beginReceive();
+  Serial.begin(9600);
   
   //3
   if(Ethernet.begin(mac) == 0){
@@ -126,6 +123,7 @@ void setup(){
     setColor(false, true, false);
   }
   offLED(500);
+
 }
 
 /**************************************************************************/
@@ -134,7 +132,7 @@ void setup(){
 //  2 : Recepcion de actividades de la cerradura.
 /**************************************************************************/
 void loop(){
-    
+  
   //1
   uint8_t success;
   success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, &uid[0], &uidLength);
@@ -154,31 +152,13 @@ void loop(){
     offLED(0);
   }  
 
-  if (man.receiveComplete()){
-    uint16_t data = man.getMessage();
-    char c = (char)data;
-    Serial.println(c);
-    man.beginReceive();
+  //2
+  while(Serial.available()){
+    char c = Serial.read();
+    Serial.print(c);
   }
+  
 }
-
-/******************************************************************************/
-/*!
- *  Recibe el mensaje de actividad de la cerradura.
- */
-/******************************************************************************/
-//void receiveMessage(){
-//  String message = "";
-//  uint16_t data = man.getMessage();
-//  
-//  Serial.println("Receiving");
-//  if ((data == '&') || (data == '#')){
-//    Serial.println("Receiving Message");
-//  }
-//  
-//  man.beginReceive();
-//  
-//}
 
 /******************************************************************************/
 /*!
@@ -246,14 +226,12 @@ String getResponse(){
   }    
   client.stop();
 
-  Serial.println(response);
   int index = response.indexOf("{");
   response = response.substring(index);
-  Serial.println(index);
-  Serial.println(response);
+  
   return response;
 }
-
+  
 /*****************************************************************/
 /*!
  Función para Establecer la fecha hora de la tarjeta.
