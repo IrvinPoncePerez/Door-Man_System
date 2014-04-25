@@ -26,7 +26,6 @@
 #include <SPI.h>
 #include <MFRC522.h> 
 #include <Servo.h>
-#include <Manchester.h>
 
 /*!
  *   Definiciones para el lector RFID MF-RC522
@@ -52,9 +51,9 @@ const int PIN_BLUE = 7;
 /*!
  *  Definición para los interruptores.
  */
-const int PIN_CLOSED = 3;
 const int PIN_INSIDE = 0;
 const int PIN_OUTSIDE = 1;
+const int PIN_CLOSED = 2;
 
 boolean isInside;
 boolean isOutside; 
@@ -74,16 +73,6 @@ const String DOOR = "door10";
 Servo servo;
 const int PIN_SERVO = 8;
 
-/*!
- * Definiciones para el transmisor.
- */
-#define TX_PIN 4
-
-/*!
- *  Definicion para el indicador de bateria.
- */
-const int PIN_BATTERY = 2;
-
 /*****************************************************************/
 /*!
  *      Inicialización de la Arduino UNO
@@ -96,7 +85,7 @@ const int PIN_BATTERY = 2;
  */
 /*****************************************************************/
 void setup(){
-  Serial.begin(9600);
+
   //1
   pinMode(PIN_RED, OUTPUT);
   pinMode(PIN_GREEN, OUTPUT);
@@ -109,7 +98,7 @@ void setup(){
   offLED(500);
 
   //3
-  man.setupTransmit(TX_PIN, MAN_4800);
+  Serial.begin(9600);
 
   //5
   setServo(0);
@@ -179,28 +168,15 @@ void loop(){
 /******************************************************************************/
 void sendMessage(String side){
   String data = "";
-  data += "&#" + DOOR;
-  data += "/" + getBattery();
+  data += "#" + DOOR;
   data += "/" + side;
   data += "/" + card + "$";
   
   for (int i = 0; i < data.length(); i++){
-    uint16_t c = data[i];
-    man.transmit(c);
+    Serial.print(data[i]);
     delay(10);
   }
   
-}
-
-/******************************************************************************/
-/*!
- *  Obtiene el valor de la entrada del indicador de bateria y mapea el valor
- *  de 0 a 100.
- */
-/******************************************************************************/
-String getBattery(){
-  int value = map(analogRead(PIN_BATTERY), 200, 1023, 0, 100);
-  return (String)value;
 }
 
 /**************************************************************************/
