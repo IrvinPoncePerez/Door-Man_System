@@ -12,14 +12,12 @@
  cerradura al servidor door-man.appspot.com
  */
 /*********************************************************************************/
-
 #include <Ethernet.h>
 #include <SPI.h>
 #include <JsonParser.h>
 #include <Wire.h>
-#include <Adafruit_NFCShield.h> 
+#include <Adafruit_NFCShield.h>
 #include <Time.h>
-#include <DateTimeStrings.h>
 
 /*!
  *  Definiciones para el NFC Shield.
@@ -36,9 +34,9 @@ uint8_t key[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 /*!
  *  Definición de Pines.
  */
-#define PIN_RED 5
-#define PIN_GREEN 6
-#define PIN_BLUE 7
+const int PIN_RED = 5;
+const int PIN_GREEN = 6;
+const int PIN_BLUE = 7;
 
 /*!
  *  Objeto Json para realizar el parse del 
@@ -60,19 +58,15 @@ IPAddress ip (192, 168, 0, 111);
 int port = 80;
 EthernetClient client;
 
-/*!
- * Otras definiciones
- */
-
 /*********************************************************************************/
 /*!
  *        Inicializacion de la Arduino Ethernet.
  *  1 : Configuración de los pines de salida para el indicador LED.
- *  2 : Configuracion del receptor de Datos.
  *  2 : Inicializacion de la libreria Ethernet.
  *  3 : Test de conexión con el servidor.
  *  4 : Sincronización del tiempo de la unidad de escritura.
  *  5 : Inicialización de la libreria NFC.
+ *  6 : Configuracion del receptor de Datos.
  */
 /*********************************************************************************/
 void setup(){
@@ -81,11 +75,8 @@ void setup(){
   pinMode(PIN_RED, OUTPUT);
   pinMode(PIN_GREEN, OUTPUT);
   pinMode(PIN_BLUE, OUTPUT);
-  
+   
   //2
-  Serial.begin(9600);
-  
-  //3
   if(Ethernet.begin(mac) == 0){
     Ethernet.begin(mac, ip);
     setColor(true, true, false); //Ilumina de color amarillo si establecio la dirección IP de forma estatica.
@@ -95,16 +86,17 @@ void setup(){
   }
   offLED(500);
 
-  //4
+  //3
   while (!client.connected()){
     client.connect(server, port);
+    setColor(true, false, false);
   }
   if (client.connected()){
     setColor(false, true, false);
   }
   offLED(500);
 
-  //5
+  //4
   if (client.connected()){
     doGET("/sync?board=Arduino1");  
     setTimeArduino(getResponse()); 
@@ -112,7 +104,7 @@ void setup(){
   }
   offLED(500);
 
-  //6
+  //5
   nfc.begin();
   uint32_t versiondata = nfc.getFirmwareVersion();
   if (!versiondata){
@@ -123,7 +115,10 @@ void setup(){
     setColor(false, true, false);
   }
   offLED(500);
-
+   
+  //6
+  Serial.begin(9600);
+  
 }
 
 /**************************************************************************/
@@ -133,7 +128,7 @@ void setup(){
 /**************************************************************************/
 void loop(){
   
-  //1
+   //1
   uint8_t success;
   success = nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, &uid[0], &uidLength);
   if (success){
@@ -141,10 +136,10 @@ void loop(){
     offLED(200);
     doGET("/writecard?writer=Arduino1");
     String userId = writeCard(getResponse());
-    
+
     if (userId.length() > 0){
       doPOST("/writecard", "function=write&writer=Arduino1&userId=" + userId);
-      getResponse();
+      client.stop();
     }
     offLED(500);
   }
@@ -153,9 +148,11 @@ void loop(){
   }  
 
   //2
-  while(Serial.available()){
+  if(Serial.available()){
     char c = Serial.read();
-    Serial.print(c);
+    if (c == '#'){
+      receiveMessage();
+    }
   }
   
 }
@@ -191,6 +188,7 @@ void doGET(String URL){
  */
 /******************************************************************************/
 void doPOST(String URL, String data){
+
   while(!client.connected()){
     client.connect(server, port);
   }
@@ -205,61 +203,75 @@ void doPOST(String URL, String data){
     client.println();
     client.print(data);
     client.println();
-  }
+  }  
 }
 
 /******************************************************************************/
 /*!
- Lee la respuesta realizada por el servidor y la devuelve como tipo cadena
- 
- @return  :  String del JSON devuelto del servidor.
+ *    Metodo para recibir la actividad de la cerradura.
+ *
+ *      @return String del mensaje recibido.
  */
 /******************************************************************************/
-String getResponse(){
-  while (!client.available()) {
+void receiveMessage(){
+  String message = "";
+  String hour = getHour();
+  String data = "";
+  
+  while (true){
+    if (Serial.available()){
+      char c = Serial.read();
+      if (c == '$'){
+        break;
+      } else {
+        message.concat(c);
+      }
+    } else {
+      break;
+    }
   }
-
-  String response = "";
-  while (client.available()) {
-    char character = client.read();
-    response.concat(character);
-  }    
+  
+  message += "/" + hour;
+  
+  doPOST("/estatus", "status=" + message);
   client.stop();
 
-  int index = response.indexOf("{");
-  response = response.substring(index);
-  
-  return response;
 }
-  
-/*****************************************************************/
-/*!
- Función para Establecer la fecha hora de la tarjeta.
- 
- @param JSON  :  Objeto JSON de tipo String para estbalecer la fecha
- y hora de la tarjeta Arduino.
+
+/*****************************************************************************/
+/*!    
+ *    Funcion para obtener la hora de la actividad. 
+ *
+ *    @return : Hora hh:mm am o pm.
  */
-/*****************************************************************/
-void setTimeArduino(String JSON){
-  int lenght = JSON.length();  
-  char buffer[lenght];
-  JSON.toCharArray(buffer, lenght +1); 
-
-  //JSON Parse.
-  JsonHashTable objJson = parser.parseHashTable(buffer);
-  if (objJson.success()){
-    int Year = objJson.getLong("year");
-    int Month = objJson.getLong("month");
-    int Day = objJson.getLong("day");
-    int Hour = objJson.getLong("hour");
-    int Minute = objJson.getLong("minute");
-    int Second = objJson.getLong("second");
-    setTime(Hour, Minute, Second, Day, Month, Year);
-
-    setColor(false, true, false);
-  } else {
-    setColor(true, true, false);
+/*****************************************************************************/
+String getHour(){
+  String date = "";
+  
+  date.concat(getDigits(hour()));
+  date.concat(":");
+  date.concat(getDigits(minute()));
+  date.concat(" ");
+  if (isAM()){
+    date.concat("AM");
+  } 
+  else if(isPM()){
+    date.concat("PM");
   }
+  
+  return date;
+}
+
+String getDigits(int digits){
+  String strDigits = "";
+  if(digits < 10){
+    strDigits.concat("0");
+    strDigits.concat(digits);
+  } 
+  else {
+    strDigits.concat(digits);
+  }
+  return strDigits;
 }
 
 /*****************************************************************/
@@ -273,12 +285,11 @@ void setTimeArduino(String JSON){
  */
 /*****************************************************************/
 String writeCard(String JSON){
-  String userStr;
   
   if (JSON.equals("")){
     setColor(true, false, true);
     offLED(200);
-    userStr = "";
+    return "";
   } else {
     int lenght = JSON.length();  
     char buffer[lenght];
@@ -293,11 +304,9 @@ String writeCard(String JSON){
       setColor(true, false, false);
       offLED(200);
     }
-    
-    userStr = objJson.getString("userId");
+    return objJson.getString("userId");
   }
   
-  return userStr;
 }
 
 /*****************************************************************************/
@@ -333,49 +342,58 @@ void writeData(String value, uint8_t block){
 
 }
 
-/*****************************************************************************/
-/*!    
- *    Funcion para obtener la fecha 
- *
- *    @return : fecha en formato hh:mm:ss dd mmm yyyy
+/******************************************************************************/
+/*!
+ Lee la respuesta realizada por el servidor y la devuelve como tipo cadena
+ 
+ @return  :  String del JSON devuelto del servidor.
  */
-/*****************************************************************************/
-String getDate(){
-  String date = "";
-  date.concat(getDigits(hour()));
-  date.concat(":");
-  date.concat(getDigits(minute()));
-  date.concat(":");
-  date.concat(getDigits(second()));
-  date.concat(" ");
-  if (isAM()){
-    date.concat("AM");
-  } 
-  else if(isPM()){
-    date.concat("PM");
+/******************************************************************************/
+String getResponse(){
+  while (!client.available()) {
   }
-  date.concat(" ");
-  date.concat(dayStr(weekday()));
-  date.concat(" ");
-  date.concat(getDigits(day()));
-  date.concat(" ");
-  date.concat(monthShortStr(month()));
-  date.concat(" ");
-  date.concat(year()); 
 
-  return date;
+  String response = "";
+  while (client.available()) {
+    char character = client.read();
+    response.concat(character);
+  }    
+  client.stop();
+
+  int index = response.indexOf("{");
+  response = response.substring(index);
+  
+  return response;
 }
 
-String getDigits(int digits){
-  String strDigits = "";
-  if(digits < 10){
-    strDigits.concat("0");
-    strDigits.concat(digits);
-  } 
-  else {
-    strDigits.concat(digits);
+/*****************************************************************/
+/*!
+ Función para Establecer la fecha hora de la tarjeta.
+ 
+ @param JSON  :  Objeto JSON de tipo String para estbalecer la fecha
+ y hora de la tarjeta Arduino.
+ */
+/*****************************************************************/
+void setTimeArduino(String JSON){
+  int lenght = JSON.length();  
+  char buffer[lenght];
+  JSON.toCharArray(buffer, lenght +1); 
+
+  //JSON Parse.
+  JsonHashTable objJson = parser.parseHashTable(buffer);
+  if (objJson.success()){
+    int Year = objJson.getLong("year");
+    int Month = objJson.getLong("month");
+    int Day = objJson.getLong("day");
+    int Hour = objJson.getLong("hour");
+    int Minute = objJson.getLong("minute");
+    int Second = objJson.getLong("second");
+    setTime(Hour, Minute, Second, Day, Month, Year);
+
+    setColor(false, true, false);
+  } else {
+    setColor(true, true, false);
   }
-  return strDigits;
 }
 
 /*****************************************************************************/
@@ -415,4 +433,3 @@ void offLED(int wait){
   setColor(false, false, false);
   delay(wait);
 }
-
