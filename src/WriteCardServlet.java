@@ -54,7 +54,7 @@ public class WriteCardServlet extends HttpServlet{
 			JSONObject objJsonObject = new JSONObject();
 			try{
 				objJsonObject.put("doorId", card.getProperty("DoorId"));
-				objJsonObject.put("typeCard", card.getProperty("TypeCard"));
+				objJsonObject.put("card", card.getProperty("TypeCard"));
 				objJsonObject.put("userId", card.getProperty("UserId"));
 			} catch (JSONException e){
 				logger.log(Level.WARNING, e.getMessage() + "**" + e.getStackTrace() + "**");
@@ -72,7 +72,7 @@ public class WriteCardServlet extends HttpServlet{
 			Date today = DateNow.getDateTime();
 			String doorId = request.getParameter("doorId");
 			String userId = request.getParameter("userId");
-			String typeCard = request.getParameter("typeCard");
+			String typeCard = request.getParameter("card");
 			String writer = request.getParameter("writer");
 		
 			Entity card = new Entity("Card");

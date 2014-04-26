@@ -121,7 +121,6 @@ function loadDoors(){
                             '<div class="content_info">' +
                               '<figure onClick="setRoom(' + data.doors[i].id + ')"><object id="svg' + data.doors[i].id + '" type="image/svg+xml" data="' + svgDoor + '"></object></figure>' +
                               '<div class="info">' +
-                                '<p class="info_battery"></p>' +
                                 '<p class="info_time"></p>' +
                                 '<p class="info_input"></p>' +
                                 '<p class="info_output"></p>' +
@@ -216,7 +215,7 @@ function sendDataWrite(){
   var type_user = $('#dialog_write form fieldset input[type="radio"]:checked').val();
    $.ajax({
     type : 'POST',
-    url : '/writecard?function=store&doorId=' + doorId + '&userId=' + userId + '&typeCard=' + type_user + '&writer=Arduino1',
+    url : '/writecard?function=store&doorId=' + doorId + '&userId=' + userId + '&card=' + type_user + '&writer=Arduino1',
     async : false,
     success : function(data){
       if (data == 'wait'){
@@ -310,7 +309,6 @@ function findSVGElements(door, color)
 function setDoor(door){
   var idDoor = door.id;
 
-  $('#'+ idDoor + ' .content_info .info .info_battery').html(door.battery);
   $('#'+ idDoor + ' .content_info .info .info_time').html(door.time);
   $('#'+ idDoor + ' .content_info .info .info_input').html(door.input);
   $('#'+ idDoor + ' .content_info .info .info_output').html(door.output);
@@ -387,22 +385,51 @@ onSocketMessage = function (message) {
  */
 
 function updateStatus(door){
-  var idDoor = door.id;
 
-  $('#' + idDoor + ' .content_info .info .info_battery').html(door.battery);
+  //Actualización de los datos cuando sea abierto por dentro
   if (door.activity == 'inside_open') {
-    $('#' + idDoor + ' .content_info .info .info_output').html(door.hour);
-    $('#' + idDoor + ' .content_info figure object').addClass(door.activity);
+
+    $('#' + door.id + ' .content_info .info .info_output').html(door.hour);
+    $('#' + door.id + ' .content_info figure object').addClass(door.activity);
+
+  //Actualización de los datos cuando sea abierto por fuera
   } else if (door.activity == 'outside_open') {
-    $('#' + idDoor + ' .content_info .info .info_input').html(door.hour);
-    $('#' + idDoor + ' .content_info figure object').addClass(door.activity);
+    
+    $('#' + door.id + ' .content_info .info .info_input').html(door.hour);
+    $('#' + door.id + ' .content_info figure object').addClass(door.activity);
+
+  //actualización de la animación cuando la puerta sea cerrada
   } else if (door.activity == 'closed') {
-    if ($('#' + idDoor + ' .content_info figure object').hasClass('inside_open')) {
-      $('#' + idDoor + ' .content_info figure object').removeClass('inside_open');
+    
+    if ($('#' + door.id + ' .content_info figure object').hasClass('inside_open')) {
+    
+      $('#' + door.id + ' .content_info figure object').removeClass('inside_open');
+
     } 
-    if ($('#' + idDoor + ' .content_info figure object').hasClass('outside_open')) {
-      $('#' + idDoor + ' .content_info figure object').removeClass('outside_open');
+    if ($('#' + door.id + ' .content_info figure object').hasClass('outside_open')) {
+      
+      $('#' + door.id + ' .content_info figure object').removeClass('outside_open');
+
     }
 
   }  
+
+  // door disponible : #9CBF60
+  // door cliente : #D34B44
+  // door mantenimiento : #DEAA31
+  // door limpieza : #85C7C3
+  // door supervisor : #A89565   
+  if (door.card != null){
+    if (door.card == "Disponible"){
+      findSVGElements(door.id, '#9CBF60');
+    } else if (door.card == "Cliente"){
+      findSVGElements(door.id, '#D34B44');
+    } else if (door.card == "Limpieza"){
+      findSVGElements(door.id, '#85C7C3');
+    } else if (door.card == "Supervisor"){
+      findSVGElements(door.id, '#A89565 ');
+    } else if (door.card == "Mantenimiento"){
+      findSVGElements(door.id, '#DEAA31');
+    }
+  }
 }

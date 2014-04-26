@@ -426,11 +426,6 @@ header .title_header
 	width: 200px;
 }
 
-#section_doors .content_door .content_info .info .info_description
-{
-	margin-left: 1em;	
-}
-
 #section_doors .content_door .content_info .info p
 {
 	display: inline-block;
@@ -439,23 +434,12 @@ header .title_header
 	width: 90px;
 }
 
-#section_doors .content_door .content_info .info p:nth-child(5)
+#section_doors .content_door .content_info .info .info_description,
+#section_doors .content_door .content_info .info .info_time
 {
+	margin-left: 1em;
 	text-align: left;
 	width: 100%;
-}
-
-#section_doors .content_door .content_info .info .info_battery:after
-{
-	content: ' %';
-}
-
-#section_doors .content_door .content_info .info .info_battery:before
-{
-	color: #FBD600;
-	content: "\e605";
-	font-family: 'icomoon';
-	margin-right: 3px;
 }
 
 #section_doors .content_door .content_info .info .info_time:after
@@ -647,27 +631,27 @@ header .title_header
 	width: 25px;
 }
 
-#dialog_write form fieldset #type_available[type="radio"] + label > span
+#dialog_write form fieldset #card_available[type="radio"] + label > span
 {
 	border: solid #9CBF60 2px;
 }
 
-#dialog_write form fieldset #type_client[type="radio"] + label > span
+#dialog_write form fieldset #card_client[type="radio"] + label > span
 {
 	border: solid #D34B44 2px;
 }
 
-#dialog_write form fieldset #type_supervisor[type="radio"] + label > span
+#dialog_write form fieldset #card_supervisor[type="radio"] + label > span
 {
 	border: solid #A89565 2px;
 }
 
-#dialog_write form fieldset #type_cleaning[type="radio"] + label > span
+#dialog_write form fieldset #card_cleaning[type="radio"] + label > span
 {
 	border: solid #85C7C3 2px;
 }
 
-#dialog_write form fieldset #type_maintenance[type="radio"] + label > span
+#dialog_write form fieldset #card_maintenance[type="radio"] + label > span
 {
 	border: solid #DEAA31 2px;
 }
@@ -681,27 +665,27 @@ header .title_header
 	width: 19px;
 }
 
-#dialog_write form fieldset #type_available[type="radio"]:checked + label > span span
+#dialog_write form fieldset #card_available[type="radio"]:checked + label > span span
 {
 	background: #9CBF60;
 }
 
-#dialog_write form fieldset #type_client[type="radio"]:checked + label > span span
+#dialog_write form fieldset #card_client[type="radio"]:checked + label > span span
 {
 	background: #D34B44;
 }
 
-#dialog_write form fieldset #type_supervisor[type="radio"]:checked + label > span span
+#dialog_write form fieldset #card_supervisor[type="radio"]:checked + label > span span
 {
 	background: #A89565;
 }
 
-#dialog_write form fieldset #type_cleaning[type="radio"]:checked + label > span span
+#dialog_write form fieldset #card_cleaning[type="radio"]:checked + label > span span
 {
 	background: #85C7C3;
 }
 
-#dialog_write form fieldset #type_maintenance[type="radio"]:checked + label > span span
+#dialog_write form fieldset #card_maintenance[type="radio"]:checked + label > span span
 {
 	background: #DEAA31;
 }
