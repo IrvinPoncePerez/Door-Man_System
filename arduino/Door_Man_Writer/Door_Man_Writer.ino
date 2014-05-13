@@ -34,9 +34,9 @@ uint8_t key[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 /*!
  *  Definición de Pines.
  */
-const int PIN_RED = 5;
-const int PIN_GREEN = 6;
-const int PIN_BLUE = 7;
+const int PIN_RED = 7;
+const int PIN_GREEN = 5;
+const int PIN_BLUE = 6;
 
 /*!
  *  Objeto Json para realizar el parse del 
@@ -75,6 +75,7 @@ void setup(){
   pinMode(PIN_RED, OUTPUT);
   pinMode(PIN_GREEN, OUTPUT);
   pinMode(PIN_BLUE, OUTPUT);
+  setColor(false, false, false);
    
   //2
   if(Ethernet.begin(mac) == 0){
@@ -415,9 +416,9 @@ void setTimeArduino(String JSON){
  */
 /*****************************************************************************/
 void setColor(boolean red, boolean green, boolean blue){
-  digitalWrite(PIN_RED, red);
-  digitalWrite(PIN_GREEN, green);
-  digitalWrite(PIN_BLUE, blue);
+  digitalWrite(PIN_RED, !red);
+  digitalWrite(PIN_GREEN, !green);
+  digitalWrite(PIN_BLUE, !blue);
 }
 
 /*****************************************************************************/
