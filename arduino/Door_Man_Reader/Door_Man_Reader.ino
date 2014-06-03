@@ -34,8 +34,7 @@
 #define RST_PIN 9
 
 MFRC522 mfrc522(SDA_PIN, RST_PIN);
-MFRC522::MIFARE_Key key = {
-  0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+MFRC522::MIFARE_Key key = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
 const byte TRAILER_BLOCK = 7;
 const byte DOOR_BLOCK = 4;
@@ -45,8 +44,8 @@ const byte CARD_BLOCK = 5;
  *  Definición de Pines LED RGB.
  */
 const int PIN_RED = 5;
-const int PIN_GREEN = 6;
-const int PIN_BLUE = 7;
+const int PIN_GREEN = 7;
+const int PIN_BLUE = 6;
 
 /*!
  *  Definición para los interruptores.
@@ -206,7 +205,7 @@ void changeInside(){
          break;
        }
   
-       if (mili == 1000){
+       if (mili == 3000){
          break;
        }  
   
@@ -228,7 +227,7 @@ void changeOutside(){
          break;
        }
   
-       if (mili == 1000){
+       if (mili == 3000){
          break;
        }  
   

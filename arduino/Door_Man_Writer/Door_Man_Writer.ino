@@ -286,7 +286,7 @@ String getDigits(int digits){
  */
 /*****************************************************************/
 String writeCard(String JSON){
-  
+
   if (JSON.equals("")){
     setColor(true, false, true);
     offLED(200);
@@ -363,7 +363,7 @@ String getResponse(){
 
   int index = response.indexOf("{");
   response = response.substring(index);
-  
+  Serial.println(response);
   return response;
 }
 

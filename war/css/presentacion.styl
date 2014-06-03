@@ -1,0 +1,441 @@
+@font-face
+  font-family 'icomoon'
+  src url('fonts/icomoon.eot')
+  src url('fonts/icomoon.eot?#iefix') format('embedded-opentype'), url('fonts/icomoon.woff') format('woff'),		url('fonts/icomoon.ttf') format('truetype'),		url('fonts/icomoon.svg#icomoon') format('svg')
+  font-weight normal
+  font-style normal
+
+*
+  margin 0
+
+a
+  text-decoration none
+
+body
+  background-image url('../img/background.png')
+  color #4C4C4C
+  height 100%
+  font-family "Antic", sans-serif
+  font-size 80%
+
+footer
+  background #22bce0
+  box-shadow 0px -3px 10px #999
+  color #fff
+  font-size 1em
+  width 100%
+  #copyright
+    display block
+    font-size 0.8em
+    padding-bottom 1em
+    padding-top 2em
+    text-align center
+    p
+      &:first-child
+        padding-top 30px
+  #footer
+    text-align center
+    #contact
+      margin-top 30px
+      a
+        background white
+        border-radius 50%
+        color #999
+        font-size 1.5em
+        padding 0.4em 0.5em
+      #gplus
+        &:after
+          content "\e607"
+          font-family 'icomoon'
+        &:hover
+          color #D44332
+      #skype
+        &:after
+          content "\e601"
+          font-family 'icomoon'
+        &:hover
+          color #00B0F6
+      #twitter
+        &:after
+          content "\e602"
+          font-family 'icomoon'
+        &:hover
+          color #00aced
+    #location
+      padding-bottom 1em
+      margin-top 50px
+      p
+        text-align left
+        padding-bottom 0.5em
+        padding-left 3em
+  #developer
+    display none
+
+footer #footer #contact,footer #footer #location
+  display inline-block
+  margin-left 2%
+  margin-right 2%
+  vertical-align top
+  width 290px
+
+footer #footer #contact h3,footer #footer #location h3
+  padding-bottom 2em
+
+header
+  h1
+    font-size 2em
+    margin-top -110px
+    text-shadow 3px 1px 0 rgba(0, 0, 0, 0.3)
+  h2
+    color #848484
+    font-size 1em
+    margin-top -75px
+  #login
+    background #cc3732
+    border-radius 5px
+    color white
+    cursor pointer
+    margin-top -100px
+    position absolute
+    right 5px
+    width 50px
+    &:hover
+      background #e74b37
+    .icon_login
+      background url('../img/btn_red1.png') transparent 10px 50% no-repeat
+      display inline-block
+      vertical-align middle
+      width 35px
+      height 35px
+  #title
+    border-right 40px solid transparent
+    border-top 100px solid #fff
+    margin-right 20%
+    padding 1em 0.5em
+    -webkit-filter drop-shadow(0px 0px 10px #999)
+    #logo
+      margin-top -100px
+      img
+        width 70px
+  #user
+    display none
+    position absolute
+    top 15px
+    right 5px
+    div
+      display none
+      #arrow
+        border-top 10px solid transparent
+        border-bottom 10px solid transparent
+        border-left 10px solid white
+        position relative
+        left -5px
+        top -12px
+        -webkit-filter drop-shadow(rgba(153, 153, 153, 1) 1.5px 0px 0px)
+      .data_user
+        background #fff
+        border-radius 5px 2px 5px 5px
+        box-shadow 0px 0px 1px 1px #999
+        padding 0.5em 1em
+        text-align right
+        #user_name
+          font-weight bold
+        #signout
+          color #cc3732
+          cursor pointer
+          &:hover
+            text-decoration underline
+    figure
+      margin-left -10px
+    #avatar
+      img
+        border-radius 50%
+        box-shadow 0px 0px 1px 1px #999
+        display block
+        width 50px
+  .title_header
+    font-family 'Kite One', sans-serif
+    margin-bottom 0px
+    margin-left 80px
+    margin-right 20%
+    position absolute
+
+header #user div,header #user div .data_user,header #user div #arrow,header #user #avatar
+  display inline-block
+
+#content_presentation
+  text-align center
+  .item
+    display inline-block
+    margin 10px 0px
+    text-align center
+    padding 1em 0px
+    vertical-align top
+    width 220px
+    .icon_description
+      border-radius 50%
+      color #fff
+      display inline-block
+      font-family "icomoon"
+      font-size 2.5em
+      padding 0.5em
+      text-align center
+    #icon_description1
+      background #9CBF60
+      &:after
+        content "\e603"
+    #icon_description2
+      background #D34B44
+      &:after
+        content "\e604"
+    #icon_description3
+      background #E2A326
+      &:after
+        content "\e606"
+    .description
+      font-size 1.5em
+      margin 1em 0.5em
+      text-align center
+      padding 1em 0.5em
+
+#section_doors
+  text-align center
+  .content_door
+    background white
+    border-radius 5px
+    box-shadow 0px 0px 10px 1px #999
+    display inline-block
+    margin 0.5em 0.5em
+    width 300px
+    .title_door
+      display inline-block
+      font-weight bold
+      padding 0.5em 0px
+      width 280px
+    .content_info
+      figure
+        border-left solid #999 0.3em
+        border-right solid #999 0.3em
+        border-top solid #999 0.3em
+        display inline-block
+        margin 0.5em 0 1em 0
+        padding 1px 1px 0px 1px
+        perspective 10em
+        z-index 99
+      object
+        height 55px
+        width 40px
+        pointer-events none
+        transition 1s
+        z-index 0
+        &.outside_open
+          transform-origin 0 50% 0
+          transform rotateY(60deg)
+        &.inside_open
+          transform-origin 0 50% 0
+          transform rotateY(-60deg)
+      .info
+        display inline-block
+        margin 0.5em
+        text-align center
+        vertical-align top
+        width 200px
+        p
+          display inline-block
+          font-size 0.8em
+          text-align left
+          width 90px
+        .info_time
+          &:after
+            content ' minutos'
+          &:before
+            color #000
+            content "\e608"
+            font-family 'icomoon'
+            margin-right 3px
+        .info_input
+          &:before
+            color #3AB54A
+            content "\e609"
+            font-family 'icomoon'
+            margin-right 3px
+        .info_output
+          &:before
+            color #EC1B23
+            content "\e60a"
+            font-family 'icomoon'
+            margin-right 3px
+        .info_description
+          &:before
+            color #3F7BCB
+            content "\e60b"
+            font-family 'icomoon'
+            margin-right 3px
+
+#section_doors .content_door .content_info .info .info_description,#section_doors .content_door .content_info .info .info_time
+  margin-left 1em
+  text-align left
+  width 100%
+
+.modal_dialog
+  background transparent
+  height 100%
+  opacity 0
+  pointer-events none
+  position fixed
+  text-align center
+  transition opacity 400ms ease-in
+  width 100%
+  z-index 99999
+  &.show
+    opacity 1
+    pointer-events auto
+
+#dialog_write
+  background-image url('../img/background.png')
+  border-radius 15px
+  box-shadow 0px 0px 0px 7px rgba(34, 188, 224, 0.5)
+  display inline-block
+  margin-top 10%
+  padding 10px
+  position relative
+  width 260px
+  .close
+    background white
+    border solid #22BCE0 2px
+    border-radius 50%
+    color #22BCE0
+    cursor pointer
+    display block
+    height 25px
+    font-size 20px
+    font-weight bold
+    padding 2px
+    position absolute
+    width 25px
+    right -20px
+    text-align center
+    top -15px
+    vertical-align middle
+    transition color 100ms ease-in,  background 100ms ease-in
+    &:hover
+      color white
+      background #22BCE0
+  form
+    #title_room
+      background #22bce0
+      border-radius 15px 15px 0 0
+      color white
+      font-weight bold
+      margin -10px 0 0 -10px
+      padding 10px 0
+      text-align center
+      width 278px
+    div
+      display block
+      height 40px
+      a
+        background white
+        border solid #A9CF00 2px
+        border-radius 10px
+        display none
+        font-weight bold
+        color #A9CF00
+        padding 5px 15px
+        transition background 100ms ease-in,  color 100ms ease-in
+        &.show
+          display inline-block
+          &:hover
+            background #A9CF00
+            color white
+          &.cancel
+            color #E90000
+            border-color #E90000
+            transition background 100ms ease-in,  color 100ms ease-in
+            &:hover
+              background #E90000
+              color white
+    fieldset
+      background white
+      border solid #22BCE0 1px
+      border-radius 10px
+      margin 10px 0
+      padding 5px
+      label
+        display flex
+        margin 7px 0 10px 25px
+      input[type="radio"]
+        display none
+        & + label
+          & > span
+            background white
+            border-radius 50%
+            display inline-block
+            height 25px
+            margin -5px 5px 0 0
+            vertical-align top
+            width 25px
+      #card_available[type="radio"]
+        & + label
+          & > span
+            border solid #9CBF60 2px
+      #card_client[type="radio"]
+        & + label
+          & > span
+            border solid #D34B44 2px
+      #card_supervisor[type="radio"]
+        & + label
+          & > span
+            border solid #A89565 2px
+      #card_cleaning[type="radio"]
+        & + label
+          & > span
+            border solid #85C7C3 2px
+      #card_maintenance[type="radio"]
+        & + label
+          & > span
+            border solid #DEAA31 2px
+      input[type="radio"]:checked
+        & + label
+          & > span
+            span
+              border-radius 50%
+              display inline-block
+              height 19px
+              margin 3px 0 0 0
+              width 19px
+      #card_available[type="radio"]:checked
+        & + label
+          & > span
+            span
+              background #9CBF60
+      #card_client[type="radio"]:checked
+        & + label
+          & > span
+            span
+              background #D34B44
+      #card_supervisor[type="radio"]:checked
+        & + label
+          & > span
+            span
+              background #A89565
+      #card_cleaning[type="radio"]:checked
+        & + label
+          & > span
+            span
+              background #85C7C3
+      #card_maintenance[type="radio"]:checked
+        & + label
+          & > span
+            span
+              background #DEAA31
+    legend
+      background white
+      border solid #22BCE0 1px
+      border-radius 10px
+      padding 2px 10px
+    #status_dialog
+      font-weight bold
+      font-size 10px
+      margin 10px 0
+
