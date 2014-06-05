@@ -54,6 +54,8 @@ JsonParser<32> parser;
  */
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
 char server[] = "192.168.0.106";
+//char server[] = "door-man.appspot.com";
+
 IPAddress ip (192, 168, 0, 111);
 int port = 80;
 EthernetClient client;
@@ -217,7 +219,6 @@ void doPOST(String URL, String data){
 void receiveMessage(){
   String message = "";
   String hour = getHour();
-  String data = "";
   
   while (true){
     if (Serial.available()){
@@ -292,9 +293,9 @@ String writeCard(String JSON){
     offLED(200);
     return "";
   } else {
-    int lenght = JSON.length();  
-    char buffer[lenght];
-    JSON.toCharArray(buffer, lenght +1); 
+    int length = JSON.length();  
+    char buffer[length];
+    JSON.toCharArray(buffer, length +1); 
 
     //JSON Parse.
     JsonHashTable objJson = parser.parseHashTable(buffer);
