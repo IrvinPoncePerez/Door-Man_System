@@ -100,7 +100,7 @@ void setup(){
   Serial.begin(9600);
 
   //5
-  setServo(0);
+  setServo(30);
 
   //6
   isInside = getSwitch(PIN_INSIDE);
@@ -126,11 +126,11 @@ void loop(){
       if (readTag()){
         if (DOOR.equals(door)){
           setColor(false, true, false);
-          setServo(180);
+          setServo(120);
         } 
         else {
           setColor(true, false, false);
-          setServo(0);
+          setServo(30);
         }
       } 
       else {
@@ -193,7 +193,7 @@ boolean getSwitch(int pin){
 
 void changeInside(){
   isInside = !isInside;
-  if (isInside){
+  if (!isInside){
      int mili = 0;
 
      while (true){
@@ -205,7 +205,7 @@ void changeInside(){
          break;
        }
   
-       if (mili == 3000){
+       if (mili == 10000){
          break;
        }  
   
@@ -215,7 +215,7 @@ void changeInside(){
 
 void changeOutside(){
   isOutside = !isOutside;
-  if (isOutside){
+  if (!isOutside){
      int mili = 0;
 
      while (true){
@@ -227,14 +227,14 @@ void changeOutside(){
          break;
        }
   
-       if (mili == 3000){
+       if (mili == 10000){
          break;
        }  
   
      } 
   } 
   else {
-    setServo(0);
+    setServo(30);
   }
 }
 
@@ -320,9 +320,7 @@ boolean readed(){
   if (DOOR.equals(_door)){
     door = _door;
     card = _card;
-  } else {
-    door = _door;
-  }
+  } 
 
   if (readDoor == MFRC522::STATUS_OK && readCard == MFRC522::STATUS_OK){
     return true;
