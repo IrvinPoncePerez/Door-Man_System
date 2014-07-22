@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.jdo.annotations.Serialized;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +30,7 @@ public class WriteCardServlet extends HttpServlet{
 	private static final Logger logger = Logger.getLogger(ChannelServlet.class.getCanonicalName());
 	private static DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 	
+	@Serialized 
 	protected void doPost(HttpServletRequest request,  HttpServletResponse response) throws ServletException, IOException{
 		String function = request.getParameter("function");
 		if (function.equals("store")){			

@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
-import com.google.apphosting.utils.servlet.ParseBlobUploadFilter;
 
 import door_man.EstatusServlet;
 

@@ -24,50 +24,6 @@
 		width: 300px;
 	}
 
-	footer #footer #developer
-	{
-		background: #fff;
-		box-shadow: 3px 3px 5px #999;
-		color: #848484;
-		display: inline-block;
-		font-size: 0.7em;
-		margin-left: 2%;
-		margin-right: 2%;
-		padding: 0.5em;
-		text-align: left;
-		top: 0;
-		vertical-align: top;
-		width: 400px;
-		
-		transform: rotateZ(-10deg);
-	}
-
-	footer #footer #developer h3
-	{
-		color: #4C4C4C;
-		margin-top: 1em;
-	}
-
-	footer #footer #developer p
-	{
-		font-family: 'Gloria Hallelujah', cursive;
-		margin-top: 1em;
-	}
-
-	footer #footer #developer #photo
-	{
-		border: solid white 3px;
-		box-shadow: 1px 1px 5px #999;
-		float: left;
-		padding: 0.5em;
-		margin-right: 10px;
-	}
-
-	footer #footer #developer #photo img
-	{
-		width: 100px;
-	}
-
 	header #login
 	{
 		width: 130px;
@@ -146,11 +102,6 @@
 	body
 	{
 		font-size: 120%;
-	}
-
-	footer #footer #developer
-	{
-		width: 410px;
 	}
 
 	header h1
