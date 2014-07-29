@@ -50,8 +50,9 @@ public class EstatusServlet extends HttpServlet{
 			objJSON.put("hour", params[3]);
 					
 			 for (Entity user : objUsersStore.getUsers()){
-				 logger.log(Level.INFO, "sending estatus info to the channel " + user);
 				 ChannelServlet.sendMessage(user.getProperty("UserId").toString(), objJSON.toString());
+				 logger.log(Level.INFO, "sending estatus info to the channel " + user);
+				 logger.log(Level.INFO, "Message :: " + objJSON.toString());				 
 			 }
 			
 		} catch (JSONException e) {
