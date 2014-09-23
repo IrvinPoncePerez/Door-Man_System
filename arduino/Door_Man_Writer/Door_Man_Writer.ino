@@ -53,7 +53,7 @@ JsonParser<32> parser;
  *   client : cliente ethernet para comunicarse con el servidor.
  */
 byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
-char server[] = "192.168.0.101";
+char server[] = "192.168.0.104";
 //char server[] = "door-man.appspot.com";
 
 IPAddress ip (192, 168, 0, 111);

@@ -126,7 +126,7 @@ void loop(){
       if (readTag()){
         if (DOOR.equals(door)){
           setColor(false, true, false);
-          setServo(120);
+          setServo(110);
         } 
         else {
           setColor(true, false, false);
